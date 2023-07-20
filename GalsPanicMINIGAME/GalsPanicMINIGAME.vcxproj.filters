@@ -1,49 +1,162 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Default">
+      <UniqueIdentifier>{5ae0ee86-d1e6-4e1b-8b62-6bb828297418}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="리소스 파일">
+    <Filter Include="Default\리소스 파일">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{ce17c0b0-1060-4986-909b-7525f2969dbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\1. 헤더파일">
+      <UniqueIdentifier>{b117a71b-b6be-4dd9-8d22-69d2bb634a58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\2. 코어">
+      <UniqueIdentifier>{e65e61ca-df40-4e6b-887f-e7b8ae5705b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3. 매니저">
+      <UniqueIdentifier>{5942d250-6a8b-4c86-9a53-a1d70994d012}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\4. 오브젝트">
+      <UniqueIdentifier>{11c38cf1-2cc8-44a9-85a8-caa8e7d96fd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\5. 씬">
+      <UniqueIdentifier>{5134f7a9-e417-4efe-9c82-e5a377d93f88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3. 매니저\1. 키 매니저">
+      <UniqueIdentifier>{928823a7-f3be-4860-a33e-9e5ddce6ff12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3. 매니저\2. 타임 매니저">
+      <UniqueIdentifier>{3f82a17e-3133-4c50-8e68-453f3478b7d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3. 매니저\3. 씬 매니저">
+      <UniqueIdentifier>{baef269e-0812-4007-a407-4f5709640ef3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\4. 오브젝트\플레이어">
+      <UniqueIdentifier>{93ab0b39-875b-428c-8e71-f7642d78458f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\5. 씬\Start">
+      <UniqueIdentifier>{18074360-cced-4095-96a9-76f1459eb167}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\4. 오브젝트\영역">
+      <UniqueIdentifier>{9b6809a5-1751-4f5b-9d4b-149c6ce9fca5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\4. 오브젝트\텍스트">
+      <UniqueIdentifier>{fe2ffd4d-efe8-4fc5-9053-1e51a6eec375}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3. 매니저\4. 계산 매니저">
+      <UniqueIdentifier>{e8a64abc-7b9e-47db-bc96-c0330d2dc9fc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Default</Filter>
     </ClInclude>
     <ClInclude Include="GalsPanicMINIGAME.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Default</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="GalsPanicMINIGAME.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
+    <ClInclude Include="Resource.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Engine\1. 헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="struct.h">
+      <Filter>Engine\1. 헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>Engine\1. 헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CCore.h">
+      <Filter>Engine\2. 코어</Filter>
+    </ClInclude>
+    <ClInclude Include="CKeyMgr.h">
+      <Filter>Engine\3. 매니저\1. 키 매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="CScene.h">
+      <Filter>Engine\5. 씬</Filter>
+    </ClInclude>
+    <ClInclude Include="CTimeMgr.h">
+      <Filter>Engine\3. 매니저\2. 타임 매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="CObject.h">
+      <Filter>Engine\4. 오브젝트</Filter>
+    </ClInclude>
+    <ClInclude Include="CScene_Start.h">
+      <Filter>Engine\5. 씬\Start</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneMgr.h">
+      <Filter>Engine\3. 매니저\3. 씬 매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>Engine\4. 오브젝트\플레이어</Filter>
+    </ClInclude>
+    <ClInclude Include="CArea.h">
+      <Filter>Engine\4. 오브젝트\영역</Filter>
+    </ClInclude>
+    <ClInclude Include="CText.h">
+      <Filter>Engine\4. 오브젝트\텍스트</Filter>
+    </ClInclude>
+    <ClInclude Include="CCalculate.h">
+      <Filter>Engine\3. 매니저\4. 계산 매니저</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GalsPanicMINIGAME.rc">
-      <Filter>리소스 파일</Filter>
+      <Filter>Default\리소스 파일</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
-      <Filter>리소스 파일</Filter>
+      <Filter>Default\리소스 파일</Filter>
     </Image>
     <Image Include="GalsPanicMINIGAME.ico">
-      <Filter>리소스 파일</Filter>
+      <Filter>Default\리소스 파일</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GalsPanicMINIGAME.cpp" />
+    <ClCompile Include="CCore.cpp">
+      <Filter>Engine\2. 코어</Filter>
+    </ClCompile>
+    <ClCompile Include="CKeyMgr.cpp">
+      <Filter>Engine\3. 매니저\1. 키 매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene.cpp">
+      <Filter>Engine\5. 씬</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimeMgr.cpp">
+      <Filter>Engine\3. 매니저\2. 타임 매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="CObject.cpp">
+      <Filter>Engine\4. 오브젝트</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene_Start.cpp">
+      <Filter>Engine\5. 씬\Start</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneMgr.cpp">
+      <Filter>Engine\3. 매니저\3. 씬 매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>Engine\4. 오브젝트\플레이어</Filter>
+    </ClCompile>
+    <ClCompile Include="CArea.cpp">
+      <Filter>Engine\4. 오브젝트\영역</Filter>
+    </ClCompile>
+    <ClCompile Include="CText.cpp">
+      <Filter>Engine\4. 오브젝트\텍스트</Filter>
+    </ClCompile>
+    <ClCompile Include="CCalculate.cpp">
+      <Filter>Engine\3. 매니저\4. 계산 매니저</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
