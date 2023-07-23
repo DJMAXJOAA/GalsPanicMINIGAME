@@ -129,9 +129,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="calculate.h" />
     <ClInclude Include="CArea.h" />
-    <ClInclude Include="CCalculate.h" />
     <ClInclude Include="CCore.h" />
+    <ClInclude Include="CDecisionMgr.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CObject.h" />
     <ClInclude Include="CPlayer.h" />
@@ -150,8 +151,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CArea.cpp" />
-    <ClCompile Include="CCalculate.cpp" />
     <ClCompile Include="CCore.cpp" />
+    <ClCompile Include="CDecisionMgr.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CObject.cpp" />
     <ClCompile Include="CPlayer.cpp" />

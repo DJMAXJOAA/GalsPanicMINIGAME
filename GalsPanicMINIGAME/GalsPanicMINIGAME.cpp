@@ -64,6 +64,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 		else
 		{
+			Sleep(1);
 			CCore::GetInstance()->Progress(); // 2. 코어 객체의 실행 부분
 		}
 	}

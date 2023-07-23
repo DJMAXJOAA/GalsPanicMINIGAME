@@ -2,6 +2,7 @@
 #include "CKeyMgr.h"
 
 #include "CCore.h"
+#include "CDecisionMgr.h"
 
 int arrVK[(int)KEY::LAST]
 {
@@ -41,10 +42,8 @@ void CKeyMgr::Init()
 {
 	for (int i = 0; i < (int)KEY::LAST; ++i)
 	{
-		vecKey.push_back(tKeyInfo{ KEY_STATE::NONE, false });
+		vecKey.push_back(tKeyInfo{ KEY_STATE::NONE, false, true });
 	}
-	//m_vecKey[(int)KEY::LEFT].eState;
-	//m_vecKey[(int)KEY::LEFT].bPrev; 이런시긍로 확인
 }
 
 void CKeyMgr::Update()
@@ -61,8 +60,11 @@ void CKeyMgr::Update()
 			// 키가 눌려있음
 			if (GetAsyncKeyState(arrVK[i]) & 0x8000)
 			{
+				SetKeyAvailability((KEY)i, CDecisionMgr::GetInstance()->PlayerMovingDecision((KEY)i));
+
 				// 이전에도 눌리고 있었음
 				if (vecKey[i].bPrevPush)
+
 				{
 					vecKey[i].eState = KEY_STATE::HOLD;
 				}
@@ -85,6 +87,7 @@ void CKeyMgr::Update()
 				// 이전에도 떼져있었음
 				else
 				{
+					vecKey[i].bKeyAvailability = true;
 					vecKey[i].eState = KEY_STATE::NONE;
 				}
 				vecKey[i].bPrevPush = false;
@@ -107,6 +110,7 @@ void CKeyMgr::Update()
 			// 떼지고 있는 상태라면, NONE으로 가게 하기
 			if (KEY_STATE::AWAY == vecKey[i].eState)
 			{
+				vecKey[i].bKeyAvailability = true;
 				vecKey[i].eState = KEY_STATE::NONE;
 			}
 		}

@@ -48,6 +48,7 @@ struct tKeyInfo
 {
 	KEY_STATE	eState;		// 키의 상태값(enum)
 	bool		bPrevPush;	// 이전 프레임에 눌림?
+	bool		bKeyAvailability; // 키입력 가능여부
 };
 
 class CKeyMgr
@@ -62,6 +63,8 @@ public:
 
 public:
 	KEY_STATE GetKeyState(KEY _eKey) { return vecKey[(int)_eKey].eState; }
+	bool GetKeyAvailability(KEY _eKey) { return vecKey[(int)_eKey].bKeyAvailability; }
+	void SetKeyAvailability(KEY _eKey, bool TF) { vecKey[(int)_eKey].bKeyAvailability = TF; }
 
 private:
 	CKeyMgr();

@@ -3,12 +3,12 @@
 
 #include "CArea.h"
 
-enum class PLAYER_STATE
+enum PLAYER_STATE
 {
-    MOVE, DRAW, RETRY,
+    MOVE, DRAW, DEAD,
 };
 
-enum class PLAYER_DIRECTION
+enum PLAYER_DIRECTION
 {
     LEFT, UP, RIGHT, DOWN,
 };
@@ -19,17 +19,17 @@ class CPlayer :
 private:
     int iState;
     int iDirection;
-    CArea* pArea;
+    int iSpeed;
 
 public:
     int GetState() { return iState; }
     int GetDirection() { return iDirection; }
-    void SetArea(CArea* _pArea) { pArea = _pArea; }
-    void SetState(PLAYER_STATE _iState) { iState = (int)_iState; }
+    int GetSpeed() { return iSpeed; }
+    void SetState(int _iState) { iState = _iState; }
 
 public:
     void Move();
-    void Collide();
+    void Draw();
 
 public:
     virtual void Update();

@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "CText.h"
+
 #include "CPlayer.h"
+
+#include "CDecisionMgr.h"
 
 CText::CText()
 	: txtType(PRINT_TYPE::NONE)
@@ -27,9 +30,12 @@ void CText::Update()
 		SetText(temp);
 		break;
 	case PRINT_TYPE::DIRECTION:
-		temp = L"이동 방향 : " + std::to_wstring(pTarget->GetDirection());
+	{
+		auto itr = CDecisionMgr::GetInstance()->GetPlayerAreaPoint();
+		temp = L"기준 좌표 : " + std::to_wstring(itr->x) + L", " +std::to_wstring(itr->y);
 		SetText(temp);
 		break;
+	}
 	case PRINT_TYPE::STATE:
 		temp = L"플레이어 상태 : " + std::to_wstring(pTarget->GetState());
 		SetText(temp);
@@ -42,5 +48,5 @@ void CText::Update()
 void CText::Render(HDC hdc)
 {
 	Vec2 pos = GetPos();
-	TextOut(hdc, pos.x, pos.y, strText.c_str(), strText.length());
+	TextOut(hdc, (int)pos.x, (int)pos.y, strText.c_str(), strText.length());
 }

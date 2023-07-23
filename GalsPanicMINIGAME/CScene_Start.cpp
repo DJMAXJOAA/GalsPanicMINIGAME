@@ -7,7 +7,7 @@
 #include "CText.h"
 
 #include "CCore.h"
-#include "CCalculate.h"
+#include "CDecisionMgr.h"
 
 void CScene_Start::Enter()
 {
@@ -17,11 +17,9 @@ void CScene_Start::Enter()
 
 	// Player 추가
 	CPlayer* pPlayer = new CPlayer;
-	pPlayer->SetPos(Vec2(40.f, 40.f));
+	pPlayer->SetPos(Vec2(40.f, 728.f));
 	pPlayer->SetScale(Vec2(40.f, 40.f));
-	pPlayer->SetArea(pArea);
 	AddObject(pPlayer, GROUP_TYPE::PLAYER);
-
 
 	// 텍스트 추가
 	CText* pText1 = new CText;
@@ -41,6 +39,8 @@ void CScene_Start::Enter()
 	pText3->SetTarget(pPlayer);
 	pText3->SetType(PRINT_TYPE::STATE);
 	AddObject(pText3, GROUP_TYPE::DEFAULT);
+
+	CDecisionMgr::GetInstance()->Init(pPlayer, pArea);
 }
 
 void CScene_Start::Exit()

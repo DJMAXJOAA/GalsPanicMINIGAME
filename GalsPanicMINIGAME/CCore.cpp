@@ -6,6 +6,7 @@
 #include "CTimeMgr.h"
 #include "CKeyMgr.h"
 #include "CSceneMgr.h"
+#include "CDecisionMgr.h"
 
 int CCore::Init(HWND _hWnd, POINT _ptResolution)
 {
@@ -37,8 +38,10 @@ void CCore::Progress()
 {
 	// 매니저 업데이트
 	CTimeMgr::GetInstance()->Update();
+	CDecisionMgr::GetInstance()->Update();
 	CKeyMgr::GetInstance()->Update();
 	CSceneMgr::GetInstance()->Update();
+
 
 	// 화면 클리어
 	Rectangle(memDC, -1, -1, ptResolution.x + 1, ptResolution.y + 1);

@@ -5,10 +5,18 @@ class CArea
 	: public CObject
 {
 private:
-	vector<Vec2> vecPoint;
+	list<POINT> lstPoint;
+	list<POINT> newPoint;
+	POINT* ptBorder; // 외곽선 영역
+	POINT* ptMyArea; // 내 영역
 
 public:
-	vector<Vec2> GetVector() { return vecPoint; }
+	list<POINT>& GetPoint() { return lstPoint; }
+
+public:
+	void AddToNewPoint(POINT _point) { newPoint.push_back(_point); };
+	void ResetNewPoint() { newPoint.clear(); }
+	void RenewlstPoint();
 
 public:
 	virtual void Update();

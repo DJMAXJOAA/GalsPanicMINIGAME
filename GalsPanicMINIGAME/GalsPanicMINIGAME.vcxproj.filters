@@ -47,8 +47,8 @@
     <Filter Include="Engine\4. 오브젝트\텍스트">
       <UniqueIdentifier>{fe2ffd4d-efe8-4fc5-9053-1e51a6eec375}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\3. 매니저\4. 계산 매니저">
-      <UniqueIdentifier>{e8a64abc-7b9e-47db-bc96-c0330d2dc9fc}</UniqueIdentifier>
+    <Filter Include="Engine\3. 매니저\4. 의사결정 매니저">
+      <UniqueIdentifier>{9e49e81a-ac3a-4d37-b2e5-1681d4429e18}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -103,8 +103,11 @@
     <ClInclude Include="CText.h">
       <Filter>Engine\4. 오브젝트\텍스트</Filter>
     </ClInclude>
-    <ClInclude Include="CCalculate.h">
-      <Filter>Engine\3. 매니저\4. 계산 매니저</Filter>
+    <ClInclude Include="calculate.h">
+      <Filter>Engine\1. 헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CDecisionMgr.h">
+      <Filter>Engine\3. 매니저\4. 의사결정 매니저</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -152,8 +155,8 @@
     <ClCompile Include="CText.cpp">
       <Filter>Engine\4. 오브젝트\텍스트</Filter>
     </ClCompile>
-    <ClCompile Include="CCalculate.cpp">
-      <Filter>Engine\3. 매니저\4. 계산 매니저</Filter>
+    <ClCompile Include="CDecisionMgr.cpp">
+      <Filter>Engine\3. 매니저\4. 의사결정 매니저</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

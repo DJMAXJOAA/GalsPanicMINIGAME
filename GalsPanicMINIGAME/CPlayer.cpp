@@ -3,12 +3,15 @@
 
 #include "CKeyMgr.h"
 #include "CTimeMgr.h"
+#include "CDecisionMgr.h"
+#include "CCore.h"
+
 #include "CArea.h"
 
 CPlayer::CPlayer()
 	: iState((int)PLAYER_STATE::MOVE)
 	, iDirection((int)PLAYER_DIRECTION::LEFT)
-	, pArea(nullptr)
+	, iSpeed(10)
 {
 }
 
@@ -18,49 +21,121 @@ CPlayer::~CPlayer()
 
 void CPlayer::Move()
 {
+	Vec2 vResolution = CCore::GetInstance()->GetResolution();
+	float fInterval = 40.f;
+
 	Vec2 vPos = GetPos();
 
-	if (CKeyMgr::GetInstance()->GetKeyState(KEY::A) == KEY_STATE::HOLD)
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::SPACE) == KEY_STATE::HOLD
+	 && CKeyMgr::GetInstance()->GetKeyAvailability(KEY::SPACE))
 	{
-		vPos.x -= 400.f * fDT;
+		if (CKeyMgr::GetInstance()->GetKeyState(KEY::A) == KEY_STATE::HOLD)
+		{
+			iDirection = LEFT;
+			iState = DRAW;
+			return;
+		}
+		else if (CKeyMgr::GetInstance()->GetKeyState(KEY::W) == KEY_STATE::HOLD)
+		{
+			iDirection = UP;
+			iState = DRAW;
+			return;
+		}
+		else if (CKeyMgr::GetInstance()->GetKeyState(KEY::D) == KEY_STATE::HOLD)
+		{
+			iDirection = RIGHT;
+			iState = DRAW;
+			return;
+		}
+		else if (CKeyMgr::GetInstance()->GetKeyState(KEY::S) == KEY_STATE::HOLD)
+		{
+			iDirection = DOWN;
+			iState = DRAW;
+			return;
+		}
 	}
-	if (CKeyMgr::GetInstance()->GetKeyState(KEY::W) == KEY_STATE::HOLD)
+
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::A) == KEY_STATE::HOLD
+		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::A))
 	{
-		vPos.y -= 400.f * fDT;
+		if (fInterval < vPos.x)
+			vPos.x -= iSpeed;
 	}
-	if (CKeyMgr::GetInstance()->GetKeyState(KEY::D) == KEY_STATE::HOLD)
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::W) == KEY_STATE::HOLD
+		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::W))
 	{
-		vPos.x += 400.f * fDT;
+		if (fInterval < vPos.y)
+			vPos.y -= iSpeed;
 	}
-	if (CKeyMgr::GetInstance()->GetKeyState(KEY::S) == KEY_STATE::HOLD)
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::D) == KEY_STATE::HOLD
+		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::D))
 	{
-		vPos.y += 400.f * fDT;
+		if (vResolution.x - fInterval > vPos.x)
+			vPos.x += iSpeed;
 	}
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::S) == KEY_STATE::HOLD
+		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::S))
+	{
+		if (vResolution.y - fInterval > vPos.y)
+			vPos.y += iSpeed;
+	}
+
 
 	SetPos(vPos);
 }
 
-void CPlayer::Collide()
+void CPlayer::Draw()
 {
-	vector<Vec2> AreaPos = pArea->GetVector();
-	for (int i = 0; i < AreaPos.size() - 1; i++)
+	Vec2 vResolution = CCore::GetInstance()->GetResolution();
+	float fInterval = 40.f;
+
+	Vec2 vPos = GetPos();
+
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::A) == KEY_STATE::HOLD
+		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::A))
 	{
-		if (AreaPos[i].x == AreaPos[i + 1].x)
-		{
-
-		}
-		else if (AreaPos[i].y == AreaPos[i + 1].y)
-		{
-
-		}
+		if (fInterval < vPos.x)
+			vPos.x -= iSpeed;
+		iDirection = LEFT;
 	}
-	
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::W) == KEY_STATE::HOLD
+		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::W))
+	{
+		if (fInterval < vPos.y)
+			vPos.y -= iSpeed;
+		iDirection = UP;
+	}
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::D) == KEY_STATE::HOLD
+		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::D))
+	{
+		if (vResolution.x - fInterval > vPos.x)
+			vPos.x += iSpeed;
+		iDirection = RIGHT;
+	}
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::S) == KEY_STATE::HOLD
+		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::S))
+	{
+		if (vResolution.y - fInterval > vPos.y)
+			vPos.y += iSpeed;
+		iDirection = DOWN;
+	}
+
+
+	SetPos(vPos);
 }
 
 void CPlayer::Update()
 {
-	Collide();
-	Move();
+	switch (iState)
+	{
+	case MOVE:
+		Move();
+		break;
+	case DEAD:
+		break;
+	default:
+		break;
+	}
 }
 
 void CPlayer::Render(HDC hdc)
