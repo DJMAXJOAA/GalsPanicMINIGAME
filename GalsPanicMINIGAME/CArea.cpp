@@ -27,7 +27,7 @@ CArea::CArea()
 	list<POINT>::iterator firstItr = lstPoint.begin();
 	list<POINT>::iterator lastItr = lstPoint.end();
 
-	ptMyArea = new POINT[lstPoint.size()];
+	ptMyArea = new POINT[lstPoint.size()+1];
 	int i = 0;
 	for (auto& itr = firstItr; itr != lastItr; ++itr)
 	{

@@ -33,7 +33,7 @@ void CText::Update()
 	}
 	case PRINT_TYPE::DIRECTION:
 	{
-		temp = L"방향 : " + std::to_wstring(CDecisionMgr::GetInstance()->GetPlayer()->GetDirection());
+		temp = L"방향 : " + std::to_wstring(pTarget->GetDirection());
 		SetText(temp);
 		break;
 	}
@@ -43,13 +43,13 @@ void CText::Update()
 		SetText(temp);
 		break;
 	}
-	case PRINT_TYPE::POS_POINT:
-	{
-		auto itr = CDecisionMgr::GetInstance()->GetPlayerAreaPoint();
-		temp = L"기준 좌표 : " + std::to_wstring(itr->x) + L", " + std::to_wstring(itr->y);
-		SetText(temp);
-		break;
-	}
+	//case PRINT_TYPE::POS_POINT:
+	//{
+	//	auto itr = CDecisionMgr::GetInstance()->GetPlayerAreaPoint();
+	//	temp = L"기준 좌표 : " + std::to_wstring(itr->x) + L", " + std::to_wstring(itr->y);
+	//	SetText(temp);
+	//	break;
+	//}
 	default:
 		break;
 	}

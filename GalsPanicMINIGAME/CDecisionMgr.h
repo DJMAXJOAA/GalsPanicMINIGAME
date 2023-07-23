@@ -4,6 +4,14 @@ enum class KEY;
 class CPlayer;
 class CArea;
 
+struct POINT_UNIQUE
+{
+	bool operator() (const POINT& a, const POINT& b) const
+	{
+		return (a.x == b.x && a.y == b.y);
+	}
+};
+
 class CDecisionMgr
 {
 	SINGLE(CDecisionMgr);

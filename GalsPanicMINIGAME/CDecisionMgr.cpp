@@ -239,12 +239,13 @@ void CDecisionMgr::DrawInit()
 	pArea->AddToNewPoint(PlayerPos);
 	pArea->SetDraw(true);
 	
-	list<POINT>& lstPoint = pArea->GetlstPoint();
+	auto itrFront = pArea->GetlstPoint().begin();
+	auto itrBack = pArea->GetlstPoint().end();
 	// 임시 저장 이터레이터들의 배열 (시작과 끝을 저장)
 	vecSave.push_back(itrPlayerPos);
-	if (itrPlayerPos == lstPoint.end())
+	if (itrPlayerPos == itrBack)
 	{
-		vecSave.push_back(lstPoint.begin());
+		vecSave.push_back(itrFront);
 	}
 	else
 	{
@@ -256,9 +257,8 @@ void CDecisionMgr::DrawInit()
 
 bool CDecisionMgr::DrawCollide()
 {
-	list<POINT>& myArea = pArea->GetlstPoint();
-	auto itrFront = myArea.begin();
-	auto itrBack = prev(myArea.end());
+	auto itrFront = pArea->GetlstPoint().begin();
+	auto itrBack = prev(pArea->GetlstPoint().end());
 	POINT playerPos = { pPlayer->GetPos().x, pPlayer->GetPos().y };
 
 	int max_xpos, min_xpos; // 비교
@@ -269,7 +269,7 @@ bool CDecisionMgr::DrawCollide()
 		odd_number = 0;
 	else
 		odd_number = 1;
-	for (auto itr = itrFront; itr != itrBack; ++itr)
+	for (auto& itr = itrFront; itr != itrBack; ++itr)
 	{
 		switch (odd_number)
 		{
@@ -311,44 +311,44 @@ void CDecisionMgr::DrawEnd()
 
 	pArea->AddToNewPoint(playerPos);
 
-	list<POINT>& lstPoint = pArea->GetlstPoint();
-	list<POINT>& newPoint = pArea->GetnewPoint();
+	auto itrFront = pArea->GetlstPoint().begin();
+	auto itrBack = pArea->GetlstPoint().end();
 	// 임시 저장 이터레이터들의 배열 (시작과 끝을 저장)
 	vecSave.push_back(itrPlayerPos);
-	if (itrPlayerPos == lstPoint.end())
+	if (itrPlayerPos == prev(itrBack,1))
 	{
-		vecSave.push_back(lstPoint.begin());
+		vecSave.push_back(itrFront);
 	}
 	else
 	{
 		vecSave.push_back(next(itrPlayerPos, 1));
 	}
 
+	list<POINT> lstPoint = pArea->GetlstPoint();
+	list<POINT> newPoint = pArea->GetnewPoint();
+	auto itrNewFront = pArea->GetnewPoint().begin();
+	auto itrNewBack = pArea->GetnewPoint().end();
+	auto itrNewNewBack = prev(pArea->GetnewPoint().end());  
 	// 리스트 이어붙이기
     list<POINT> renewPoint;
-	renewPoint.insert(renewPoint.end(), lstPoint.begin(), vecSave.front());
-	renewPoint.insert(renewPoint.end(), newPoint.begin(), newPoint.end());
-	renewPoint.insert(renewPoint.end(), vecSave.back(), lstPoint.end());
-	
-	lstPoint.swap(renewPoint);
+	renewPoint.insert(renewPoint.end(), itrFront, vecSave[1]);
+	renewPoint.insert(renewPoint.end(), itrNewFront, itrNewBack);
+	renewPoint.insert(renewPoint.end(), vecSave[3], itrBack);
+
+	// 중복 제거
+	//set<POINT, POINT_UNIQUE> pointSet(renewPoint.begin(), renewPoint.end());
+	//renewPoint.assign(pointSet.begin(), pointSet.end());
+
+	/*lstPoint.swap(renewPoint);*/
 
 	// 배열에 반영
-	POINT* temp = new POINT[lstPoint.size()];
-	int i = 0;
-	for (auto itr = lstPoint.begin(); itr != lstPoint.end(); ++itr)
-	{
-		temp[i].x = itr->x;
-		temp[i].y = itr->y;
-		i++;
-	}
+	POINT* temp = new POINT[renewPoint.size()];
 	POINT* save = pArea->GetptMyArea();
-	delete[] save;
-	save = temp;
+	std::copy(renewPoint.begin(), renewPoint.end(), save);
 
 	pPlayer->SetState(MOVE);
-	pArea->SetDraw(false);
 	pArea->ResetNewPoint();
-	// 충돌하면
+	pArea->SetDraw(false);
 }
 
 void CDecisionMgr::Init(CPlayer* player, CArea* area)
