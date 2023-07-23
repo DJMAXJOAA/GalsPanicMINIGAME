@@ -31,14 +31,20 @@ void CScene_Start::Enter()
 	CText* pText2 = new CText;
 	pText2->SetPos(Vec2(100.f, 120.f));
 	pText2->SetTarget(pPlayer);
-	pText2->SetType(PRINT_TYPE::DIRECTION);
+	pText2->SetType(PRINT_TYPE::POS_POINT);
 	AddObject(pText2, GROUP_TYPE::DEFAULT);
 
 	CText* pText3 = new CText;
 	pText3->SetPos(Vec2(100.f, 140.f));
 	pText3->SetTarget(pPlayer);
-	pText3->SetType(PRINT_TYPE::STATE);
+	pText3->SetType(PRINT_TYPE::DIRECTION);
 	AddObject(pText3, GROUP_TYPE::DEFAULT);
+
+	CText* pText4 = new CText;
+	pText4->SetPos(Vec2(100.f, 160.f));
+	pText4->SetTarget(pPlayer);
+	pText4->SetType(PRINT_TYPE::STATE);
+	AddObject(pText4, GROUP_TYPE::DEFAULT);
 
 	CDecisionMgr::GetInstance()->Init(pPlayer, pArea);
 }

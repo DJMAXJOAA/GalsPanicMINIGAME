@@ -25,21 +25,31 @@ void CText::Update()
 	case PRINT_TYPE::NONE:
 		break;
 	case PRINT_TYPE::POS:
+	{
 		temp = L"xÁÂÇ¥ : " + std::to_wstring(pTarget->GetPos().x) +
 			L", yÁÂÇ¥ : " + std::to_wstring(pTarget->GetPos().y);
 		SetText(temp);
 		break;
+	}
 	case PRINT_TYPE::DIRECTION:
 	{
-		auto itr = CDecisionMgr::GetInstance()->GetPlayerAreaPoint();
-		temp = L"±âÁØ ÁÂÇ¥ : " + std::to_wstring(itr->x) + L", " +std::to_wstring(itr->y);
+		temp = L"¹æÇâ : " + std::to_wstring(CDecisionMgr::GetInstance()->GetPlayer()->GetDirection());
 		SetText(temp);
 		break;
 	}
 	case PRINT_TYPE::STATE:
+	{
 		temp = L"ÇÃ·¹ÀÌ¾î »óÅÂ : " + std::to_wstring(pTarget->GetState());
 		SetText(temp);
 		break;
+	}
+	case PRINT_TYPE::POS_POINT:
+	{
+		auto itr = CDecisionMgr::GetInstance()->GetPlayerAreaPoint();
+		temp = L"±âÁØ ÁÂÇ¥ : " + std::to_wstring(itr->x) + L", " + std::to_wstring(itr->y);
+		SetText(temp);
+		break;
+	}
 	default:
 		break;
 	}

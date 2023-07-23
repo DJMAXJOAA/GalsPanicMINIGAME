@@ -12,10 +12,10 @@ private:
 	CPlayer* pPlayer;
 	CArea* pArea;
 	list<POINT>::iterator itrPlayerPos; // 플레이어가 현재 몇번 인덱스에 있는지
+	vector<list<POINT>::iterator> vecSave; // 이터레이터 저장
 
 public:
 	bool PlayerMovingPossible(KEY key);
-	bool PlayerDraw();
 
 public:
 	CPlayer* GetPlayer() { return pPlayer; }
@@ -24,6 +24,11 @@ public:
 
 public:
 	void Init(CPlayer* player, CArea* area);
+	void DrawInit();
+	bool DrawCollide();
+	void DrawEnd();
+
+public:
 	void Update();
 	void MoveUpdate();
 	void DrawUpdate();

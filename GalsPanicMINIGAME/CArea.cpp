@@ -2,11 +2,15 @@
 #include "CArea.h"
 #include "CCore.h"
 
+#include "CPlayer.h"
+#include "CDecisionMgr.h"
+
 CArea::CArea()
 	: lstPoint{}
 	, newPoint{}
 	, ptBorder(nullptr)
 	, ptMyArea(nullptr)
+	, bDrawing(false)
 {
 	POINT vResolution = CCore::GetInstance()->GetResolution();
 	LONG iInterval = 40;
@@ -20,14 +24,12 @@ CArea::CArea()
 	lstPoint.push_back(POINT{ iInterval + 2 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
 	lstPoint.push_back(POINT{ iInterval + 2 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
 
-	int size = lstPoint.size();
-
 	list<POINT>::iterator firstItr = lstPoint.begin();
 	list<POINT>::iterator lastItr = lstPoint.end();
 
-	ptMyArea = new POINT[size];
+	ptMyArea = new POINT[lstPoint.size()];
 	int i = 0;
-	for (auto itr = firstItr; itr != lastItr; ++itr)
+	for (auto& itr = firstItr; itr != lastItr; ++itr)
 	{
 		ptMyArea[i].x = itr->x;
 		ptMyArea[i].y = itr->y;
@@ -52,28 +54,29 @@ CArea::~CArea()
 	delete[] ptMyArea;
 }
 
-void CArea::AddToNewPoint()
-{
-}
-
-void CArea::ResetNewPoint()
-{
-}
-
-void CArea::RenewlstPoint()
-{
-}
-
 void CArea::Update()
 {
+
 }
 
 void CArea::Render(HDC hdc)
 {
-	int size = lstPoint.size();
-
 	Polygon(hdc, ptBorder, 4); // 기본 영역
-	Polygon(hdc, ptMyArea, size); // 내 영역
+	Polygon(hdc, ptMyArea, lstPoint.size()); // 내 영역
+
+	if (bDrawing == false)
+		return;
+
+	POINT playerPos = { CDecisionMgr::GetInstance()->GetPlayer()->GetPos().x, CDecisionMgr::GetInstance()->GetPlayer()->GetPos().y };
+	auto itrFront = newPoint.begin();
+	auto itrBack = newPoint.end();
+	MoveToEx(hdc, itrFront->x, itrFront->y, NULL);
+	for(auto itr = itrFront; itr != itrBack; ++itr)
+	{
+		LineTo(hdc, itr->x, itr->y);
+		MoveToEx(hdc, itr->x, itr->y, NULL);
+	}
+	LineTo(hdc, playerPos.x, playerPos.y);
 }
 
 

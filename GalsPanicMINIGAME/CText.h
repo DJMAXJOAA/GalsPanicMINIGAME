@@ -9,6 +9,7 @@ enum class PRINT_TYPE
     POS,
     DIRECTION,
     STATE,
+    POS_POINT,
 };
 
 class CText :

@@ -1,8 +1,11 @@
 #include "pch.h"
 #include "CKeyMgr.h"
 
+#include "CPlayer.h"
+
 #include "CCore.h"
 #include "CDecisionMgr.h"
+
 
 int arrVK[(int)KEY::LAST]
 {
@@ -60,7 +63,10 @@ void CKeyMgr::Update()
 			// 키가 눌려있음
 			if (GetAsyncKeyState(arrVK[i]) & 0x8000)
 			{
-				SetKeyAvailability((KEY)i, CDecisionMgr::GetInstance()->PlayerMovingDecision((KEY)i));
+				if (CDecisionMgr::GetInstance()->GetPlayer()->GetState() == MOVE)
+				{
+					SetKeyAvailability((KEY)i, CDecisionMgr::GetInstance()->PlayerMovingPossible((KEY)i));
+				}
 
 				// 이전에도 눌리고 있었음
 				if (vecKey[i].bPrevPush)
@@ -87,7 +93,6 @@ void CKeyMgr::Update()
 				// 이전에도 떼져있었음
 				else
 				{
-					vecKey[i].bKeyAvailability = true;
 					vecKey[i].eState = KEY_STATE::NONE;
 				}
 				vecKey[i].bPrevPush = false;
