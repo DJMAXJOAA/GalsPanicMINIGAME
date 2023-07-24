@@ -29,7 +29,6 @@ public:
 
 public:
     void Move();
-    void Draw();
 
 public:
     virtual void Update();

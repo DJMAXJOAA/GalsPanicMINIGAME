@@ -65,7 +65,10 @@ void CKeyMgr::Update()
 			{
 				if (CDecisionMgr::GetInstance()->GetPlayer()->GetState() == MOVE)
 				{
-					SetKeyAvailability((KEY)i, CDecisionMgr::GetInstance()->PlayerMovingPossible((KEY)i));
+					if (i == (int)KEY::A || i == (int)KEY::W || i == (int)KEY::D || i == (int)KEY::S)
+						SetKeyAvailability((KEY)i, CDecisionMgr::GetInstance()->PlayerMovingPossible((KEY)i));
+					else if (i == (int)KEY::SPACE)
+						SetKeyAvailability((KEY)i, CDecisionMgr::GetInstance()->DrawStartPossible((KEY)i));
 				}
 
 				// 이전에도 눌리고 있었음

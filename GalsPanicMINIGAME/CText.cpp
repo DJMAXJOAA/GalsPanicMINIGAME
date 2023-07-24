@@ -43,13 +43,13 @@ void CText::Update()
 		SetText(temp);
 		break;
 	}
-	//case PRINT_TYPE::POS_POINT:
-	//{
-	//	auto itr = CDecisionMgr::GetInstance()->GetPlayerAreaPoint();
-	//	temp = L"±âÁØ ÁÂÇ¥ : " + std::to_wstring(itr->x) + L", " + std::to_wstring(itr->y);
-	//	SetText(temp);
-	//	break;
-	//}
+	case PRINT_TYPE::POS_POINT:
+	{
+		auto itr = CDecisionMgr::GetInstance()->GetPlayerAreaPoint();
+		temp = L"±âÁØ ÁÂÇ¥ : " + std::to_wstring(itr->x) + L", " + std::to_wstring(itr->y);
+		SetText(temp);
+		break;
+	}
 	default:
 		break;
 	}

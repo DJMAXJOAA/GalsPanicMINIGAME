@@ -34,6 +34,7 @@ public:
 	void Init(CPlayer* player, CArea* area);
 	void DrawInit();
 	bool DrawCollide();
+	bool DrawStartPossible(KEY key);
 	void DrawEnd();
 
 public:

@@ -44,8 +44,8 @@ void CPlayer::Move()
 		{
 			if (fInterval < vPos.x)
 			{
-				vPos.x -= iSpeed;
 				iDirection = LEFT;
+				vPos.x -= iSpeed;
 				iState = DRAW;
 				CDecisionMgr::GetInstance()->DrawInit();
 				CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, false);
@@ -58,8 +58,8 @@ void CPlayer::Move()
 		{
 			if (fInterval < vPos.y)
 			{
-				vPos.y -= iSpeed;
 				iDirection = UP;
+				vPos.y -= iSpeed;
 				iState = DRAW;
 				CDecisionMgr::GetInstance()->DrawInit();
 				CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, false);
@@ -72,9 +72,8 @@ void CPlayer::Move()
 		{
 			if (vResolution.x - fInterval > vPos.x)
 			{
+				iDirection = RIGHT;
 				vPos.x += iSpeed;
-				iDirection = RIGHT;
-				iDirection = RIGHT;
 				iState = DRAW;
 				CDecisionMgr::GetInstance()->DrawInit();
 				CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, false);
@@ -87,8 +86,8 @@ void CPlayer::Move()
 		{
 			if (vResolution.y - fInterval > vPos.y)
 			{
-				vPos.y += iSpeed;
 				iDirection = DOWN;
+				vPos.y += iSpeed;
 				iState = DRAW;
 				CDecisionMgr::GetInstance()->DrawInit();
 				CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, false);
@@ -101,40 +100,36 @@ void CPlayer::Move()
 		return;
 	}
 
-	if (CKeyMgr::GetInstance()->GetKeyState(KEY::A) == KEY_STATE::HOLD
-		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::A))
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::A) == KEY_STATE::HOLD)
 	{
-		if (fInterval < vPos.x)
+			iDirection = LEFT;
+		if (fInterval < vPos.x && CKeyMgr::GetInstance()->GetKeyAvailability(KEY::A))
 		{
 			vPos.x -= iSpeed;
-			iDirection = LEFT;
 		}
 	}
-	if (CKeyMgr::GetInstance()->GetKeyState(KEY::W) == KEY_STATE::HOLD
-		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::W))
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::W) == KEY_STATE::HOLD)
 	{
-		if (fInterval < vPos.y)
+			iDirection = UP;
+		if (fInterval < vPos.y && CKeyMgr::GetInstance()->GetKeyAvailability(KEY::W))
 		{
 			vPos.y -= iSpeed;
-			iDirection = UP;
 		}
 	}
-	if (CKeyMgr::GetInstance()->GetKeyState(KEY::D) == KEY_STATE::HOLD
-		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::D))
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::D) == KEY_STATE::HOLD)
 	{
-		if (vResolution.x - fInterval > vPos.x)
+			iDirection = RIGHT;
+		if (vResolution.x - fInterval > vPos.x && CKeyMgr::GetInstance()->GetKeyAvailability(KEY::D))
 		{
 			vPos.x += iSpeed;
-			iDirection = RIGHT;
 		}
 	}
-	if (CKeyMgr::GetInstance()->GetKeyState(KEY::S) == KEY_STATE::HOLD
-		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::S))
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::S) == KEY_STATE::HOLD)
 	{
-		if (vResolution.y - fInterval > vPos.y)
+			iDirection = DOWN;
+		if (vResolution.y - fInterval > vPos.y && CKeyMgr::GetInstance()->GetKeyAvailability(KEY::S))
 		{
 			vPos.y += iSpeed;
-			iDirection = DOWN;
 		}
 	}
 
