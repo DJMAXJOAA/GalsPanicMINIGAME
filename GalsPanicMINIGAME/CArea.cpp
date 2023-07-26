@@ -56,27 +56,55 @@ CArea::~CArea()
 
 void CArea::Update()
 {
+	for (list<POINT>::iterator itr = lstPoint.begin(); itr != prev(lstPoint.end(), 1); ++itr)
+	{
+		if (itr->x == next(itr, 1)->x && itr->y == next(itr, 1)->y)
+		{
+			lstPoint.erase(itr);
+			break;
+		}
+	}
 
 }
 
 void CArea::Render(HDC hdc)
 {
+	static int asdf;
+	asdf++;
+
 	Polygon(hdc, ptBorder, 4); // 기본 영역
 	Polygon(hdc, ptMyArea, lstPoint.size()); // 내 영역
 
+
+	int radius = 10;
+	wstring temp;
+	for (int i = 0; i < lstPoint.size(); i++)
+	{
+		temp = L"" + std::to_wstring(i);
+		TextOut(hdc, ptMyArea[i].x + radius, ptMyArea[i].y + radius, temp.c_str(), temp.length());
+		temp = L"" + std::to_wstring(ptMyArea[i].x) + L", " + std::to_wstring(ptMyArea[i].y);
+		TextOut(hdc, ptMyArea[i].x + radius, ptMyArea[i].y + 3*radius, temp.c_str(), temp.length());
+		Ellipse(hdc, ptMyArea[i].x - radius, ptMyArea[i].y - radius, ptMyArea[i].x + + radius, ptMyArea[i].y + radius);
+	}
+
+	
 	if (bDrawing == false)
 		return;
-
 	POINT playerPos = { CDecisionMgr::GetInstance()->GetPlayer()->GetPos().x, CDecisionMgr::GetInstance()->GetPlayer()->GetPos().y };
 	auto itrFront = newPoint.begin();
 	auto itrBack = newPoint.end();
 	MoveToEx(hdc, itrFront->x, itrFront->y, NULL);
-	for(auto itr = itrFront; itr != itrBack; ++itr)
+	for(auto& itr = itrFront; itr != itrBack; ++itr)
 	{
 		LineTo(hdc, itr->x, itr->y);
 		MoveToEx(hdc, itr->x, itr->y, NULL);
 	}
 	LineTo(hdc, playerPos.x, playerPos.y);
+
+	for (list<POINT>::iterator itr = newPoint.begin(); itr != newPoint.end(); ++itr)
+	{
+		Ellipse(hdc, itr->x - radius, itr->y - radius, itr->x + +radius, itr->y + radius);
+	}
 }
 
 

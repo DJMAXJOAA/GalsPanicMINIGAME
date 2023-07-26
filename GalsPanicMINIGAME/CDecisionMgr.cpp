@@ -17,16 +17,16 @@ bool CDecisionMgr::PlayerMovingPossible(KEY key)
 	int playerSpeed = pPlayer->GetSpeed();
 
 	int max_xpos, min_xpos; // 비교
-	int max_ypos, min_ypos; 
+	int max_ypos, min_ypos;
 
 	if (itrPlayerPos == itrBack) // 1. 플레이어의 현재 위치 = 좌표의 맨 마지막
 	{
 		if (itrFront->x == itrPlayerPos->x) // x좌표 동일 : 위아래 이동
 		{
-			if (itrFront->y > itrPlayerPos->y)				 { max_ypos = itrFront->y; min_ypos = itrPlayerPos->y; }
-			else											 { min_ypos = itrFront->y; max_ypos = itrPlayerPos->y; }	
-			if (prev(itrPlayerPos, 1)->x > itrPlayerPos->x)	 { max_xpos = prev(itrPlayerPos, 1)->x; min_xpos = itrPlayerPos->x; }
-			else											 { min_xpos = prev(itrPlayerPos, 1)->x; max_xpos = itrPlayerPos->x; }
+			if (itrFront->y > itrPlayerPos->y) { max_ypos = itrFront->y; min_ypos = itrPlayerPos->y; }
+			else { min_ypos = itrFront->y; max_ypos = itrPlayerPos->y; }
+			if (prev(itrPlayerPos, 1)->x > itrPlayerPos->x) { max_xpos = prev(itrPlayerPos, 1)->x; min_xpos = itrPlayerPos->x; }
+			else { min_xpos = prev(itrPlayerPos, 1)->x; max_xpos = itrPlayerPos->x; }
 
 			switch (key)
 			{
@@ -56,10 +56,10 @@ bool CDecisionMgr::PlayerMovingPossible(KEY key)
 		}
 		if (itrFront->y == itrPlayerPos->y) // y좌표 동일 : 좌우로 이동
 		{
-			if (itrFront->x > itrPlayerPos->x)				{ max_xpos = itrFront->x; min_xpos = itrPlayerPos->x; }
-			else											{ min_xpos = itrFront->x; max_xpos = itrPlayerPos->x; }
+			if (itrFront->x > itrPlayerPos->x) { max_xpos = itrFront->x; min_xpos = itrPlayerPos->x; }
+			else { min_xpos = itrFront->x; max_xpos = itrPlayerPos->x; }
 			if (prev(itrPlayerPos, 1)->y > itrPlayerPos->y) { max_ypos = prev(itrPlayerPos, 1)->y; min_ypos = itrPlayerPos->y; }
-			else											{ min_ypos = prev(itrPlayerPos, 1)->y; max_ypos = itrPlayerPos->y; }
+			else { min_ypos = prev(itrPlayerPos, 1)->y; max_ypos = itrPlayerPos->y; }
 
 			switch (key)
 			{
@@ -92,10 +92,10 @@ bool CDecisionMgr::PlayerMovingPossible(KEY key)
 	{
 		if (next(itrPlayerPos, 1)->x == itrPlayerPos->x) // x좌표 동일 : 위아래 이동
 		{
-			if (next(itrPlayerPos, 1)->y > itrPlayerPos->y)	 { max_ypos = next(itrPlayerPos, 1)->y; min_ypos = itrPlayerPos->y; }
-			else											 { min_ypos = next(itrPlayerPos, 1)->y; max_ypos = itrPlayerPos->y; }	
-			if (itrBack->x > itrPlayerPos->x)				 { max_xpos = itrBack->x; min_xpos = itrPlayerPos->x; }
-			else											 { min_xpos = itrBack->x; max_xpos = itrPlayerPos->x; }
+			if (next(itrPlayerPos, 1)->y > itrPlayerPos->y) { max_ypos = next(itrPlayerPos, 1)->y; min_ypos = itrPlayerPos->y; }
+			else { min_ypos = next(itrPlayerPos, 1)->y; max_ypos = itrPlayerPos->y; }
+			if (itrBack->x > itrPlayerPos->x) { max_xpos = itrBack->x; min_xpos = itrPlayerPos->x; }
+			else { min_xpos = itrBack->x; max_xpos = itrPlayerPos->x; }
 
 			switch (key)
 			{
@@ -125,10 +125,10 @@ bool CDecisionMgr::PlayerMovingPossible(KEY key)
 		}
 		if (next(itrPlayerPos, 1)->y == itrPlayerPos->y) // y좌표 동일 : 좌우로 이동
 		{
-			if (next(itrPlayerPos, 1)->x > itrPlayerPos->x)	{ max_xpos = next(itrPlayerPos, 1)->x; min_xpos = itrPlayerPos->x; }
-			else											{ min_xpos = next(itrPlayerPos, 1)->x; max_xpos = itrPlayerPos->x; }
-			if (itrBack->y > itrPlayerPos->y)				{ max_ypos = itrBack->y; min_ypos = itrPlayerPos->y; }
-			else											{ min_ypos = itrBack->y; max_ypos = itrPlayerPos->y; }
+			if (next(itrPlayerPos, 1)->x > itrPlayerPos->x) { max_xpos = next(itrPlayerPos, 1)->x; min_xpos = itrPlayerPos->x; }
+			else { min_xpos = next(itrPlayerPos, 1)->x; max_xpos = itrPlayerPos->x; }
+			if (itrBack->y > itrPlayerPos->y) { max_ypos = itrBack->y; min_ypos = itrPlayerPos->y; }
+			else { min_ypos = itrBack->y; max_ypos = itrPlayerPos->y; }
 
 			switch (key)
 			{
@@ -161,10 +161,10 @@ bool CDecisionMgr::PlayerMovingPossible(KEY key)
 	{
 		if (next(itrPlayerPos, 1)->x == itrPlayerPos->x) // x좌표 동일 : 위아래 이동
 		{
-			if (next(itrPlayerPos, 1)->y > itrPlayerPos->y)	 { max_ypos = next(itrPlayerPos, 1)->y; min_ypos = itrPlayerPos->y; }
-			else											 { min_ypos = next(itrPlayerPos, 1)->y; max_ypos = itrPlayerPos->y; }	
-			if (prev(itrPlayerPos, 1)->x > itrPlayerPos->x)	 { max_xpos = prev(itrPlayerPos, 1)->x; min_xpos = itrPlayerPos->x; }
-			else											 { min_xpos = prev(itrPlayerPos, 1)->x; max_xpos = itrPlayerPos->x; }
+			if (next(itrPlayerPos, 1)->y > itrPlayerPos->y) { max_ypos = next(itrPlayerPos, 1)->y; min_ypos = itrPlayerPos->y; }
+			else { min_ypos = next(itrPlayerPos, 1)->y; max_ypos = itrPlayerPos->y; }
+			if (prev(itrPlayerPos, 1)->x > itrPlayerPos->x) { max_xpos = prev(itrPlayerPos, 1)->x; min_xpos = itrPlayerPos->x; }
+			else { min_xpos = prev(itrPlayerPos, 1)->x; max_xpos = itrPlayerPos->x; }
 
 			switch (key)
 			{
@@ -194,10 +194,10 @@ bool CDecisionMgr::PlayerMovingPossible(KEY key)
 		}
 		if (next(itrPlayerPos, 1)->y == itrPlayerPos->y) // y좌표 동일 : 좌우로 이동
 		{
-			if (next(itrPlayerPos, 1)->x > itrPlayerPos->x)	{ max_xpos = next(itrPlayerPos, 1)->x; min_xpos = itrPlayerPos->x; }
-			else											{ min_xpos = next(itrPlayerPos, 1)->x; max_xpos = itrPlayerPos->x; }
+			if (next(itrPlayerPos, 1)->x > itrPlayerPos->x) { max_xpos = next(itrPlayerPos, 1)->x; min_xpos = itrPlayerPos->x; }
+			else { min_xpos = next(itrPlayerPos, 1)->x; max_xpos = itrPlayerPos->x; }
 			if (prev(itrPlayerPos, 1)->y > itrPlayerPos->y) { max_ypos = prev(itrPlayerPos, 1)->y; min_ypos = itrPlayerPos->y; }
-			else											{ min_ypos = prev(itrPlayerPos, 1)->y; max_ypos = itrPlayerPos->y; }
+			else { min_ypos = prev(itrPlayerPos, 1)->y; max_ypos = itrPlayerPos->y; }
 
 			switch (key)
 			{
@@ -236,7 +236,25 @@ void CDecisionMgr::DrawInit()
 	CKeyMgr::GetInstance()->SetKeyAvailability(KEY::SPACE, false);
 	pArea->AddToNewPoint(PlayerPos);
 	pArea->SetDraw(true);
-	
+	int playerDirection = pPlayer->GetDirection();
+	switch (playerDirection)
+	{
+	case LEFT:
+		lastKEY = KEY::A;
+		break;
+	case UP:
+		lastKEY = KEY::W;
+		break;
+	case RIGHT:
+		lastKEY = KEY::D;
+		break;
+	case DOWN:
+		lastKEY = KEY::S;
+		break;
+	default:
+		break;
+	}
+
 	auto itrFront = pArea->GetlstPoint().begin();
 	auto itrBack = pArea->GetlstPoint().end();
 	// 임시 저장 이터레이터들의 배열 (시작과 끝을 저장)
@@ -249,8 +267,6 @@ void CDecisionMgr::DrawInit()
 	{
 		vecSave.push_back(next(itrPlayerPos, 1));
 	}
-
-	
 }
 
 bool CDecisionMgr::DrawCollide()
@@ -263,18 +279,20 @@ bool CDecisionMgr::DrawCollide()
 	int max_ypos, min_ypos;
 
 	int odd_number;
-	if (itrFront->x == next(itrFront, 1)->x)
-		odd_number = 0;
-	else
-		odd_number = 1;
+
 	for (auto& itr = itrFront; itr != itrBack; ++itr)
 	{
+		if (itrFront->x == next(itrFront, 1)->x)
+			odd_number = 0;
+		else
+			odd_number = 1;
+
 		switch (odd_number)
 		{
 		case 0: // x가 같을때 (y축으로 비교)
 		{
-			if (next(itr, 1)->y > itr->y)	 { max_ypos = next(itr, 1)->y; min_ypos = itr->y; }
-			else							 { min_ypos = next(itr, 1)->y; max_ypos = itr->y; }	
+			if (next(itr, 1)->y > itr->y) { max_ypos = next(itr, 1)->y; min_ypos = itr->y; }
+			else { min_ypos = next(itr, 1)->y; max_ypos = itr->y; }
 			if (itr->x == playerPos.x && min_ypos <= playerPos.y && playerPos.y <= max_ypos)
 			{
 				itrPlayerPos = itr;
@@ -282,11 +300,11 @@ bool CDecisionMgr::DrawCollide()
 			}
 			odd_number = 1;
 		}
-			break;
+		break;
 		case 1: // y가 같을때 (x축으로 비교)
 		{
-			if (next(itr, 1)->x > itr->x)	 { max_xpos = next(itr, 1)->x; min_xpos = itr->x; }
-			else							 { min_xpos = next(itr, 1)->x; max_xpos = itr->x; }	
+			if (next(itr, 1)->x > itr->x) { max_xpos = next(itr, 1)->x; min_xpos = itr->x; }
+			else { min_xpos = next(itr, 1)->x; max_xpos = itr->x; }
 			if (itr->y == playerPos.y && min_xpos <= playerPos.x && playerPos.x <= max_xpos)
 			{
 				itrPlayerPos = itr;
@@ -294,7 +312,7 @@ bool CDecisionMgr::DrawCollide()
 			}
 			odd_number = 0;
 		}
-			break;
+		break;
 		default:
 			break;
 		}
@@ -302,6 +320,7 @@ bool CDecisionMgr::DrawCollide()
 
 	return false;
 }
+
 
 bool CDecisionMgr::DrawStartPossible(KEY key)
 {
@@ -318,7 +337,11 @@ bool CDecisionMgr::DrawStartPossible(KEY key)
 	int odd_number;
 	if (itrPlayerPos == itrBack)
 	{
-		if (itrPlayerPos->x == itrFront->x)
+		if (itrPlayerPos->x == playerPos.x && itrPlayerPos->y == playerPos.y)
+		{
+			odd_number = 2;
+		}
+		else if (itrPlayerPos->x == itrFront->x)
 		{
 			odd_number = 0; // 세로
 		}
@@ -329,7 +352,11 @@ bool CDecisionMgr::DrawStartPossible(KEY key)
 	}
 	else
 	{
-		if (itrPlayerPos->x == next(itrPlayerPos, 1)->x)
+		if (itrPlayerPos->x == playerPos.x && itrPlayerPos->y == playerPos.y)
+		{
+			odd_number = 2;
+		}
+		else if (itrPlayerPos->x == next(itrPlayerPos, 1)->x)
 		{
 			odd_number = 0;
 		}
@@ -342,12 +369,12 @@ bool CDecisionMgr::DrawStartPossible(KEY key)
 	int cnt = 0;
 	for (auto itr = itrFront; itr != itrBack; ++itr)
 	{
-		switch(odd_number)
+		switch (odd_number)
 		{
 		case 0: // x가 같을때 (y축으로 비교)
 		{
-			if (next(itr, 1)->y > itr->y)	 { max_ypos = next(itr, 1)->y; min_ypos = itr->y; }
-			else							 { min_ypos = next(itr, 1)->y; max_ypos = itr->y; }	
+			if (next(itr, 1)->y > itr->y)	{ max_ypos = next(itr, 1)->y; min_ypos = itr->y; }
+			else							{ min_ypos = next(itr, 1)->y; max_ypos = itr->y; }
 
 			switch (playerDirection)
 			{
@@ -363,16 +390,48 @@ bool CDecisionMgr::DrawStartPossible(KEY key)
 				return false;
 			}
 		}
-			break;
+		break;
 		case 1: // y가 같을때 (x축으로 비교)
 		{
-			if (next(itr, 1)->x > itr->x)	 { max_xpos = next(itr, 1)->x; min_xpos = itr->x; }
-			else							 { min_xpos = next(itr, 1)->x; max_xpos = itr->x; }	
+			if (next(itr, 1)->x > itr->x)	{ max_xpos = next(itr, 1)->x; min_xpos = itr->x; }
+			else							{ min_xpos = next(itr, 1)->x; max_xpos = itr->x; }
 
 			switch (playerDirection)
 			{
 			case UP:
-				if (itr->y < playerPos.y && max_xpos <= playerPos.x && playerPos.x < max_xpos)
+				if (itr->y < playerPos.y && min_xpos <= playerPos.x && playerPos.x < max_xpos)
+					cnt++;
+				break;
+			case DOWN:
+				if (itr->y > playerPos.y && min_xpos <= playerPos.x && playerPos.x < max_xpos)
+				{
+					cnt++;
+				}
+				break;
+			default:
+				return false;
+			}
+		}
+		break;
+		case 2: // x, y 둘다 같을때
+		{
+			if (next(itr, 1)->x > itr->x)	{ max_xpos = next(itr, 1)->x; min_xpos = itr->x; }
+			else							{ min_xpos = next(itr, 1)->x; max_xpos = itr->x; }
+			if (next(itr, 1)->y > itr->y)	{ max_ypos = next(itr, 1)->y; min_ypos = itr->y; }
+			else							{ min_ypos = next(itr, 1)->y; max_ypos = itr->y; }
+
+			switch (playerDirection)
+			{
+			case LEFT:
+				if (itr->x < playerPos.x && min_ypos <= playerPos.y && playerPos.y < max_ypos)
+					cnt++;
+				break;
+			case RIGHT:
+				if (itr->x > playerPos.x && min_ypos <= playerPos.y && playerPos.y < max_ypos)
+					cnt++;
+				break;
+			case UP:
+				if (itr->y < playerPos.y && min_xpos <= playerPos.x && playerPos.x < max_xpos)
 					cnt++;
 				break;
 			case DOWN:
@@ -383,13 +442,12 @@ bool CDecisionMgr::DrawStartPossible(KEY key)
 				return false;
 			}
 		}
-			break;
+		break;
 		default:
 			break;
 		}
 	}
 
-	
 	switch (odd_number)
 	{
 	case 0: // x가 같을때 (y축으로 비교)
@@ -420,7 +478,39 @@ bool CDecisionMgr::DrawStartPossible(KEY key)
 		switch (playerDirection)
 		{
 		case UP:
-			if (itrBack->y < playerPos.y && max_xpos <= playerPos.x && playerPos.x < max_xpos)
+			if (itrBack->y < playerPos.y && min_xpos <= playerPos.x && playerPos.x < max_xpos)
+				cnt++;
+			break;
+		case DOWN:
+			if (itrBack->y > playerPos.y && min_xpos <= playerPos.x && playerPos.x < max_xpos)
+			{
+				cnt++;
+			}
+			break;
+		default:
+			return false;
+		}
+	}
+	break;
+	case 2: // x, y 둘다 같을때
+	{
+		if (itrFront->x > itrBack->x)	{ max_xpos = itrFront->x; min_xpos = itrBack->x; }
+		else							{ min_xpos = itrFront->x; max_xpos = itrBack->x; }
+		if (itrFront->y > itrBack->y)	{ max_ypos = itrFront->y; min_ypos = itrBack->y; }
+		else							{ min_ypos = itrFront->y; max_ypos = itrBack->y; }
+
+		switch (playerDirection)
+		{
+		case LEFT:
+			if (itrBack->x < playerPos.x && min_ypos <= playerPos.y && playerPos.y < max_ypos)
+				cnt++;
+			break;
+		case RIGHT:
+			if (itrBack->x > playerPos.x && min_ypos <= playerPos.y && playerPos.y < max_ypos)
+				cnt++;
+			break;
+		case UP:
+			if (itrBack->y < playerPos.y && min_xpos <= playerPos.x && playerPos.x < max_xpos)
 				cnt++;
 			break;
 		case DOWN:
@@ -432,14 +522,12 @@ bool CDecisionMgr::DrawStartPossible(KEY key)
 		}
 	}
 	break;
-	default:
-		break;
 	}
-	
-	printf("%d", cnt);
+
+	printf("중복 점 : %d\n", cnt);
 
 	if (cnt % 2 == 0)
-		return true; // 짝수면 그리기 가능 
+		return true; // 짝수면 그리기 가능
 	else
 		return false; // 홀수면 내부로 들어가는거니까 못그림
 }
@@ -455,7 +543,7 @@ void CDecisionMgr::DrawEnd()
 
 	// 임시 저장 이터레이터들의 배열 (시작과 끝을 저장)
 	vecSave.push_back(itrPlayerPos);
-	if (itrPlayerPos == prev(itrBack,1))
+	if (itrPlayerPos == prev(itrBack, 1))
 	{
 		vecSave.push_back(itrFront);
 	}
@@ -474,6 +562,7 @@ void CDecisionMgr::DrawEnd()
 		{
 			if (vecSave[i] == itr)
 			{
+				printf("vecSave[%d] = %d, %d\n", i, vecSave[i]->x, vecSave[i]->y);
 				vecTemp.push_back(itr);
 				break;
 			}
@@ -485,7 +574,7 @@ void CDecisionMgr::DrawEnd()
 	if (vecSave[0] != vecTemp[0])
 	{
 		check = true;
-		printf("거꾸로 돌림");
+		printf("거꾸로 돌림\n");
 	}
 
 	auto tempFront = pArea->GetnewPoint().begin();
@@ -496,12 +585,12 @@ void CDecisionMgr::DrawEnd()
 	{
 		if (vecTemp[0]->x == vecTemp[1]->x && tempFront->y - tempBack->y > 0) // y축에서 비교
 		{
-			printf("거꾸로 돌림");
+			printf("거꾸로 돌림\n");
 			check = true;
 		}
-		else if(vecTemp[0]->y == vecTemp[1]->y && tempFront->x - tempBack->x > 0) // x축에서 비교
+		else if (vecTemp[0]->y == vecTemp[1]->y && tempFront->x - tempBack->x > 0) // x축에서 비교
 		{
-			printf("거꾸로 돌림");
+			printf("거꾸로 돌림\n");
 			check = true;
 		}
 		max = 1;
@@ -510,35 +599,115 @@ void CDecisionMgr::DrawEnd()
 	{
 		max = 2;
 	}
-	
+	printf("\n");
+
+	for (int i = 0; i < vecTemp.size(); i++)
+	{
+		printf("vecTemp[%d] = %d, %d\n", i, vecTemp[i]->x, vecTemp[i]->y);
+	}
+	printf("\n");
+
+	auto itrtFront = pArea->GetnewPoint().begin();
+	auto itrtBack = pArea->GetnewPoint().end();
+	for (auto itr = itrtFront; itr != itrtBack; ++itr)
+	{
+		printf("%d, %d\n", itr->x, itr->y);
+	}
+	printf("\n");
+
 	// 처음이 불일치하면 새로만든 배열 거꾸로
 	if (check)
+	{
 		pArea->GetnewPoint().reverse();
-	vecSave = vecTemp;
+		vecSave = vecTemp;
+	}
+	else
+	{
+		vecSave = vecTemp;
+	}
+
+
+	for (int i = 0; i < vecSave.size(); i++)
+	{
+		printf("vecSave[%d] = %d, %d\n", i, vecSave[i]->x, vecSave[i]->y);
+	}
+	printf("max = %d\n", max);
 
 
 	// 리스트 이어붙이기
 	auto itrNewFront = pArea->GetnewPoint().begin();
 	auto itrNewBack = pArea->GetnewPoint().end();
 
-    list<POINT> renewPoint;
+	list<POINT> renewPoint;
 	renewPoint.insert(renewPoint.end(), itrFront, vecSave[min]);
 	renewPoint.insert(renewPoint.end(), itrNewFront, itrNewBack);
 	renewPoint.insert(renewPoint.end(), vecSave[max], itrBack);
 
-	// 리스트 중복 좌표 제거
-	for (auto itr = renewPoint.begin(); itr != prev(renewPoint.end(),1); ++itr)
+	auto itrtnFront = renewPoint.begin();
+	auto itrtnBack = renewPoint.end();
+	for (auto itr = itrtnFront; itr != itrtnBack; ++itr)
 	{
-		if (itr->x == next(itr, 1)->x && itr->y == next(itr,1)->y)
+		printf("%d, %d\n", itr->x, itr->y);
+	}
+	printf("\n");
+
+
+	// 리스트 중복 좌표 제거
+	while (1)
+	{
+		int overlaped = 0;
+		list<POINT>::iterator itrOverlap;
+		list<POINT>::iterator itrPrev;
+		list<POINT>::iterator itrNext;
+		for (auto itr = next(renewPoint.begin(),1); itr != prev(renewPoint.end(), 1); ++itr)
 		{
-			printf("%d, %d 지움\n", itr->x, itr->y);
-			renewPoint.erase(itr);
+			itrPrev = prev(itr, 1);
+			itrNext = next(itr, 1);
+
+			if ((itr->x == itrNext->x && itr->y == itrNext->y)
+				|| itr->x == itrPrev->x && itr->y == itrPrev->y)
+			{
+				printf("%d, %d 1번지움\n", itr->x, itr->y);
+				itrOverlap = itrNext;
+				renewPoint.erase(itr);
+				overlaped = 1;
+				break;
+			}
+			else if (prev(itr, 1)->x == next(itr, 1)->x
+				|| prev(itr, 1)->y == next(itr, 1)->y)
+			{
+				printf("%d, %d 1번지움\n", itr->x, itr->y);
+				itrOverlap = itrNext;
+				renewPoint.erase(itr);
+				overlaped = 2;
+				break;
+			}
+		}
+		if (overlaped == 1)
+		{
+			printf("%d, %d 2번지움\n", itrOverlap->x, itrOverlap->y);
+			renewPoint.erase(itrOverlap);
+		}
+		else if (overlaped == 2)
+		{
+			continue;
+		}
+		else // 중복좌표 없으면 탈출
+		{
 			break;
 		}
 	}
+	printf("\n");
+
+	auto itrtnFront2 = renewPoint.begin();
+	auto itrtnBack2 = renewPoint.end();
+	for (auto itr = itrtnFront2; itr != itrtnBack2; ++itr)
+	{
+		printf("%d, %d\n", itr->x, itr->y);
+	}
+	printf("\n");
 
 	// 배열에 반영
-	POINT* temp = new POINT[renewPoint.size()];
 	POINT* save = pArea->GetptMyArea();
 	std::copy(renewPoint.begin(), renewPoint.end(), save);
 
@@ -546,13 +715,71 @@ void CDecisionMgr::DrawEnd()
 	pArea->GetlstPoint() = renewPoint;
 
 	// 플레이어 이터레이터 초기화
+	bool itrPlayerInit = false;
 	for (auto itr = itrFront; itr != itrBack; ++itr)
 	{
 		if (itr->x == playerPos.x && itr->y == playerPos.y)
 		{
 			itrPlayerPos = itr;
+			itrPlayerInit = true;
 			break;
 		}
+	}
+
+	if(itrPlayerInit == false)
+	{ // 콜라이더
+		auto itrFront = pArea->GetlstPoint().begin();
+		auto itrBack = prev(pArea->GetlstPoint().end());
+		POINT playerPos = { pPlayer->GetPos().x, pPlayer->GetPos().y };
+
+		int max_xpos, min_xpos; // 비교
+		int max_ypos, min_ypos;
+
+		int odd_number;
+
+		for (auto itr = itrFront; itr != itrBack; ++itr)
+		{
+			if (itrFront->x == next(itrFront, 1)->x)
+				odd_number = 0;
+			else
+				odd_number = 1;
+
+			switch (odd_number)
+			{
+			case 0: // x가 같을때 (y축으로 비교)
+			{
+				if (next(itr, 1)->y > itr->y) { max_ypos = next(itr, 1)->y; min_ypos = itr->y; }
+				else { min_ypos = next(itr, 1)->y; max_ypos = itr->y; }
+				if (itr->x == playerPos.x && min_ypos <= playerPos.y && playerPos.y <= max_ypos)
+				{
+					itrPlayerPos = itr;
+					itrPlayerInit = true;
+					break;
+				}
+				odd_number = 1;
+			}
+			break;
+			case 1: // y가 같을때 (x축으로 비교)
+			{
+				if (next(itr, 1)->x > itr->x) { max_xpos = next(itr, 1)->x; min_xpos = itr->x; }
+				else { min_xpos = next(itr, 1)->x; max_xpos = itr->x; }
+				if (itr->y == playerPos.y && min_xpos <= playerPos.x && playerPos.x <= max_xpos)
+				{
+					itrPlayerPos = itr;
+					itrPlayerInit = true;
+					break;
+				}
+				odd_number = 0;
+			}
+			break;
+			default:
+				break;
+			}
+		}
+	}
+	if (itrPlayerInit == false)
+	{
+		itrPlayerPos = prev(pArea->GetlstPoint().end());
 	}
 
 	// 뒷정리
@@ -560,6 +787,77 @@ void CDecisionMgr::DrawEnd()
 	pPlayer->SetState(MOVE);
 	pArea->ResetNewPoint();
 	pArea->SetDraw(false);
+}
+
+void CDecisionMgr::DrawCollideDead()
+{
+	if (pArea->GetnewPoint().size() < 2)
+		return;
+
+	auto itrFront = pArea->GetnewPoint().begin();
+	auto itrBack = prev(pArea->GetnewPoint().end(), 2);
+	POINT playerPos = { pPlayer->GetPos().x, pPlayer->GetPos().y };
+
+	int max_xpos, min_xpos; // 비교
+	int max_ypos, min_ypos;
+	int odd_number;
+
+	// 충돌 체크
+	bool dead = false;
+	for (auto& itr = itrFront; itr != itrBack; ++itr)
+	{
+		if (itrFront->x == next(itrFront, 1)->x)
+			odd_number = 0;
+		else
+			odd_number = 1;
+
+		switch (odd_number)
+		{
+		case 0: // x가 같을때 (y축으로 비교)
+		{
+			if (next(itr, 1)->y > itr->y) { max_ypos = next(itr, 1)->y; min_ypos = itr->y; }
+			else { min_ypos = next(itr, 1)->y; max_ypos = itr->y; }
+			if (itr->x == playerPos.x && min_ypos <= playerPos.y && playerPos.y <= max_ypos)
+			{
+				itrPlayerPos = itr;
+				printf("x : %d, y : %d ~ x : %d, y : %d에서 닿음\n", itr->x, itr->y, next(itr,1)->x, next(itr,1)->y);
+				dead = true;
+				break;
+			}
+			odd_number = 1;
+		}
+		break;
+		case 1: // y가 같을때 (x축으로 비교)
+		{
+			if (next(itr, 1)->x > itr->x) { max_xpos = next(itr, 1)->x; min_xpos = itr->x; }
+			else { min_xpos = next(itr, 1)->x; max_xpos = itr->x; }
+			if (itr->y == playerPos.y && min_xpos <= playerPos.x && playerPos.x <= max_xpos)
+			{
+				itrPlayerPos = itr;
+				printf("x : %d, y : %d ~ x : %d, y : %d에서 닿음\n", itr->x, itr->y, next(itr, 1)->x, next(itr, 1)->y);
+				dead = true;
+				break;
+			}
+			odd_number = 0;
+		}
+		break;
+		default:
+			break;
+		}
+	}
+
+	if(dead == true && pPlayer->GetState() == DRAW)
+	{
+		auto itrReverse = prev(pArea->GetnewPoint().end(), 1);
+		itrPlayerPos = itrReverse;
+		pPlayer->SetState(DEAD);
+
+		for (int i = 0; i < (int)KEY::LAST; i++)
+		{
+			CKeyMgr::GetInstance()->SetKeyAvailability((KEY)i, false);
+		}
+		return;
+	}
 }
 
 void CDecisionMgr::Init(CPlayer* player, CArea* area)
@@ -572,16 +870,18 @@ void CDecisionMgr::Init(CPlayer* player, CArea* area)
 void CDecisionMgr::Update()
 {
 	int playerState = pPlayer->GetState();
-
+	
 	switch (playerState)
 	{
 	case MOVE:
 		MoveUpdate();
 		break;
 	case DRAW:
+		DrawCollideDead();
 		DrawUpdate();
 		break;
 	case DEAD:
+		DeadUpdate();
 		break;
 	default:
 		break;
@@ -648,39 +948,203 @@ void CDecisionMgr::DrawUpdate()
 		pArea->AddToNewPoint(PlayerPos);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, true);
+		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, false);
+		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, false);
+		return;
+	}
+	else if (CKeyMgr::GetInstance()->GetKeyState(KEY::A) == KEY_STATE::AWAY
+		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::A))
+	{
+		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, false);
+		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, true);
+		return;
 	}
-	else if (CKeyMgr::GetInstance()->GetKeyState(KEY::W) == KEY_STATE::TAP
+
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::W) == KEY_STATE::TAP
 		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::W))
 	{
 		pArea->AddToNewPoint(PlayerPos);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, false);
+		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, false);
+		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, true);
+		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, false);
+		return;
+	}
+	else if (CKeyMgr::GetInstance()->GetKeyState(KEY::W) == KEY_STATE::AWAY
+		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::W))
+	{
+		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, true);
+		return;
 	}
-	else if (CKeyMgr::GetInstance()->GetKeyState(KEY::D) == KEY_STATE::TAP
+
+
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::D) == KEY_STATE::TAP
 		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::D))
 	{
 		pArea->AddToNewPoint(PlayerPos);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, false);
+		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, false);
+		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, true);
+		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, false);
+		return;
+	}
+	else if (CKeyMgr::GetInstance()->GetKeyState(KEY::D) == KEY_STATE::AWAY
+		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::D))
+	{
+		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, true);
+		return;
 	}
-	else if (CKeyMgr::GetInstance()->GetKeyState(KEY::S) == KEY_STATE::TAP
+
+	if (CKeyMgr::GetInstance()->GetKeyState(KEY::S) == KEY_STATE::TAP
 		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::S))
 	{
 		pArea->AddToNewPoint(PlayerPos);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, false);
-		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, true);
-		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, true);
+		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, true);
+		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, false);
+		return;
+	}
+	else if (CKeyMgr::GetInstance()->GetKeyState(KEY::S) == KEY_STATE::AWAY
+		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::S))
+	{
+		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, false);
+		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, true);
+		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, true);
+		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, true);
+		return;
 	}
 
 	if (DrawCollide() == true) // 닿으면 종료
 		DrawEnd();
+}
+
+void CDecisionMgr::DeadUpdate()
+{
+	POINT playerPos = { pPlayer->GetPos().x, pPlayer->GetPos().y };
+	int playerSpeed = pPlayer->GetSpeed();
+	auto& newPoint = pArea->GetnewPoint();
+
+	auto &itrReverse = itrPlayerPos;
+
+	bool erase = false;
+	if(newPoint.size() > 0)
+	{
+		if (playerPos.x == itrPlayerPos->x && playerPos.y == itrPlayerPos->y)
+		{
+			if (itrPlayerPos != newPoint.begin())
+			{
+				itrPlayerPos = prev(itrReverse, 1);
+				newPoint.pop_back();
+			}
+			else
+			{
+				erase = true;
+			}
+		}
+		else if (playerPos.x == itrReverse->x) // y축으로 이동
+		{
+			pPlayer->SetPos(Vec2((int)playerPos.x,
+				playerPos.y + (int)((itrReverse->y - playerPos.y) / abs((itrReverse->y - playerPos.y))) * playerSpeed));
+		}
+		else // x축으로 이동
+		{
+			pPlayer->SetPos(Vec2(playerPos.x + (int)((itrReverse->x - playerPos.x) / abs((itrReverse->x - playerPos.x))) * playerSpeed
+				, (int)playerPos.y));
+		}
+	}
+	if (erase == true)
+	{
+		printf("asdf\n");
+
+		auto itrFront = pArea->GetlstPoint().begin();
+		auto itrBack = pArea->GetlstPoint().end();
+		// 다시 상태 변경
+		for (int i = 0; i < (int)KEY::LAST; i++)
+		{
+			CKeyMgr::GetInstance()->SetKeyAvailability((KEY)i, true);
+		}
+
+		bool itrPlayerInit = false;
+		for (auto &itr = itrFront; itr != itrBack; ++itr)
+		{
+			if (itr->x == playerPos.x && itr->y == playerPos.y)
+			{
+				itrPlayerPos = itr;
+				itrPlayerInit = true;
+				break;
+			}
+		}
+
+		if (itrPlayerInit == false)
+		{ // 콜라이더
+			auto itrFront = pArea->GetlstPoint().begin();
+			auto itrBack = prev(pArea->GetlstPoint().end());
+			POINT playerPos = { pPlayer->GetPos().x, pPlayer->GetPos().y };
+
+			int max_xpos, min_xpos; // 비교
+			int max_ypos, min_ypos;
+
+			int odd_number;
+
+			for (auto &itr = itrFront; itr != itrBack; ++itr)
+			{
+				if (itrFront->x == next(itrFront, 1)->x)
+					odd_number = 0;
+				else
+					odd_number = 1;
+
+				switch (odd_number)
+				{
+				case 0: // x가 같을때 (y축으로 비교)
+				{
+					if (next(itr, 1)->y > itr->y) { max_ypos = next(itr, 1)->y; min_ypos = itr->y; }
+					else { min_ypos = next(itr, 1)->y; max_ypos = itr->y; }
+					if (itr->x == playerPos.x && min_ypos <= playerPos.y && playerPos.y <= max_ypos)
+					{
+						itrPlayerPos = itr;
+						itrPlayerInit = true;
+						break;
+					}
+					odd_number = 1;
+				}
+				break;
+				case 1: // y가 같을때 (x축으로 비교)
+				{
+					if (next(itr, 1)->x > itr->x) { max_xpos = next(itr, 1)->x; min_xpos = itr->x; }
+					else { min_xpos = next(itr, 1)->x; max_xpos = itr->x; }
+					if (itr->y == playerPos.y && min_xpos <= playerPos.x && playerPos.x <= max_xpos)
+					{
+						itrPlayerPos = itr;
+						itrPlayerInit = true;
+						break;
+					}
+					odd_number = 0;
+				}
+				break;
+				default:
+					break;
+				}
+			}
+		}
+		if (itrPlayerInit == false)
+		{
+			itrPlayerPos = prev(pArea->GetlstPoint().end());
+		}
+
+		vecSave.clear();
+		pPlayer->SetState(MOVE);
+		pArea->ResetNewPoint();
+		pArea->SetDraw(false);
+	}
 }
 
 CDecisionMgr::CDecisionMgr()

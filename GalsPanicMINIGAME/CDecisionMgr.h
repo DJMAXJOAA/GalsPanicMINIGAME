@@ -21,6 +21,7 @@ private:
 	CArea* pArea;
 	list<POINT>::iterator itrPlayerPos; // 플레이어가 현재 몇번 인덱스에 있는지
 	vector<list<POINT>::iterator> vecSave; // 이터레이터 저장
+	KEY lastKEY;
 
 public:
 	bool PlayerMovingPossible(KEY key);
@@ -36,11 +37,13 @@ public:
 	bool DrawCollide();
 	bool DrawStartPossible(KEY key);
 	void DrawEnd();
+	void DrawCollideDead();
 
 public:
 	void Update();
 	void MoveUpdate();
 	void DrawUpdate();
+	void DeadUpdate();
 
 private:
 	CDecisionMgr();
