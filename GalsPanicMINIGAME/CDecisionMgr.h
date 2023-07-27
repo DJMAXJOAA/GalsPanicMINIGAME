@@ -23,6 +23,8 @@ private:
 	vector<list<POINT>::iterator> vecSave; // 이터레이터 저장
 	KEY lastKEY;
 
+	int check = 1;
+
 public:
 	bool PlayerMovingPossible(KEY key);
 
@@ -30,6 +32,7 @@ public:
 	CPlayer* GetPlayer() { return pPlayer; }
 	CArea* GetArea() { return pArea; }
 	list<POINT>::iterator GetPlayerAreaPoint() { return itrPlayerPos; }
+	int GetCheck() { return check; }
 
 public:
 	void Init(CPlayer* player, CArea* area);

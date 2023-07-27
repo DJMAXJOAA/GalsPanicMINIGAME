@@ -958,6 +958,7 @@ void CDecisionMgr::DrawUpdate()
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, false);
+		check = LEFT;
 		return;
 	}
 	else if (CKeyMgr::GetInstance()->GetKeyState(KEY::A) == KEY_STATE::AWAY
@@ -967,6 +968,7 @@ void CDecisionMgr::DrawUpdate()
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, true);
+		check = NONE;
 		return;
 	}
 
@@ -978,6 +980,7 @@ void CDecisionMgr::DrawUpdate()
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, false);
+		check = UP;
 		return;
 	}
 	else if (CKeyMgr::GetInstance()->GetKeyState(KEY::W) == KEY_STATE::AWAY
@@ -987,6 +990,7 @@ void CDecisionMgr::DrawUpdate()
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, true);
+		check = NONE;
 		return;
 	}
 
@@ -999,6 +1003,7 @@ void CDecisionMgr::DrawUpdate()
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, false);
+		check = RIGHT;
 		return;
 	}
 	else if (CKeyMgr::GetInstance()->GetKeyState(KEY::D) == KEY_STATE::AWAY
@@ -1008,6 +1013,7 @@ void CDecisionMgr::DrawUpdate()
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, true);
+		check = NONE;
 		return;
 	}
 
@@ -1019,6 +1025,7 @@ void CDecisionMgr::DrawUpdate()
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, false);
+		check = DOWN;
 		return;
 	}
 	else if (CKeyMgr::GetInstance()->GetKeyState(KEY::S) == KEY_STATE::AWAY
@@ -1028,6 +1035,7 @@ void CDecisionMgr::DrawUpdate()
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, true);
+		check = NONE;
 		return;
 	}
 

@@ -12,7 +12,7 @@ enum PLAYER_STATE
 
 enum PLAYER_DIRECTION
 {
-    LEFT, UP, RIGHT, DOWN,
+    LEFT, UP, RIGHT, DOWN, NONE
 };
 
 class CPlayer :

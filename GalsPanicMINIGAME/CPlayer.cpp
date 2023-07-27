@@ -35,17 +35,6 @@ void CPlayer::Move()
 	Vec2 vPos = GetPos();
 
 	if (CKeyMgr::GetInstance()->GetKeyState(KEY::SPACE) == KEY_STATE::TAP
-		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::SPACE) == false)
-	{
-		iState = MOVE;
-		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, true);
-		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, true);
-		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, true);
-		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, true);
-		return;
-	}
-
-	if (CKeyMgr::GetInstance()->GetKeyState(KEY::SPACE) == KEY_STATE::TAP
 	 && CKeyMgr::GetInstance()->GetKeyAvailability(KEY::SPACE) == true)
 	{
 		if (CKeyMgr::GetInstance()->GetKeyState(KEY::A) == KEY_STATE::HOLD)
@@ -141,7 +130,10 @@ void CPlayer::Move()
 		}
 	}
 
-	SetPos(vPos);
+	if (CDecisionMgr::GetInstance()->GetCheck() < NONE)
+	{
+		SetPos(vPos);
+	}
 }
 
 void CPlayer::Update()
