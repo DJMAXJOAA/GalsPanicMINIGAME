@@ -23,7 +23,7 @@ private:
 	vector<list<POINT>::iterator> vecSave; // 이터레이터 저장
 	KEY lastKEY;
 
-	int check = 1;
+	int check = 0;
 
 public:
 	bool PlayerMovingPossible(KEY key);
