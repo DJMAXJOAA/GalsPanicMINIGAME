@@ -7,6 +7,7 @@
 #include "CKeyMgr.h"
 #include "CSceneMgr.h"
 #include "CDecisionMgr.h"
+#include "CPathMgr.h"
 
 int CCore::Init(HWND _hWnd, POINT _ptResolution)
 {
@@ -27,9 +28,11 @@ int CCore::Init(HWND _hWnd, POINT _ptResolution)
 	DeleteObject(hOldBit);
 
 	// Manager 초기화
+	CPathMgr::GetInstance()->Init();
 	CTimeMgr::GetInstance()->Init();
 	CKeyMgr::GetInstance()->Init();
 	CSceneMgr::GetInstance()->Init();
+
 
 	return S_OK;
 }
@@ -51,6 +54,7 @@ void CCore::Progress()
 
 	// 더블버퍼링(화면 복붙)
 	BitBlt(hdc, 0, 0, ptResolution.x, ptResolution.y, memDC, 0, 0, SRCCOPY);
+	/*TransparentBlt(hdc, 0, 0, ptResolution.x, ptResolution.y, memDC, 0, 0, ptResolution.x, ptResolution.y, RGB(255, 0, 255));*/
 }
 
 CCore::CCore()

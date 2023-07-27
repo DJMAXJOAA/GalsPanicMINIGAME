@@ -1,9 +1,12 @@
 #include "pch.h"
 #include "CArea.h"
 #include "CCore.h"
-
 #include "CPlayer.h"
+#include "CTexture.h"
+
 #include "CDecisionMgr.h"
+#include "CPathMgr.h"
+
 
 CArea::CArea()
 	: lstPoint{}
@@ -12,17 +15,44 @@ CArea::CArea()
 	, ptMyArea(nullptr)
 	, bDrawing(false)
 {
+	// 텍스쳐 로딩
+	{
+		pTex[0] = new CTexture;
+		wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
+		strFilePath += L"texture\\NewJeans.bmp";
+		pTex[0]->Load(strFilePath);
+	}
+
+	{
+		pTex[1] = new CTexture;
+		wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
+		strFilePath += L"texture\\Background.bmp";
+		pTex[1]->Load(strFilePath);
+	}
+
+	{
+		pTex[2] = new CTexture;
+		wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
+		strFilePath += L"texture\\BALL1.bmp";
+		pTex[2]->Load(strFilePath);
+	}
+
+	{
+		pTex[3] = new CTexture;
+		wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
+		strFilePath += L"texture\\BALL2.bmp";
+		pTex[3]->Load(strFilePath);
+	}
+
 	POINT vResolution = CCore::GetInstance()->GetResolution();
 	LONG iInterval = 40;
 	LONG iInitialValue = 200;
 
 	// 내 영역
 	lstPoint.push_back(POINT{ iInterval + 0 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
-	lstPoint.push_back(POINT{ iInterval + 0 * iInitialValue, vResolution.y - iInterval - 2 * iInitialValue });
-	lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 2 * iInitialValue });
+	lstPoint.push_back(POINT{ iInterval + 0 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
 	lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
-	lstPoint.push_back(POINT{ iInterval + 2 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
-	lstPoint.push_back(POINT{ iInterval + 2 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
+	lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
 
 	list<POINT>::iterator firstItr = lstPoint.begin();
 	list<POINT>::iterator lastItr = lstPoint.end();
@@ -35,6 +65,7 @@ CArea::CArea()
 		ptMyArea[i].y = itr->y;
 		i++;
 	}
+	CalculuateMyArea(); // 넓이 계산
 
 	// 기본 영역
 	ptBorder = new POINT[4];
@@ -50,8 +81,27 @@ CArea::CArea()
 
 CArea::~CArea()
 {
+	delete pTex;
 	delete[] ptBorder;
 	delete[] ptMyArea;
+}
+
+void CArea::CalculuateMyArea()
+{
+	float sum1 = 0;
+	float sum2 = 0;
+	for (auto itr = lstPoint.begin(); itr != prev(lstPoint.end(),1); ++itr)
+	{
+		sum1 += (float)itr->x * (float)next(itr, 1)->y;
+		sum2 += (float)itr->y * (float)next(itr, 1)->x;
+	}
+	auto itrFront = lstPoint.begin();
+	auto itrBack = prev(lstPoint.end(), 1);
+	sum1 += (float)itrBack->x * (float)itrFront->y;
+	sum2 += (float)itrBack->y * (float)itrFront->x;
+
+	float myArea = (sum1 - sum2)/2;
+	fExtent = myArea / 828000.0 * 100.0;
 }
 
 void CArea::Update()
@@ -64,46 +114,83 @@ void CArea::Update()
 			break;
 		}
 	}
-
+	CalculuateMyArea();
 }
 
 void CArea::Render(HDC hdc)
 {
-	static int asdf;
-	asdf++;
+	{
+		int iWidth = pTex[0]->Width();
+		int iHeight = pTex[0]->Height();
+		BitBlt(hdc, 0, 0, iWidth, iHeight, pTex[0]->GetDC(), 0, 0, SRCCOPY);
 
-	Polygon(hdc, ptBorder, 4); // 기본 영역
-	Polygon(hdc, ptMyArea, lstPoint.size()); // 내 영역
+		int iWidth2 = pTex[1]->Width();
+		int iHeight2 = pTex[1]->Height();
+		HBRUSH hBrush = CreateSolidBrush(RGB(255, 0, 255));
+		HBRUSH oldBrush = (HBRUSH)SelectObject(pTex[1]->GetDC(), hBrush);
+		HPEN hPen = CreatePen(PS_DOT, 2, RGB(255, 0, 0));
+		HPEN oldPen = (HPEN)SelectObject(pTex[1]->GetDC(), hPen);
+
+		Polygon(pTex[1]->GetDC(), ptMyArea, lstPoint.size()); // 내 영역
+
+		MoveToEx(pTex[1]->GetDC(), ptBorder[0].x, ptBorder[0].y, NULL);
+		for (int i = 1; i < 4; i++)
+		{
+			LineTo(pTex[1]->GetDC(), ptBorder[i].x, ptBorder[i].y);
+			MoveToEx(pTex[1]->GetDC(), ptBorder[i].x, ptBorder[i].y, NULL);
+		}
+		LineTo(pTex[1]->GetDC(), ptBorder[0].x, ptBorder[0].y);
 
 
-	int radius = 10;
+		SelectObject(hdc, oldBrush);
+		DeleteObject(hBrush);
+		SelectObject(hdc, oldPen);
+		DeleteObject(hPen);
+		TransparentBlt(hdc, 0, 0, iWidth2, iHeight2, pTex[1]->GetDC(), 0, 0, iWidth2, iHeight2, RGB(255, 0, 255));
+	}
+
+	int radius = 7;
 	wstring temp;
 	for (int i = 0; i < lstPoint.size(); i++)
 	{
-		temp = L"" + std::to_wstring(i);
-		TextOut(hdc, ptMyArea[i].x + radius, ptMyArea[i].y + radius, temp.c_str(), temp.length());
-		temp = L"" + std::to_wstring(ptMyArea[i].x) + L", " + std::to_wstring(ptMyArea[i].y);
-		TextOut(hdc, ptMyArea[i].x + radius, ptMyArea[i].y + 3*radius, temp.c_str(), temp.length());
-		Ellipse(hdc, ptMyArea[i].x - radius, ptMyArea[i].y - radius, ptMyArea[i].x + + radius, ptMyArea[i].y + radius);
+		int iWidth = pTex[2]->Width();
+		int iHeight = pTex[2]->Height();
+		//temp = L"" + std::to_wstring(i);
+		//TextOut(hdc, ptMyArea[i].x + radius, ptMyArea[i].y + radius, temp.c_str(), temp.length());
+		//temp = L"" + std::to_wstring(ptMyArea[i].x) + L", " + std::to_wstring(ptMyArea[i].y);
+		//TextOut(hdc, ptMyArea[i].x + radius, ptMyArea[i].y + 3*radius, temp.c_str(), temp.length());v
+		TransparentBlt(hdc, ptMyArea[i].x - radius, ptMyArea[i].y - radius, iWidth, iHeight, pTex[2]->GetDC(), 0, 0, iWidth, iHeight, RGB(255, 0, 255));
 	}
 
-	
 	if (bDrawing == false)
 		return;
-	POINT playerPos = { CDecisionMgr::GetInstance()->GetPlayer()->GetPos().x, CDecisionMgr::GetInstance()->GetPlayer()->GetPos().y };
-	auto itrFront = newPoint.begin();
-	auto itrBack = newPoint.end();
-	MoveToEx(hdc, itrFront->x, itrFront->y, NULL);
-	for(auto& itr = itrFront; itr != itrBack; ++itr)
-	{
-		LineTo(hdc, itr->x, itr->y);
-		MoveToEx(hdc, itr->x, itr->y, NULL);
-	}
-	LineTo(hdc, playerPos.x, playerPos.y);
 
-	for (list<POINT>::iterator itr = newPoint.begin(); itr != newPoint.end(); ++itr)
+	// 그림 그리는 중일때 실행
 	{
-		Ellipse(hdc, itr->x - radius, itr->y - radius, itr->x + +radius, itr->y + radius);
+		POINT playerPos = { CDecisionMgr::GetInstance()->GetPlayer()->GetPos().x, CDecisionMgr::GetInstance()->GetPlayer()->GetPos().y };
+		auto itrFront = newPoint.begin();
+		auto itrBack = newPoint.end();
+
+		HPEN hPen = CreatePen(PS_DOT, 2, RGB(0, 0, 255));
+		HPEN oldPen = (HPEN)SelectObject(hdc, hPen);
+
+		MoveToEx(hdc, itrFront->x, itrFront->y, NULL);
+		for (auto& itr = itrFront; itr != itrBack; ++itr)
+		{
+			LineTo(hdc, itr->x, itr->y);
+			MoveToEx(hdc, itr->x, itr->y, NULL);
+		}
+		LineTo(hdc, playerPos.x, playerPos.y);
+
+		SelectObject(hdc, oldPen);
+		DeleteObject(hPen);
+
+		for (list<POINT>::iterator itr = newPoint.begin(); itr != newPoint.end(); ++itr)
+		{
+			int iWidth = pTex[3]->Width();
+			int iHeight = pTex[3]->Height();
+			TransparentBlt(hdc, itr->x - radius, itr->y - radius, iWidth, iHeight, pTex[3]->GetDC(), 0, 0, iWidth, iHeight, RGB(255, 0, 255));
+		}
 	}
 }
 

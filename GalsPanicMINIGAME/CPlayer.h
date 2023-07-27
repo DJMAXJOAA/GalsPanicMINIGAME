@@ -3,6 +3,8 @@
 
 #include "CArea.h"
 
+class CTexture;
+
 enum PLAYER_STATE
 {
     MOVE, DRAW, DEAD,
@@ -20,6 +22,8 @@ private:
     int iState;
     int iDirection;
     int iSpeed;
+    CTexture* pTex;
+
 
 public:
     int GetState() { return iState; }

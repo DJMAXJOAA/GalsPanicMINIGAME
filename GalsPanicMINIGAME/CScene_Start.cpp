@@ -5,8 +5,10 @@
 #include "CPlayer.h"
 #include "CArea.h"
 #include "CText.h"
+#include "CTexture.h"
 
 #include "CCore.h"
+#include "CPathMgr.h"
 #include "CDecisionMgr.h"
 
 void CScene_Start::Enter()
@@ -45,6 +47,12 @@ void CScene_Start::Enter()
 	pText4->SetTarget(pPlayer);
 	pText4->SetType(PRINT_TYPE::STATE);
 	AddObject(pText4, GROUP_TYPE::DEFAULT);
+
+	CText* pText5 = new CText;
+	pText5->SetPos(Vec2(100.f, 180.f));
+	pText5->SetTarget(pPlayer);
+	pText5->SetType(PRINT_TYPE::AREA);
+	AddObject(pText5, GROUP_TYPE::DEFAULT);
 
 	CDecisionMgr::GetInstance()->Init(pPlayer, pArea);
 }

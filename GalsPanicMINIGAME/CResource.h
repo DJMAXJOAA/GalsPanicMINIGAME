@@ -2,7 +2,7 @@
 class CResource
 {
 private:
-	wstring strKey;			// 리소스 키
+	wstring strKey;				// 리소스 키
 	wstring strRelativePath;	// 리소스 경로
 
 public:

@@ -47,17 +47,20 @@
     <Filter Include="Engine\4. 오브젝트\텍스트">
       <UniqueIdentifier>{fe2ffd4d-efe8-4fc5-9053-1e51a6eec375}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\3. 매니저\4. 의사결정 매니저">
-      <UniqueIdentifier>{9e49e81a-ac3a-4d37-b2e5-1681d4429e18}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\6. 리소스">
       <UniqueIdentifier>{490eb78b-5321-4fcf-91a8-8dc2e4ea8e40}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\6. 리소스\Texture">
       <UniqueIdentifier>{e6575d55-1042-4850-b6a6-a8271d3879c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\6. 리소스\Sound">
-      <UniqueIdentifier>{abe1a50d-bf2f-418e-9d17-0dfb69864c1b}</UniqueIdentifier>
+    <Filter Include="Engine\3. 매니저\4. 경로매니저">
+      <UniqueIdentifier>{48af2209-1b1b-48e6-bee9-c98fa483dc79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3. 매니저\의사결정 매니저">
+      <UniqueIdentifier>{9e49e81a-ac3a-4d37-b2e5-1681d4429e18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\4. 오브젝트\몬스터">
+      <UniqueIdentifier>{3ccb7a0f-2540-4be7-af66-16e729c419b0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -112,20 +115,20 @@
     <ClInclude Include="CText.h">
       <Filter>Engine\4. 오브젝트\텍스트</Filter>
     </ClInclude>
-    <ClInclude Include="calculate.h">
-      <Filter>Engine\1. 헤더파일</Filter>
-    </ClInclude>
     <ClInclude Include="CDecisionMgr.h">
-      <Filter>Engine\3. 매니저\4. 의사결정 매니저</Filter>
+      <Filter>Engine\3. 매니저\의사결정 매니저</Filter>
     </ClInclude>
     <ClInclude Include="CResource.h">
       <Filter>Engine\6. 리소스</Filter>
     </ClInclude>
-    <ClInclude Include="CSound.h">
-      <Filter>Engine\6. 리소스\Sound</Filter>
-    </ClInclude>
     <ClInclude Include="CTexture.h">
       <Filter>Engine\6. 리소스\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="CPathMgr.h">
+      <Filter>Engine\3. 매니저\4. 경로매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonster.h">
+      <Filter>Engine\4. 오브젝트\몬스터</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -174,16 +177,19 @@
       <Filter>Engine\4. 오브젝트\텍스트</Filter>
     </ClCompile>
     <ClCompile Include="CDecisionMgr.cpp">
-      <Filter>Engine\3. 매니저\4. 의사결정 매니저</Filter>
+      <Filter>Engine\3. 매니저\의사결정 매니저</Filter>
     </ClCompile>
     <ClCompile Include="CResource.cpp">
       <Filter>Engine\6. 리소스</Filter>
     </ClCompile>
-    <ClCompile Include="CSound.cpp">
-      <Filter>Engine\6. 리소스\Sound</Filter>
-    </ClCompile>
     <ClCompile Include="CTexture.cpp">
       <Filter>Engine\6. 리소스\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="CPathMgr.cpp">
+      <Filter>Engine\3. 매니저\4. 경로매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonster.cpp">
+      <Filter>Engine\4. 오브젝트\몬스터</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

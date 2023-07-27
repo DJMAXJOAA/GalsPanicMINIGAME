@@ -17,6 +17,8 @@ public:
 public:
 	HWND GetMainhWnd() { return hWnd; }
 	POINT GetResolution() { return ptResolution; }
+	HDC getMainDC() { return hdc; }
+	HDC getMemDC() { return memDC; }
 
 private:
 	CCore();

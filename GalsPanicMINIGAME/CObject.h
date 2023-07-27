@@ -12,6 +12,8 @@ public:
 	Vec2 GetPos() { return vPos; }
 	Vec2 GetScale() { return vScale; }
 
+	float Random(float min, float max);
+
 public:
 	virtual void Update() = 0;
 	virtual void Render(HDC hdc);

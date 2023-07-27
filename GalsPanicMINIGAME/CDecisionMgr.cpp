@@ -583,15 +583,23 @@ void CDecisionMgr::DrawEnd()
 	int min = 1, max = 3; // 비교하는 점이 2개일경우 -> 선 한개 / 점 3개 -> 선 두개 / 점 4개 -> 선 세개 이상
 	if (vecTemp.size() == 2) // 중복 두개(한줄에서 그림)
 	{
-		if (vecTemp[0]->x == vecTemp[1]->x && tempFront->y - tempBack->y > 0) // y축에서 비교
+		if (vecTemp[0]->x == vecTemp[1]->x) // y축에서 비교
 		{
-			printf("거꾸로 돌림\n");
-			check = true;
+			if ((vecSave[2]->y < vecSave[3]->y && tempFront->y > tempBack->y)
+				|| (vecSave[2]->y > vecSave[3]->y && tempFront->y < tempBack->y))
+			{
+				printf("거꾸로 돌림\n");
+				check = true;
+			}
 		}
-		else if (vecTemp[0]->y == vecTemp[1]->y && tempFront->x - tempBack->x > 0) // x축에서 비교
+		else if (vecTemp[0]->y == vecTemp[1]->y)
 		{
-			printf("거꾸로 돌림\n");
-			check = true;
+			if((vecSave[2]->x < vecSave[3]->x && tempFront->x > tempBack->x)
+				|| (vecSave[2]->x > vecSave[3]->x && tempFront->x < tempBack->x)) // x축에서 비교
+			{
+				printf("거꾸로 돌림\n");
+				check = true;
+			}
 		}
 		max = 1;
 	}

@@ -5,14 +5,22 @@
 #include "CTimeMgr.h"
 #include "CDecisionMgr.h"
 #include "CCore.h"
+#include "CPathMgr.h"
 
 #include "CArea.h"
+#include "CTexture.h"
 
 CPlayer::CPlayer()
 	: iState((int)PLAYER_STATE::MOVE)
 	, iDirection((int)PLAYER_DIRECTION::LEFT)
 	, iSpeed(10)
 {
+	{
+		pTex = new CTexture;
+		wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
+		strFilePath += L"texture\\PlayerTemp.bmp";
+		pTex->Load(strFilePath);
+	}
 }
 
 CPlayer::~CPlayer()
@@ -146,8 +154,12 @@ void CPlayer::Render(HDC hdc)
 {
 	Vec2 Pos = GetPos();
 	Vec2 Scale = GetScale();
-	Ellipse(hdc, (int)(Pos.x - Scale.x / 2.f), (int)(Pos.y - Scale.y / 2.f),
-				 (int)(Pos.x + Scale.x / 2.f), (int)(Pos.y + Scale.y / 2.f));
+	//Ellipse(hdc, (int)(Pos.x - Scale.x / 2.f), (int)(Pos.y - Scale.y / 2.f),
+	//			 (int)(Pos.x + Scale.x / 2.f), (int)(Pos.y + Scale.y / 2.f));
+
+	int iWidth = pTex->Width();
+	int iHeight = pTex->Height();
+	TransparentBlt(hdc, (int)(Pos.x - Scale.x / 2.f), (int)(Pos.y - Scale.y / 2.f), iWidth, iHeight, pTex->GetDC(), 0, 0, iWidth, iHeight, RGB(255, 0, 255));
 }
 
 

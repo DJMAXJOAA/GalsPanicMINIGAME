@@ -4,6 +4,8 @@
 
 #define fDT CTimeMgr::GetInstance()->GetfDT()
 #define DT CTimeMgr::GetInstance()->GetDT()
+#define PI 3.14159
+#define RADIAN(value) value * PI / 180
 
 enum class GROUP_TYPE
 {

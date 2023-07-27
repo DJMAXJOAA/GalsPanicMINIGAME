@@ -50,6 +50,13 @@ void CText::Update()
 		SetText(temp);
 		break;
 	}
+	case PRINT_TYPE::AREA:
+	{
+		float fExtent = CDecisionMgr::GetInstance()->GetArea()->GetExtent();
+		temp = L"점령 퍼센트 : " + std::to_wstring(CDecisionMgr::GetInstance()->GetArea()->GetExtent()) + L"% ";
+		SetText(temp);
+		break;
+	}
 	default:
 		break;
 	}
