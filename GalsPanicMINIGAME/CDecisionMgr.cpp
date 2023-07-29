@@ -949,11 +949,17 @@ void CDecisionMgr::MoveUpdate()
 void CDecisionMgr::DrawUpdate()
 {
 	POINT PlayerPos = { pPlayer->GetPos().x, pPlayer->GetPos().y };
+	int playerDirection = pPlayer->GetDirection();
 
 	if (CKeyMgr::GetInstance()->GetKeyState(KEY::A) == KEY_STATE::TAP
 		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::A))
 	{
-		pArea->AddToNewPoint(PlayerPos);
+		if (playerDirection != LEFT)
+		{
+			pArea->AddToNewPoint(PlayerPos);
+			printf("점 추가\n");
+		}
+		
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, false);
@@ -975,7 +981,12 @@ void CDecisionMgr::DrawUpdate()
 	if (CKeyMgr::GetInstance()->GetKeyState(KEY::W) == KEY_STATE::TAP
 		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::W))
 	{
-		pArea->AddToNewPoint(PlayerPos);
+		if (playerDirection != UP)
+		{
+			pArea->AddToNewPoint(PlayerPos);
+			printf("점 추가\n");
+		}
+		
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, true);
@@ -998,7 +1009,12 @@ void CDecisionMgr::DrawUpdate()
 	if (CKeyMgr::GetInstance()->GetKeyState(KEY::D) == KEY_STATE::TAP
 		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::D))
 	{
-		pArea->AddToNewPoint(PlayerPos);
+		if (playerDirection != RIGHT)
+		{
+			pArea->AddToNewPoint(PlayerPos);
+			printf("점 추가\n");
+		}
+
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, true);
@@ -1020,7 +1036,12 @@ void CDecisionMgr::DrawUpdate()
 	if (CKeyMgr::GetInstance()->GetKeyState(KEY::S) == KEY_STATE::TAP
 		&& CKeyMgr::GetInstance()->GetKeyAvailability(KEY::S))
 	{
-		pArea->AddToNewPoint(PlayerPos);
+		if (playerDirection != DOWN)
+		{
+			pArea->AddToNewPoint(PlayerPos);
+			printf("점 추가\n");
+		}
+
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, true);
