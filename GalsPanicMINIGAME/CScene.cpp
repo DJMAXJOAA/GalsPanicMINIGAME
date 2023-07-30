@@ -36,8 +36,11 @@ CScene::~CScene()
 	{
 		for (size_t j = 0; j < arrObj[i].size(); j++)
 		{
-			// arrObj[i]의 그룹의 벡터 j 물체 삭제
-			delete arrObj[i][j];
+			if (arrObj[i][j] != nullptr)
+			{
+				// arrObj[i]의 그룹의 벡터 j 물체 삭제
+				delete arrObj[i][j];
+			}
 		}
 	}
 }

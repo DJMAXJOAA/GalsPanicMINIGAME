@@ -81,9 +81,7 @@ CArea::CArea()
 
 CArea::~CArea()
 {
-	delete[] pTex;
-	delete[] ptBorder;
-	delete[] ptMyArea;
+
 }
 
 void CArea::CalculuateMyArea()
