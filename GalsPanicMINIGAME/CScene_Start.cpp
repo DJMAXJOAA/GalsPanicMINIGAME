@@ -13,15 +13,15 @@
 
 void CScene_Start::Enter()
 {
-	// 영역 추가
-	CArea* pArea = new CArea;
-	AddObject(pArea, GROUP_TYPE::DEFAULT);
-
 	// Player 추가
 	CPlayer* pPlayer = new CPlayer;
 	pPlayer->SetPos(Vec2(40.f, 728.f));
 	pPlayer->SetScale(Vec2(40.f, 40.f));
 	AddObject(pPlayer, GROUP_TYPE::PLAYER);
+
+	// 영역 추가
+	CArea* pArea = new CArea;
+	AddObject(pArea, GROUP_TYPE::DEFAULT);
 
 	// 텍스트 추가
 	CText* pText1 = new CText;
