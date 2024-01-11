@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="CCore" Collapsed="true">
-    <Position X="13" Y="0.5" Width="1.5" />
+  <Class Name="CCore">
+    <Position X="14.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAAAKABIAAAAAAAAAAAMAACCACABAE=</HashCode>
+      <HashCode>AAAAAAAAgCBAAAAAAKABIAAAAAAAAAAAMAACCACABAE=</HashCode>
       <FileName>CCore.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CKeyMgr" Collapsed="true">
-    <Position X="11.25" Y="0.5" Width="1.5" />
+  <Class Name="CKeyMgr">
+    <Position X="13" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEQAAAAAEAAAAAAQAIAAAAAAAgBAAAAAAAECAAAAAAA=</HashCode>
       <FileName>CKeyMgr.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CTimeMgr" Collapsed="true">
-    <Position X="9.5" Y="6.5" Width="1.5" />
+  <Class Name="CTimeMgr">
+    <Position X="16.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAABAIBABAQEAQAAQAAAAARCCAAAAAA=</HashCode>
       <FileName>CTimeMgr.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CSceneMgr" Collapsed="true">
-    <Position X="11.25" Y="1.25" Width="1.5" />
+  <Class Name="CSceneMgr">
+    <Position X="11.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQEAAAAAAAAAAAAAICAAAAAAAAAAAAAABICAAAIAAA=</HashCode>
       <FileName>CSceneMgr.h</FileName>
@@ -31,40 +31,40 @@
   <Class Name="CDecisionMgr">
     <Position X="9.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQCAAQEAAACgAAAAIEAAAAhAAwAAAAAABACEAAAgEA=</HashCode>
+      <HashCode>AAUCgASEAAIKgAAAAIFAAAAhAAwAAAAAABACEAAAgEA=</HashCode>
       <FileName>CDecisionMgr.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CObject" Collapsed="true">
     <Position X="3" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIQAAAAAAAAAABAACAAAAAgAAAAAAAAAIFAAAgACAAA=</HashCode>
+      <HashCode>AIQAAAAAAAAAABAACAAAAAgAAAAABAAAIFAAAgACAAA=</HashCode>
       <FileName>CObject.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CPlayer" Collapsed="true">
+  <Class Name="CPlayer">
     <Position X="5.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIQABEAAAIAoAgAAAAAAAAAAAAEgAIAAABAAAAAAAAA=</HashCode>
+      <HashCode>AIQABEAAAIAoAAAAAAAAAAAAAAEgAIAAABAAQAAAAAA=</HashCode>
       <FileName>CPlayer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CArea">
     <Position X="0.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAYAAAAAAQAABABAAAgAAQAAAAAAABABEAIAAAAAA=</HashCode>
+      <HashCode>AEQAQQAAAAAQAQBABAAAgAEQAQAAAAARABEAYAAAAAA=</HashCode>
       <FileName>CArea.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CText" Collapsed="true">
+  <Class Name="CText">
     <Position X="3" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABQAAEAAAAAAAAAAAIAAAAAAAAAAAJAQABAAgAAAAAI=</HashCode>
       <FileName>CText.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="CScene" Collapsed="true">
-    <Position X="7.75" Y="4.25" Width="1.5" />
+  <Class Name="CScene">
+    <Position X="7.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAQAAAAAAAAAAAAAAAgBAAEAAAAIBAAQAAQBAg=</HashCode>
       <FileName>CScene.h</FileName>
@@ -78,65 +78,65 @@
     </TypeIdentifier>
   </Class>
   <Struct Name="Vec2" Collapsed="true">
-    <Position X="11.25" Y="3" Width="1.5" />
+    <Position X="11.25" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABggAAAAAA=</HashCode>
       <FileName>struct.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="tKeyInfo" Collapsed="true">
-    <Position X="13" Y="1.5" Width="1.5" />
+    <Position X="13" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAAAABAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CKeyMgr.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Enum Name="GROUP_TYPE" Collapsed="true">
-    <Position X="11.25" Y="5.5" Width="1.5" />
+    <Position X="11.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAEAAAAAAAAAAAgAgAAAAAAAAAAAAAAAAIA=</HashCode>
       <FileName>define.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="SCENE_TYPE" Collapsed="true">
-    <Position X="13" Y="5.5" Width="1.5" />
+    <Position X="13" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAIAAAAAAAAAAAAABAAAgAAAgAAAAAAAAAgAAAA=</HashCode>
       <FileName>define.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="KEY" Collapsed="true">
-    <Position X="13" Y="3.25" Width="1.5" />
+    <Position X="14.75" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IgAAAACAAAAAAgAAAAAAAAQAAAICgAAgAAAAvin+YQE=</HashCode>
       <FileName>CKeyMgr.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="KEY_STATE" Collapsed="true">
-    <Position X="11.25" Y="4" Width="1.5" />
+    <Position X="11.25" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAACAAAAAAAAgAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CKeyMgr.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="PLAYER_STATE" Collapsed="true">
-    <Position X="13" Y="4" Width="1.5" />
+    <Position X="13" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAIA=</HashCode>
       <FileName>CPlayer.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="PLAYER_DIRECTION" Collapsed="true">
-    <Position X="13" Y="4.75" Width="1.5" />
+    <Position X="13" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAICAAAgAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAgAAAQAAAAAAAAICAAAgAAAAAAAAAAA=</HashCode>
       <FileName>CPlayer.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="PRINT_TYPE" Collapsed="true">
-    <Position X="11.25" Y="4.75" Width="1.5" />
+    <Position X="11.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAAAAAAAAACAAAAAAQAAAIAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <HashCode>QAAAAAAAAACAAAAAAQEAAIAAAAAAAAAAACAAAAAAAAA=</HashCode>
       <FileName>CText.h</FileName>
     </TypeIdentifier>
   </Enum>

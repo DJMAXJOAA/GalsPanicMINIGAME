@@ -9,7 +9,7 @@ class CMonster :
     int iSpeed;
     float fAngle;
     Vec2 fDirection;
-    /*CTexture* pTex;*/
+    CTexture* pTex;
 
 public:
     virtual void Update();
@@ -18,5 +18,8 @@ public:
 public:
     CMonster();
     ~CMonster();
+
+private:
+    void Move();
 };
 

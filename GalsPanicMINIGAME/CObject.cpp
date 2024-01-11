@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "CObject.h"
 
+#include "CCollider.h"
+
 CObject::CObject()
 	: vPos{}
 	, vScale{}
@@ -31,5 +33,11 @@ void CObject::Render(HDC hdc)
 {
 	Rectangle(hdc, (int)(vPos.x - vScale.x / 2.f), (int)(vPos.y - vScale.y / 2.f),
 		(int)(vPos.x + vScale.x / 2.f), (int)(vPos.y + vScale.y / 2.f));
+}
+
+void CObject::CreateCollider()
+{
+    m_pCollider = new CCollider;
+    m_pCollider->m_pOwner = this;
 }
 

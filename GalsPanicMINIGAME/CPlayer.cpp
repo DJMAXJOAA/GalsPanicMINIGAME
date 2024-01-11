@@ -146,8 +146,6 @@ void CPlayer::Render(HDC hdc)
 {
 	Vec2 Pos = GetPos();
 	Vec2 Scale = GetScale();
-	//Ellipse(hdc, (int)(Pos.x - Scale.x / 2.f), (int)(Pos.y - Scale.y / 2.f),
-	//			 (int)(Pos.x + Scale.x / 2.f), (int)(Pos.y + Scale.y / 2.f));
 
 	int iWidth = pTex->Width();
 	int iHeight = pTex->Height();
