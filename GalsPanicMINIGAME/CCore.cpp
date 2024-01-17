@@ -7,7 +7,9 @@
 #include "CKeyMgr.h"
 #include "CSceneMgr.h"
 #include "CDecisionMgr.h"
+#include "CCollisionMgr.h"
 #include "CPathMgr.h"
+#include "CEventMgr.h"
 
 int CCore::Init(HWND _hWnd, POINT _ptResolution)
 {
@@ -44,7 +46,7 @@ void CCore::Progress()
 	CDecisionMgr::GetInstance()->Update();
 	CKeyMgr::GetInstance()->Update();
 	CSceneMgr::GetInstance()->Update();
-
+	CCollisionMgr::GetInstance()->Update();
 
 	// 화면 클리어
 	Rectangle(memDC, -1, -1, ptResolution.x + 1, ptResolution.y + 1);
@@ -55,6 +57,8 @@ void CCore::Progress()
 	// 더블버퍼링(화면 복붙)
 	BitBlt(hdc, 0, 0, ptResolution.x, ptResolution.y, memDC, 0, 0, SRCCOPY);
 	/*TransparentBlt(hdc, 0, 0, ptResolution.x, ptResolution.y, memDC, 0, 0, ptResolution.x, ptResolution.y, RGB(255, 0, 255));*/
+
+	CEventMgr::GetInstance()->Update();
 }
 
 CCore::CCore()
@@ -63,6 +67,8 @@ CCore::CCore()
 	, hdc(0)
 	, hBit(0)
 	, memDC(0)
+	, m_arrBrush{}
+	, m_arrPen{}
 {
 }
 

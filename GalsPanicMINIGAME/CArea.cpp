@@ -49,10 +49,18 @@ CArea::CArea()
 	LONG iInitialValue = 200;
 
 	// ³» ¿µ¿ª
+	//lstPoint.push_back(POINT{ iInterval + 0 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
+	//lstPoint.push_back(POINT{ iInterval + 0 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
+	//lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
+	//lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
 	lstPoint.push_back(POINT{ iInterval + 0 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
-	lstPoint.push_back(POINT{ iInterval + 0 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
+	lstPoint.push_back(POINT{ iInterval + 0 * iInitialValue, vResolution.y - iInterval - 2 * iInitialValue });
+	lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 2 * iInitialValue });
 	lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
-	lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
+	lstPoint.push_back(POINT{ iInterval + 5 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
+	lstPoint.push_back(POINT{ iInterval + 5 * iInitialValue, vResolution.y - iInterval - 3 * iInitialValue });
+	lstPoint.push_back(POINT{ iInterval + 6 * iInitialValue, vResolution.y - iInterval - 3 * iInitialValue });
+	lstPoint.push_back(POINT{ iInterval + 6 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
 
 	list<POINT>::iterator firstItr = lstPoint.begin();
 	list<POINT>::iterator lastItr = lstPoint.end();

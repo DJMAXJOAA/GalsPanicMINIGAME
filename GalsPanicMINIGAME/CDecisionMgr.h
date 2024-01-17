@@ -3,6 +3,7 @@
 enum class KEY;
 class CPlayer;
 class CArea;
+class CMonster;
 
 struct POINT_UNIQUE
 {
@@ -19,6 +20,7 @@ class CDecisionMgr
 private:
 	CPlayer* pPlayer;
 	CArea* pArea;
+	vector<CMonster*> vecMonsters;
 	list<POINT>::iterator itrPlayerPos; // 플레이어가 현재 몇번 인덱스에 있는지
 	vector<list<POINT>::iterator> vecSave; // 이터레이터 저장
 	KEY lastKEY;
@@ -35,18 +37,22 @@ public:
 	int GetCheck() { return check; }
 
 public:
-	void Init(CPlayer* player, CArea* area);
+	void Init();
+	void Init(CPlayer* player, CArea* area, vector<CMonster*> monsters);
 	void DrawInit();
 	bool DrawCollide();
 	bool DrawStartPossible(KEY key);
 	void DrawEnd();
 	void DrawCollideDead();
+	int MonsterCollide(CMonster* monster);
+	bool MonsterWallCheck(CMonster* monster, int left_right);
 
 public:
 	void Update();
 	void MoveUpdate();
 	void DrawUpdate();
 	void DeadUpdate();
+	void MonsterUpdate();
 
 private:
 	CDecisionMgr();

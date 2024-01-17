@@ -1,8 +1,10 @@
 #include "pch.h"
+#include "func.h"
 #include "CDecisionMgr.h"
 
 #include "CPlayer.h"
 #include "CArea.h"
+#include "CMonster.h"
 
 #include "CKeyMgr.h"
 #include "CCore.h"
@@ -811,7 +813,7 @@ void CDecisionMgr::DrawCollideDead()
 	int odd_number;
 
 	// 충돌 체크
-	bool dead = false;
+	bool dead = pPlayer->GetDead();
 	for (auto& itr = itrFront; itr != itrBack; ++itr)
 	{
 		if (itrFront->x == next(itrFront, 1)->x)
@@ -859,6 +861,7 @@ void CDecisionMgr::DrawCollideDead()
 		auto itrReverse = prev(pArea->GetnewPoint().end(), 1);
 		itrPlayerPos = itrReverse;
 		pPlayer->SetState(DEAD);
+		pPlayer->GetDamaged();
 
 		for (int i = 0; i < (int)KEY::LAST; i++)
 		{
@@ -868,10 +871,206 @@ void CDecisionMgr::DrawCollideDead()
 	}
 }
 
-void CDecisionMgr::Init(CPlayer* player, CArea* area)
+int CDecisionMgr::MonsterCollide(CMonster* pMonster)
+{
+	auto itrFront = pArea->GetlstPoint().begin();
+	auto itrBack = prev(pArea->GetlstPoint().end());
+	Vec2 vPos = pMonster->GetPos();
+	Vec2 vScale = pMonster->GetScale();
+	POINT monsterPos = { vPos.x, vPos.y };
+	Vec2 direction = pMonster->GetDirection();
+	int speed = pMonster->GetSpeed();
+
+	int max_xpos, min_xpos; // 비교
+	int max_ypos, min_ypos;
+
+	int odd_number;
+
+	if (direction.x <= 0 || direction.y >= 0)
+	{
+		for (auto& itr = itrFront; itr != itrBack; ++itr)
+		{
+			if (itrFront->x == next(itrFront, 1)->x)
+				odd_number = 0;
+			else
+				odd_number = 1;
+
+			switch (odd_number)
+			{
+			case 0: // x가 같을때 (y축으로 비교)
+			{
+				if (next(itr, 1)->y > itr->y) { max_ypos = next(itr, 1)->y; min_ypos = itr->y; }
+				else { min_ypos = next(itr, 1)->y; max_ypos = itr->y; }
+
+				if (direction.x >= 0)
+				{
+					if (itr->x < monsterPos.x + vScale.x / 2 && min_ypos <= monsterPos.y && monsterPos.y <= max_ypos)
+					{
+						return 0;
+					}
+				}
+				else
+				{
+					if (itr->x > monsterPos.x - vScale.x / 2 && min_ypos <= monsterPos.y && monsterPos.y <= max_ypos)
+					{
+						return 0;
+					}
+				}
+				odd_number = 1;
+			}
+			break;
+			case 1: // y가 같을때 (x축으로 비교)
+			{
+				if (next(itr, 1)->x > itr->x) { max_xpos = next(itr, 1)->x; min_xpos = itr->x; }
+				else { min_xpos = next(itr, 1)->x; max_xpos = itr->x; }
+
+				if (direction.y >= 0)
+				{
+					if (itr->y < monsterPos.y + vScale.y / 2 && min_xpos <= monsterPos.x && monsterPos.x <= max_xpos)
+					{
+						return 1;
+					}
+				}
+				else
+				{
+					if (itr->y > monsterPos.y - vScale.y / 2 && min_xpos <= monsterPos.x && monsterPos.x <= max_xpos)
+					{
+						return 1;
+					}
+				}
+				odd_number = 0;
+			}
+			break;
+			default:
+				break;
+			}
+		}
+	}
+
+	return -1;
+}
+
+bool CDecisionMgr::MonsterWallCheck(CMonster* pMonster, int left_right)
+{
+	auto itrFront = pArea->GetlstPoint().begin();
+	auto itrBack = prev(pArea->GetlstPoint().end());
+	Vec2 vPos = pMonster->GetPos();
+	Vec2 vScale = pMonster->GetScale();
+	POINT monsterPos = { vPos.x, vPos.y };
+	Vec2 direction = pMonster->GetDirection();
+	int speed = pMonster->GetSpeed();
+
+	int max_xpos, min_xpos; // 비교
+	int max_ypos, min_ypos;
+
+	int odd_number = 0;
+	int cnt = 0;
+	for (auto itr = itrFront; itr != itrBack; ++itr)
+	{
+		if (itr->x == next(itr, 1)->x)
+			odd_number = 0;
+		else
+			odd_number = 1;
+
+		switch (odd_number)
+		{
+		case 0: // x가 같을때 (y축으로 비교)
+		{
+			if (left_right == 1) continue;
+			if (next(itr, 1)->y > itr->y) { max_ypos = next(itr, 1)->y; min_ypos = itr->y; }
+			else { min_ypos = next(itr, 1)->y; max_ypos = itr->y; }
+
+			if (direction.x >= 0)
+			{
+				if (itr->x > monsterPos.x && min_ypos <= monsterPos.y && monsterPos.y < max_ypos)
+					cnt++;
+			}
+			else
+			{
+				if (itr->x < monsterPos.x && min_ypos <= monsterPos.y && monsterPos.y < max_ypos)
+					cnt++;
+			}
+		}
+		break;
+		case 1: // y가 같을때 (x축으로 비교)
+		{
+			if (left_right == 0) continue;
+			if (next(itr, 1)->x > itr->x) { max_xpos = next(itr, 1)->x; min_xpos = itr->x; }
+			else { min_xpos = next(itr, 1)->x; max_xpos = itr->x; }
+
+			if (direction.y >= 0)
+			{
+				if (itr->y > monsterPos.y && min_xpos <= monsterPos.x && monsterPos.x < max_xpos)
+					cnt++;
+			}
+			else
+			{
+				if (itr->y < monsterPos.y && min_xpos <= monsterPos.x && monsterPos.x < max_xpos)
+					cnt++;
+			}
+		}
+		break;
+		}
+	}
+
+	odd_number = odd_number % 2 == 0 ? 1 : 0;
+	switch (odd_number)
+	{
+	case 0: // x가 같을때 (y축으로 비교)
+	{
+		if (left_right == 1) break;
+		if (itrFront->y > itrBack->y) { max_ypos = itrFront->y; min_ypos = itrBack->y; }
+		else { min_ypos = itrFront->y; max_ypos = itrBack->y; }
+
+		if (direction.x >= 0)
+		{
+			if (itrBack->x > monsterPos.x && min_ypos <= monsterPos.y && monsterPos.y < max_ypos)
+				cnt++;
+		}
+		else
+		{
+			if (itrBack->x < monsterPos.x && min_ypos <= monsterPos.y && monsterPos.y < max_ypos)
+				cnt++;
+		}
+	}
+	break;
+	case 1: // y가 같을때 (x축으로 비교)
+	{
+		if (left_right == 0) break;
+		if (itrFront->x > itrBack->x) { max_xpos = itrFront->x; min_xpos = itrBack->x; }
+		else { min_xpos = itrFront->x; max_xpos = itrBack->x; }
+
+		if (direction.y >= 0)
+		{
+			if (itrBack->y > monsterPos.y && min_xpos <= monsterPos.x && monsterPos.x < max_xpos)
+				cnt++;
+		}
+		else
+		{
+			if (itrBack->y < monsterPos.y && min_xpos <= monsterPos.x && monsterPos.x < max_xpos)
+				cnt++;
+		}
+	}
+	break;
+	}
+	if (cnt == 0) return false;
+	if (cnt % 2 == 0)
+		return true;
+	else
+		return false;
+}
+
+void CDecisionMgr::Init()
+{
+	vecSave.clear();
+	vecMonsters.clear();
+}
+
+void CDecisionMgr::Init(CPlayer* player, CArea* area, vector<CMonster*> monsters)
 {
 	pPlayer = player;
 	pArea = area;
+	vecMonsters = monsters;
 	itrPlayerPos = pArea->GetlstPoint().begin();
 }
 
@@ -894,6 +1093,8 @@ void CDecisionMgr::Update()
 	default:
 		break;
 	}
+
+	MonsterUpdate();
 }
 
 void CDecisionMgr::MoveUpdate()
@@ -1181,6 +1382,39 @@ void CDecisionMgr::DeadUpdate()
 		pPlayer->SetState(MOVE);
 		pArea->ResetNewPoint();
 		pArea->SetDraw(false);
+	}
+}
+
+void CDecisionMgr::MonsterUpdate()
+{
+	for (auto& monster : vecMonsters)
+	{
+		int direction = MonsterCollide(monster);
+		Vec2 vDirection = monster->GetDirection();
+		Vec2 vPos = monster->GetPos();
+		Vec2 vScale = monster->GetScale();
+		if (direction == 0)
+		{
+			if(MonsterWallCheck(monster, direction))
+			{
+				vDirection.x *= -1;
+				monster->SetDirection(vDirection);
+				if (vDirection.x >= 0) vPos.x += vScale.x;
+				else vPos.x -= vScale.x;
+				monster->SetPos(vPos);
+			}
+		}
+		else if (direction == 1)
+		{
+			if (MonsterWallCheck(monster, direction))
+			{
+				vDirection.y *= -1;
+				monster->SetDirection(vDirection);
+				if (vDirection.y >= 0) vPos.y += vScale.y;
+				else vPos.y -= vScale.y;
+				monster->SetPos(vPos);
+			}
+		}
 	}
 }
 

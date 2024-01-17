@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CScene.h"
+#include "func.h"
 
 #include "CObject.h"
 
@@ -10,6 +11,17 @@ void CScene::Update()
 		for (size_t j = 0; j < arrObj[i].size(); j++)
 		{
 			arrObj[i][j]->Update();
+		}
+	}
+}
+
+void CScene::FinalUpdate()
+{
+	for (UINT i = 0; i < (UINT)GROUP_TYPE::END; i++)
+	{
+		for (size_t j = 0; j < arrObj[i].size(); j++)
+		{
+			arrObj[i][j]->FinalUpdate();
 		}
 	}
 }
@@ -42,5 +54,20 @@ CScene::~CScene()
 				delete arrObj[i][j];
 			}
 		}
+	}
+}
+
+void CScene::DeleteGroup(GROUP_TYPE _eTarget)
+{
+	// 자주 사용하는 코드라서, func.h에 템플릿으로 구현
+	SafeDeleteVec(arrObj[(UINT)_eTarget]);
+}
+
+void CScene::DeleteAll()
+{
+	// 모든 타입의 오브젝트 제거
+	for (UINT i = 0; i < (UINT)GROUP_TYPE::END; i++)
+	{
+		DeleteGroup((GROUP_TYPE)i);
 	}
 }
