@@ -6,6 +6,8 @@
 CObject::CObject()
 	: vPos{}
 	, vScale{}
+    , m_pCollider(nullptr)
+    , m_bAlive(true)
 {
 }
 
@@ -29,10 +31,24 @@ float CObject::Random(float min, float max)
     return temp;
 }
 
+void CObject::FinalUpdate()
+{
+    if (m_pCollider != nullptr)
+        m_pCollider->FinalUpdate();
+}
+
 void CObject::Render(HDC hdc)
 {
 	Rectangle(hdc, (int)(vPos.x - vScale.x / 2.f), (int)(vPos.y - vScale.y / 2.f),
 		(int)(vPos.x + vScale.x / 2.f), (int)(vPos.y + vScale.y / 2.f));
+}
+
+void CObject::ComponetRender(HDC hdc)
+{
+	if (m_pCollider != nullptr)
+	{
+		m_pCollider->Render(hdc);
+	}
 }
 
 void CObject::CreateCollider()

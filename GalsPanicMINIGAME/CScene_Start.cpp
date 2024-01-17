@@ -11,6 +11,12 @@
 #include "CCore.h"
 #include "CPathMgr.h"
 #include "CDecisionMgr.h"
+#include "CCollisionMgr.h"
+
+void CScene_Start::Update()
+{
+	CScene::Update();
+}
 
 void CScene_Start::Enter()
 {
@@ -18,6 +24,7 @@ void CScene_Start::Enter()
 	CPlayer* pPlayer = new CPlayer;
 	pPlayer->SetPos(Vec2(40.f, 728.f));
 	pPlayer->SetScale(Vec2(40.f, 40.f));
+	pPlayer->SetType(GROUP_TYPE::PLAYER);
 	AddObject(pPlayer, GROUP_TYPE::PLAYER);
 
 	// 영역 추가
@@ -25,10 +32,32 @@ void CScene_Start::Enter()
 	AddObject(pArea, GROUP_TYPE::DEFAULT);
 
 	// 몬스터
-	//CMonster* pMonster = new CMonster;
-	//pMonster->SetPos(Vec2(300.f, 300.f));
-	//pPlayer->SetScale(Vec2(40.f, 40.f));
-	//AddObject(pMonster, GROUP_TYPE::MONSTER);
+	vector<CMonster*> monsters;
+
+	{
+		CMonster* pMonster = new CMonster;
+		pMonster->SetPos(Vec2(500.f, 300.f));
+		pMonster->SetScale(Vec2(40.f, 40.f));
+		pMonster->SetType(GROUP_TYPE::MONSTER);
+		AddObject(pMonster, GROUP_TYPE::MONSTER);
+		monsters.push_back(pMonster);
+	}
+	{
+		CMonster* pMonster = new CMonster;
+		pMonster->SetPos(Vec2(800.f, 300.f));
+		pMonster->SetScale(Vec2(40.f, 40.f));
+		pMonster->SetType(GROUP_TYPE::MONSTER);
+		AddObject(pMonster, GROUP_TYPE::MONSTER);
+		monsters.push_back(pMonster);
+	}
+	{
+		CMonster* pMonster = new CMonster;
+		pMonster->SetPos(Vec2(800.f, 500.f));
+		pMonster->SetScale(Vec2(40.f, 40.f));
+		pMonster->SetType(GROUP_TYPE::MONSTER);
+		AddObject(pMonster, GROUP_TYPE::MONSTER);
+		monsters.push_back(pMonster);
+	}
 
 	// 텍스트 추가
 	//CText* pText1 = new CText;
@@ -61,11 +90,16 @@ void CScene_Start::Enter()
 	//pText5->SetType(PRINT_TYPE::AREA);
 	//AddObject(pText5, GROUP_TYPE::DEFAULT);
 
-	CDecisionMgr::GetInstance()->Init(pPlayer, pArea);
+	CDecisionMgr::GetInstance()->Init(pPlayer, pArea, monsters);
+
+	CCollisionMgr::GetInstance()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::MONSTER);
+	CCollisionMgr::GetInstance()->CheckGroup(GROUP_TYPE::MONSTER, GROUP_TYPE::MONSTER);
 }
 
 void CScene_Start::Exit()
 {
+	DeleteAll();
+	CCollisionMgr::GetInstance()->Reset();
 }
 
 CScene_Start::CScene_Start()

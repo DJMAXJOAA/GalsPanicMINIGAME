@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CPlayer.h"
+#include "func.h"
 
 #include "CKeyMgr.h"
 #include "CTimeMgr.h"
@@ -9,17 +10,27 @@
 
 #include "CArea.h"
 #include "CTexture.h"
+#include "CCollider.h"
 
 CPlayer::CPlayer()
 	: iState((int)PLAYER_STATE::MOVE)
 	, iDirection((int)PLAYER_DIRECTION::LEFT)
 	, iSpeed(10)
+	, iHP(3)
+	, pTex(nullptr)
+	, bDead(false)
 {
 	{
 		pTex = new CTexture;
 		wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
 		strFilePath += L"texture\\PlayerTemp.bmp";
 		pTex->Load(strFilePath);
+
+		SetScale(Vec2(31.f, 29.f));
+
+		CreateCollider();
+		GetCollider()->SetScale(Vec2(31.f, 29.f));
+		GetCollider()->SetOffsetPos(Vec2(-3.f, -5.f));
 	}
 }
 
@@ -136,6 +147,26 @@ void CPlayer::Move()
 	}
 }
 
+void CPlayer::OnCollisionEnter(CCollider* _pOther)
+{
+	if (iState == PLAYER_STATE::DRAW)
+	{
+		bDead = true;
+	}
+}
+
+void CPlayer::GetDamaged()
+{
+	iHP--;
+	if (iHP <= 0)
+	{
+		printf("»ç¸Á");
+		ChangeScene(SCENE_TYPE::ENDING);
+		return;
+	}
+	bDead = false;
+}
+
 void CPlayer::Update()
 {
 	if (iState != DEAD)
@@ -146,10 +177,21 @@ void CPlayer::Render(HDC hdc)
 {
 	Vec2 Pos = GetPos();
 	Vec2 Scale = GetScale();
+	ComponetRender(hdc);
 
 	int iWidth = pTex->Width();
 	int iHeight = pTex->Height();
-	TransparentBlt(hdc, (int)(Pos.x - Scale.x / 2.f), (int)(Pos.y - Scale.y / 2.f), iWidth, iHeight, pTex->GetDC(), 0, 0, iWidth, iHeight, RGB(255, 0, 255));
+	TransparentBlt(hdc,
+		(int)(Pos.x - Scale.x / 2.f),
+		(int)(Pos.y - Scale.y / 2.f),
+		iWidth,
+		iHeight,
+		pTex->GetDC(),
+		0,
+		0,
+		iWidth,
+		iHeight,
+		RGB(255, 0, 255));
 }
 
 

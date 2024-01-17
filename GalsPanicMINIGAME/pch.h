@@ -17,6 +17,14 @@ using std::string;
 using std::wstring;
 #include <set>
 using std::set;
+#include <map>
+using std::map;
+#include <unordered_map>
+using std::unordered_map;
+using std::pair;
+using std::make_pair;
+#include <functional>
+using std::function;
 
 #pragma comment(lib, "Msimg32.lib")
 

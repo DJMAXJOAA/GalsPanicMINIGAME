@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)Output\bin_debug\</OutDir>
+    <OutDir>$(SolutionDir)Output\bin</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Output\bin\</OutDir>
@@ -137,8 +137,10 @@
   <ItemGroup>
     <ClInclude Include="CArea.h" />
     <ClInclude Include="CCollider.h" />
+    <ClInclude Include="CCollisionMgr.h" />
     <ClInclude Include="CCore.h" />
     <ClInclude Include="CDecisionMgr.h" />
+    <ClInclude Include="CEventMgr.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CObject.h" />
@@ -147,23 +149,29 @@
     <ClInclude Include="CResource.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneMgr.h" />
+    <ClInclude Include="CScene_Ending.h" />
     <ClInclude Include="CScene_Start.h" />
+    <ClInclude Include="CScene_Title.h" />
     <ClInclude Include="CText.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="CTimeMgr.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="func.h" />
     <ClInclude Include="GalsPanicMINIGAME.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SelectGDI.h" />
     <ClInclude Include="struct.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CArea.cpp" />
     <ClCompile Include="CCollider.cpp" />
+    <ClCompile Include="CCollisionMgr.cpp" />
     <ClCompile Include="CCore.cpp" />
     <ClCompile Include="CDecisionMgr.cpp" />
+    <ClCompile Include="CEventMgr.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CObject.cpp" />
@@ -172,11 +180,15 @@
     <ClCompile Include="CResource.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneMgr.cpp" />
+    <ClCompile Include="CScene_Ending.cpp" />
     <ClCompile Include="CScene_Start.cpp" />
+    <ClCompile Include="CScene_Title.cpp" />
     <ClCompile Include="CText.cpp" />
     <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />
+    <ClCompile Include="func.cpp" />
     <ClCompile Include="GalsPanicMINIGAME.cpp" />
+    <ClCompile Include="SelectGDI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GalsPanicMINIGAME.rc" />

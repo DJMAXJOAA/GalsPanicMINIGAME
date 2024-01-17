@@ -4,6 +4,7 @@
 #include "CCore.h"
 
 #include "CObject.h"
+#include "SelectGDI.h"
 
 UINT CCollider::g_iNextID = 0;
 
@@ -40,7 +41,18 @@ void CCollider::FinalUpdate()
 
 void CCollider::Render(HDC hdc)
 {
+	PEN_TYPE ePen = PEN_TYPE::GREEN;
+	if (m_iCol)
+		ePen = PEN_TYPE::RED;
 
+	SelectGDI pen(hdc, ePen);
+	SelectGDI brush(hdc, BRUSH_TYPE::HOLLOW);
+
+	Rectangle(hdc
+		, (int)(m_vFinalPos.x - m_vScale.x / 2.f)
+		, (int)(m_vFinalPos.y - m_vScale.y / 2.f)
+		, (int)(m_vFinalPos.x + m_vScale.x / 2.f)
+		, (int)(m_vFinalPos.y + m_vScale.y / 2.f));
 }
 
 void CCollider::OnCollision(CCollider* _pOther)

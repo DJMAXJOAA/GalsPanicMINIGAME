@@ -65,6 +65,21 @@
     <Filter Include="Engine\7. 컴포넌트">
       <UniqueIdentifier>{2f99c397-0860-47c2-82d5-a9857bd598f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\8. 모듈">
+      <UniqueIdentifier>{7ccb71b6-cf94-4bc9-b784-9d877c912177}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3. 매니저\충돌 매니저">
+      <UniqueIdentifier>{7cb1dafb-2e0b-4468-9743-643ff84d35ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3. 매니저\이벤트 매니저">
+      <UniqueIdentifier>{90a678b4-c9a0-4f08-ab50-fa2df26e3b69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\5. 씬\Title">
+      <UniqueIdentifier>{bda01b4f-3781-423e-879d-13115a87e8fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\5. 씬\Ending">
+      <UniqueIdentifier>{79f6414b-4196-4bbd-8648-b90299307d7d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -136,6 +151,24 @@
     <ClInclude Include="CCollider.h">
       <Filter>Engine\7. 컴포넌트</Filter>
     </ClInclude>
+    <ClInclude Include="SelectGDI.h">
+      <Filter>Engine\8. 모듈</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollisionMgr.h">
+      <Filter>Engine\3. 매니저\충돌 매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="CEventMgr.h">
+      <Filter>Engine\3. 매니저\이벤트 매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="func.h">
+      <Filter>Engine\1. 헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CScene_Title.h">
+      <Filter>Engine\5. 씬\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="CScene_Ending.h">
+      <Filter>Engine\5. 씬\Ending</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GalsPanicMINIGAME.rc">
@@ -199,6 +232,24 @@
     </ClCompile>
     <ClCompile Include="CCollider.cpp">
       <Filter>Engine\7. 컴포넌트</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectGDI.cpp">
+      <Filter>Engine\8. 모듈</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollisionMgr.cpp">
+      <Filter>Engine\3. 매니저\충돌 매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="CEventMgr.cpp">
+      <Filter>Engine\3. 매니저\이벤트 매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="func.cpp">
+      <Filter>Engine\1. 헤더파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene_Title.cpp">
+      <Filter>Engine\5. 씬\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene_Ending.cpp">
+      <Filter>Engine\5. 씬\Ending</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
