@@ -1,9 +1,8 @@
 #include "pch.h"
 #include "CScene_Ending.h"
-#include "func.h"
 
-#include "CPlayer.h"
-#include "CText.h"
+#include "CCore.h"
+#include "CPanel.h"
 
 #include "CKeyMgr.h"
 #include "CDecisionMgr.h"
@@ -20,8 +19,18 @@ void CScene_Ending::Update()
 
 void CScene_Ending::Enter()
 {
+	int score = CDecisionMgr::GetInstance()->GetTimeScore();
+	printf("\n score :: %d\n", score);
 	CKeyMgr::GetInstance()->Init();
 	CDecisionMgr::GetInstance()->Init();
+
+	Vec2 vResolution = CCore::GetInstance()->GetResolution();
+
+	// ÆÐ³Î
+	{
+		CPanel* background = new CPanel(L"texture\\StartBackground.png");
+		CreateObj(background, GROUP_TYPE::DEFAULT);
+	}
 }
 
 void CScene_Ending::Exit()

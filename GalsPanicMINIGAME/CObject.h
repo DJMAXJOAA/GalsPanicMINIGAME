@@ -1,5 +1,4 @@
 #pragma once
-
 class CCollider;
 
 class CObject
@@ -24,8 +23,8 @@ public:
 	GROUP_TYPE GetType() { return m_eType; }
 
 	CCollider* GetCollider() { return m_pCollider; }
-	bool IsDead() { return !m_bAlive; }
 
+	bool IsDead() { return !m_bAlive; }
 	float Random(float min, float max);
 
 private:

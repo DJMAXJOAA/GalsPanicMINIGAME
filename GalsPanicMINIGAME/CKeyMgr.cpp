@@ -63,7 +63,8 @@ void CKeyMgr::Update()
 			// 키가 눌려있음
 			if (GetAsyncKeyState(arrVK[i]) & 0x8000)
 			{
-				if (CDecisionMgr::GetInstance()->GetPlayer()->GetState() == MOVE)
+				auto player = CDecisionMgr::GetInstance()->GetPlayer();
+				if (player != nullptr && player->GetState() == MOVE)
 				{
 					if (i == (int)KEY::A || i == (int)KEY::W || i == (int)KEY::D || i == (int)KEY::S)
 						SetKeyAvailability((KEY)i, CDecisionMgr::GetInstance()->PlayerMovingPossible((KEY)i));

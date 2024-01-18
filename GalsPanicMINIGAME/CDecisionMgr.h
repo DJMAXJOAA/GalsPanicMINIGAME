@@ -25,7 +25,9 @@ private:
 	vector<list<POINT>::iterator> vecSave; // 이터레이터 저장
 	KEY lastKEY;
 
-	int check = 0;
+private:
+	int			m_iCheck = 0;
+	float		m_fTimeCount;
 
 public:
 	bool PlayerMovingPossible(KEY key);
@@ -34,7 +36,8 @@ public:
 	CPlayer* GetPlayer() { return pPlayer; }
 	CArea* GetArea() { return pArea; }
 	list<POINT>::iterator GetPlayerAreaPoint() { return itrPlayerPos; }
-	int GetCheck() { return check; }
+	int GetTimeScore() { return (int)m_fTimeCount; }
+	int GetCheck() { return m_iCheck; }
 
 public:
 	void Init();
@@ -53,6 +56,9 @@ public:
 	void DrawUpdate();
 	void DeadUpdate();
 	void MonsterUpdate();
+
+private:
+	void CheckTimeScore();
 
 private:
 	CDecisionMgr();

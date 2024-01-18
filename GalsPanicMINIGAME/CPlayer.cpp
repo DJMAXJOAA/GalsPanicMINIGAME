@@ -2,6 +2,8 @@
 #include "CPlayer.h"
 #include "func.h"
 
+#include "CHeart.h"
+
 #include "CKeyMgr.h"
 #include "CTimeMgr.h"
 #include "CDecisionMgr.h"
@@ -13,27 +15,29 @@
 #include "CTexture.h"
 #include "CCollider.h"
 
-CPlayer::CPlayer()
+CPlayer::CPlayer(CHeart* heart)
 	: iState((int)PLAYER_STATE::MOVE)
 	, iDirection((int)PLAYER_DIRECTION::LEFT)
 	, iSpeed(10)
-	, iHP(3)
 	, pTex(nullptr)
 	, bDead(false)
+	, pHeart(nullptr)
 {
-	{
-		pTex = CResMgr::GetInstance()->LoadTexture(L"PlayerTemp", L"texture\\PlayerTemp.bmp");
 
-		SetScale(Vec2(31.f, 29.f));
+	pTex = CResMgr::GetInstance()->LoadTexture(L"PlayerTemp", L"texture\\PlayerTemp.bmp");
 
-		CreateCollider();
-		GetCollider()->SetScale(Vec2(31.f, 29.f));
-		GetCollider()->SetOffsetPos(Vec2(-3.f, -5.f));
-	}
+	SetScale(Vec2(31.f, 29.f));
+
+	CreateCollider();
+	GetCollider()->SetScale(Vec2(31.f, 29.f));
+	GetCollider()->SetOffsetPos(Vec2(-3.f, -5.f));
+
+	pHeart = heart;
 }
 
 CPlayer::~CPlayer()
 {
+	pHeart = nullptr;
 }
 
 void CPlayer::Move()
@@ -155,13 +159,7 @@ void CPlayer::OnCollisionEnter(CCollider* _pOther)
 
 void CPlayer::GetDamaged()
 {
-	iHP--;
-	if (iHP <= 0)
-	{
-		printf("»ç¸Á");
-		ChangeScene(SCENE_TYPE::ENDING);
-		return;
-	}
+	pHeart->ReduceHP();
 	bDead = false;
 }
 

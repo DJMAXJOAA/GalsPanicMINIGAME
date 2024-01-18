@@ -16,22 +16,24 @@ CCollider::CCollider()
 }
 
 CCollider::CCollider(const CCollider& _origin)
-	:m_pOwner(nullptr)					// 콜라이더가 복사되었으면, 원래 있던 주인을 참조시키면 안됨
+	: m_pOwner(nullptr)					// 콜라이더가 복사되었으면, 원래 있던 주인을 참조시키면 안됨
 	, m_vOffsetPos(_origin.m_vOffsetPos)
 	, m_vFinalPos(_origin.m_vFinalPos)
 	, m_vScale(_origin.m_vScale)			// 나머지 멤버변수들은 그대로 복사
 	, m_iID(g_iNextID++)					// ID값은 정적 변수에서 추가시킴
 	, m_iCol(0)
 {
-
 }
 
 CCollider::~CCollider()
 {
+	m_pOwner = nullptr;
 }
 
 void CCollider::FinalUpdate()
 {
+	if (m_pOwner == nullptr) return;
+
 	// Object의 위치를 따라감
 	Vec2 vObjectPos = m_pOwner->GetPos();
 	m_vFinalPos = vObjectPos + m_vOffsetPos;

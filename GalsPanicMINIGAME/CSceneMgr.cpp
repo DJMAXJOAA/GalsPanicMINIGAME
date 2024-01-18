@@ -16,7 +16,7 @@ void CSceneMgr::Init()
 	arrScene[(UINT)SCENE_TYPE::ENDING] = new CScene_Ending;
 	arrScene[(UINT)SCENE_TYPE::ENDING]->SetName(L"결과");
 
-	pCurScene = arrScene[(UINT)SCENE_TYPE::START];
+	pCurScene = arrScene[(UINT)SCENE_TYPE::TITLE];
 	pCurScene->Enter(); // 씬 진입
 }
 

@@ -18,9 +18,9 @@ CArea::CArea()
 {
 	// 텍스쳐 로딩
 	pTex[0] = CResMgr::GetInstance()->LoadTexture(L"NewJeans", L"texture\\NewJeans.bmp");
-	pTex[1] = CResMgr::GetInstance()->LoadTexture(L"Background", L"texture\\Background.bmp");
-	pTex[2] = CResMgr::GetInstance()->LoadTexture(L"BALL1", L"texture\\BALL1.bmp");
-	pTex[3] = CResMgr::GetInstance()->LoadTexture(L"BALL2", L"texture\\BALL2.bmp");
+	pTex[1] = CResMgr::GetInstance()->LoadTexture(L"Background", L"texture\\Background2.bmp");
+	pTex[2] = CResMgr::GetInstance()->LoadTexture(L"ball1", L"texture\\BALL1.bmp");
+	pTex[3] = CResMgr::GetInstance()->LoadTexture(L"ball2", L"texture\\BALL2.bmp");
 
 	POINT vResolution = CCore::GetInstance()->GetResolution();
 	LONG iInterval = 40;
@@ -31,15 +31,6 @@ CArea::CArea()
 	lstPoint.push_back(POINT{ iInterval + 0 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
 	lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
 	lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
-
-	//lstPoint.push_back(POINT{ iInterval + 0 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
-	//lstPoint.push_back(POINT{ iInterval + 0 * iInitialValue, vResolution.y - iInterval - 2 * iInitialValue });
-	//lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 2 * iInitialValue });
-	//lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
-	//lstPoint.push_back(POINT{ iInterval + 5 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
-	//lstPoint.push_back(POINT{ iInterval + 5 * iInitialValue, vResolution.y - iInterval - 3 * iInitialValue });
-	//lstPoint.push_back(POINT{ iInterval + 6 * iInitialValue, vResolution.y - iInterval - 3 * iInitialValue });
-	//lstPoint.push_back(POINT{ iInterval + 6 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
 
 	list<POINT>::iterator firstItr = lstPoint.begin();
 	list<POINT>::iterator lastItr = lstPoint.end();
@@ -68,7 +59,19 @@ CArea::CArea()
 
 CArea::~CArea()
 {
-
+	lstPoint.clear();
+	newPoint.clear();
+	for (int i = 0; i < 4; i++) pTex[i] = nullptr;
+	if (ptBorder != nullptr)
+	{
+		delete[] ptBorder;
+		ptBorder = nullptr;
+	}
+	//if (ptMyArea != nullptr)
+	//{
+	//	delete[] ptMyArea;
+	//	ptMyArea = nullptr;
+	//}
 }
 
 void CArea::CalculuateMyArea()

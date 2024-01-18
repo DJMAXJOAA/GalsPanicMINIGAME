@@ -18,6 +18,8 @@ CText::~CText()
 
 void CText::Update()
 {
+	if (IsDead()) return;
+
 	wstring temp;
 
 	switch (txtType)

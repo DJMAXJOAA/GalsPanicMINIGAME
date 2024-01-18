@@ -4,6 +4,7 @@
 #include "CArea.h"
 
 class CTexture;
+class CHeart;
 
 enum PLAYER_STATE
 {
@@ -22,8 +23,8 @@ private:
     int iState;
     int iDirection;
     int iSpeed;
-    int iHP;
     CTexture* pTex;
+    CHeart* pHeart;
 
     bool bDead;
 
@@ -48,7 +49,7 @@ public:
     virtual void Render(HDC hdc);
 
 public:
-    CPlayer();
+    CPlayer(CHeart* heart);
     virtual ~CPlayer();
 
     CLONE(CPlayer);

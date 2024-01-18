@@ -13,7 +13,10 @@ void SafeDeleteVec(vector<T>& _vec)
 	for (size_t i = 0; i < _vec.size(); i++)
 	{
 		if (_vec[i] != nullptr)
+		{
 			delete _vec[i];
+			_vec[i] = nullptr;
+		}
 	}
 	_vec.clear();
 }
@@ -30,6 +33,7 @@ void SafeDeleteMap(map<T1, T2>& _map)
 		if (iter->second != nullptr)
 		{
 			delete iter->second;
+			iter->second = nullptr;
 		}
 	}
 	_map.clear();
@@ -47,6 +51,7 @@ void SafeDeleteList(list<T>& _lst)
 		if (iter != nullptr)
 		{
 			delete iter;
+			iter = nullptr;
 		}
 	}
 	_lst.clear();
