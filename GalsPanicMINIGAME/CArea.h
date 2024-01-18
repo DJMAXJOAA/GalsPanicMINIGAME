@@ -37,7 +37,7 @@ public:
 	
 public:
 	CArea();
-	~CArea();
+	virtual ~CArea();
 
 	CLONE(CArea);
 };

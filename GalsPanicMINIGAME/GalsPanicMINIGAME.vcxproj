@@ -142,9 +142,11 @@
     <ClInclude Include="CDecisionMgr.h" />
     <ClInclude Include="CEventMgr.h" />
     <ClInclude Include="CGdiPlus.h" />
+    <ClInclude Include="CHeart.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CObject.h" />
+    <ClInclude Include="CPanel.h" />
     <ClInclude Include="CPathMgr.h" />
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CResMgr.h" />
@@ -175,9 +177,11 @@
     <ClCompile Include="CDecisionMgr.cpp" />
     <ClCompile Include="CEventMgr.cpp" />
     <ClCompile Include="CGdiPlus.cpp" />
+    <ClCompile Include="CHeart.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CObject.cpp" />
+    <ClCompile Include="CPanel.cpp" />
     <ClCompile Include="CPathMgr.cpp" />
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CResMgr.cpp" />

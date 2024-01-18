@@ -32,7 +32,7 @@ public:
 
 public:
     CText();
-    ~CText();
+    virtual ~CText();
 
     CLONE(CText);
 };

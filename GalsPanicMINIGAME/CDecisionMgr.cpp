@@ -7,6 +7,7 @@
 #include "CMonster.h"
 
 #include "CKeyMgr.h"
+#include "CTimeMgr.h"
 #include "CCore.h"
 
 bool CDecisionMgr::PlayerMovingPossible(KEY key)
@@ -864,7 +865,7 @@ void CDecisionMgr::DrawCollideDead()
 		auto itrReverse = prev(pArea->GetnewPoint().end(), 1);
 		itrPlayerPos = itrReverse;
 		pPlayer->SetState(DEAD);
-		pPlayer->GetDamaged();
+		pPlayer->SetDead(true);
 
 		for (int i = 0; i < (int)KEY::LAST; i++)
 		{
@@ -1003,6 +1004,12 @@ void CDecisionMgr::Init()
 {
 	vecSave.clear();
 	vecMonsters.clear();
+
+	pPlayer = nullptr;
+	pArea = nullptr;
+
+	m_fTimeCount = 0.f;
+	m_iCheck = 0;
 }
 
 void CDecisionMgr::Init(CPlayer* player, CArea* area, vector<CMonster*> monsters)
@@ -1015,6 +1022,10 @@ void CDecisionMgr::Init(CPlayer* player, CArea* area, vector<CMonster*> monsters
 
 void CDecisionMgr::Update()
 {
+	if (pPlayer == nullptr) return;
+
+	CheckTimeScore();
+
 	int playerState = pPlayer->GetState();
 	
 	switch (playerState)
@@ -1104,7 +1115,7 @@ void CDecisionMgr::DrawUpdate()
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, false);
-		check = LEFT;
+		m_iCheck = LEFT;
 		return;
 	}
 	else if (CKeyMgr::GetInstance()->GetKeyState(KEY::A) == KEY_STATE::AWAY
@@ -1114,7 +1125,7 @@ void CDecisionMgr::DrawUpdate()
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, true);
-		check = NONE;
+		m_iCheck = NONE;
 		return;
 	}
 
@@ -1131,7 +1142,7 @@ void CDecisionMgr::DrawUpdate()
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, false);
-		check = UP;
+		m_iCheck = UP;
 		return;
 	}
 	else if (CKeyMgr::GetInstance()->GetKeyState(KEY::W) == KEY_STATE::AWAY
@@ -1141,7 +1152,7 @@ void CDecisionMgr::DrawUpdate()
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, true);
-		check = NONE;
+		m_iCheck = NONE;
 		return;
 	}
 
@@ -1159,7 +1170,7 @@ void CDecisionMgr::DrawUpdate()
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, false);
-		check = RIGHT;
+		m_iCheck = RIGHT;
 		return;
 	}
 	else if (CKeyMgr::GetInstance()->GetKeyState(KEY::D) == KEY_STATE::AWAY
@@ -1169,7 +1180,7 @@ void CDecisionMgr::DrawUpdate()
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::W, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, true);
-		check = NONE;
+		m_iCheck = NONE;
 		return;
 	}
 
@@ -1186,7 +1197,7 @@ void CDecisionMgr::DrawUpdate()
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, false);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, false);
-		check = DOWN;
+		m_iCheck = DOWN;
 		return;
 	}
 	else if (CKeyMgr::GetInstance()->GetKeyState(KEY::S) == KEY_STATE::AWAY
@@ -1196,7 +1207,7 @@ void CDecisionMgr::DrawUpdate()
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::A, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::S, true);
 		CKeyMgr::GetInstance()->SetKeyAvailability(KEY::D, true);
-		check = NONE;
+		m_iCheck = NONE;
 		return;
 	}
 
@@ -1321,6 +1332,7 @@ void CDecisionMgr::DeadUpdate()
 		pPlayer->SetState(MOVE);
 		pArea->ResetNewPoint();
 		pArea->SetDraw(false);
+		pPlayer->GetDamaged();
 	}
 }
 
@@ -1352,10 +1364,19 @@ void CDecisionMgr::MonsterUpdate()
 	}
 }
 
+void CDecisionMgr::CheckTimeScore()
+{
+	m_fTimeCount += fDT;
+}
+
 CDecisionMgr::CDecisionMgr()
 	: pPlayer(nullptr)
 	, pArea(nullptr)
+	, vecMonsters{}
+	, itrPlayerPos()
+	, vecSave{}
 {
+	Init();
 }
 
 CDecisionMgr::~CDecisionMgr()

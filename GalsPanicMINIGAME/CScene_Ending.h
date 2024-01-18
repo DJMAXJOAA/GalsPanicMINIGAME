@@ -4,7 +4,6 @@ class CScene_Ending :
     public CScene
 {
 public:
-public:
     virtual void Update() override;
     virtual void Enter() override;
     virtual void Exit() override;

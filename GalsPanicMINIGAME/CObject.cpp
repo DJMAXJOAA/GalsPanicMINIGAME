@@ -29,7 +29,10 @@ CObject::CObject(const CObject& _origin)
 CObject::~CObject()
 {
 	if (m_pCollider != nullptr)
+	{
 		delete m_pCollider;
+		m_pCollider = nullptr;
+	}
 }
 
 
@@ -73,4 +76,3 @@ void CObject::CreateCollider()
     m_pCollider = new CCollider;
     m_pCollider->m_pOwner = this;
 }
-

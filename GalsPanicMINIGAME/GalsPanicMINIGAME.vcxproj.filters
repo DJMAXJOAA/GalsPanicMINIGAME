@@ -86,6 +86,18 @@
     <Filter Include="Engine\6. 리소스\GDI+">
       <UniqueIdentifier>{08e85b42-262c-40c3-8cb7-1fa38187d313}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\4. 오브젝트\패널">
+      <UniqueIdentifier>{e781b1fe-0b43-4f7d-9078-32e8cbd2a8ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\7. 컴포넌트\Collider">
+      <UniqueIdentifier>{44f4360b-63fe-4290-b472-e66f5cda531e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\9. 데이터">
+      <UniqueIdentifier>{a26db96e-f99a-42f7-b071-ad02b8a44493}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\4. 오브젝트\하트">
+      <UniqueIdentifier>{bd719896-12a0-4541-b0aa-880e1dc04366}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -154,9 +166,6 @@
     <ClInclude Include="CMonster.h">
       <Filter>Engine\4. 오브젝트\몬스터</Filter>
     </ClInclude>
-    <ClInclude Include="CCollider.h">
-      <Filter>Engine\7. 컴포넌트</Filter>
-    </ClInclude>
     <ClInclude Include="SelectGDI.h">
       <Filter>Engine\8. 모듈</Filter>
     </ClInclude>
@@ -180,6 +189,15 @@
     </ClInclude>
     <ClInclude Include="CGdiPlus.h">
       <Filter>Engine\6. 리소스\GDI+</Filter>
+    </ClInclude>
+    <ClInclude Include="CPanel.h">
+      <Filter>Engine\4. 오브젝트\패널</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollider.h">
+      <Filter>Engine\7. 컴포넌트\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="CHeart.h">
+      <Filter>Engine\4. 오브젝트\하트</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -242,9 +260,6 @@
     <ClCompile Include="CMonster.cpp">
       <Filter>Engine\4. 오브젝트\몬스터</Filter>
     </ClCompile>
-    <ClCompile Include="CCollider.cpp">
-      <Filter>Engine\7. 컴포넌트</Filter>
-    </ClCompile>
     <ClCompile Include="SelectGDI.cpp">
       <Filter>Engine\8. 모듈</Filter>
     </ClCompile>
@@ -268,6 +283,15 @@
     </ClCompile>
     <ClCompile Include="CGdiPlus.cpp">
       <Filter>Engine\6. 리소스\GDI+</Filter>
+    </ClCompile>
+    <ClCompile Include="CPanel.cpp">
+      <Filter>Engine\4. 오브젝트\패널</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollider.cpp">
+      <Filter>Engine\7. 컴포넌트\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="CHeart.cpp">
+      <Filter>Engine\4. 오브젝트\하트</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
