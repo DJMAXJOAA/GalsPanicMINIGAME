@@ -6,6 +6,7 @@
 
 #include "CDecisionMgr.h"
 #include "CPathMgr.h"
+#include "CResMgr.h"
 
 
 CArea::CArea()
@@ -16,51 +17,29 @@ CArea::CArea()
 	, bDrawing(false)
 {
 	// 텍스쳐 로딩
-	{
-		pTex[0] = new CTexture;
-		wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
-		strFilePath += L"texture\\NewJeans.bmp";
-		pTex[0]->Load(strFilePath);
-	}
-
-	{
-		pTex[1] = new CTexture;
-		wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
-		strFilePath += L"texture\\Background.bmp";
-		pTex[1]->Load(strFilePath);
-	}
-
-	{
-		pTex[2] = new CTexture;
-		wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
-		strFilePath += L"texture\\BALL1.bmp";
-		pTex[2]->Load(strFilePath);
-	}
-
-	{
-		pTex[3] = new CTexture;
-		wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
-		strFilePath += L"texture\\BALL2.bmp";
-		pTex[3]->Load(strFilePath);
-	}
+	pTex[0] = CResMgr::GetInstance()->LoadTexture(L"NewJeans", L"texture\\NewJeans.bmp");
+	pTex[1] = CResMgr::GetInstance()->LoadTexture(L"Background", L"texture\\Background.bmp");
+	pTex[2] = CResMgr::GetInstance()->LoadTexture(L"BALL1", L"texture\\BALL1.bmp");
+	pTex[3] = CResMgr::GetInstance()->LoadTexture(L"BALL2", L"texture\\BALL2.bmp");
 
 	POINT vResolution = CCore::GetInstance()->GetResolution();
 	LONG iInterval = 40;
 	LONG iInitialValue = 200;
 
 	// 내 영역
-	//lstPoint.push_back(POINT{ iInterval + 0 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
-	//lstPoint.push_back(POINT{ iInterval + 0 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
-	//lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
-	//lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
 	lstPoint.push_back(POINT{ iInterval + 0 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
-	lstPoint.push_back(POINT{ iInterval + 0 * iInitialValue, vResolution.y - iInterval - 2 * iInitialValue });
-	lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 2 * iInitialValue });
+	lstPoint.push_back(POINT{ iInterval + 0 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
 	lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
-	lstPoint.push_back(POINT{ iInterval + 5 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
-	lstPoint.push_back(POINT{ iInterval + 5 * iInitialValue, vResolution.y - iInterval - 3 * iInitialValue });
-	lstPoint.push_back(POINT{ iInterval + 6 * iInitialValue, vResolution.y - iInterval - 3 * iInitialValue });
-	lstPoint.push_back(POINT{ iInterval + 6 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
+	lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
+
+	//lstPoint.push_back(POINT{ iInterval + 0 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
+	//lstPoint.push_back(POINT{ iInterval + 0 * iInitialValue, vResolution.y - iInterval - 2 * iInitialValue });
+	//lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 2 * iInitialValue });
+	//lstPoint.push_back(POINT{ iInterval + 1 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
+	//lstPoint.push_back(POINT{ iInterval + 5 * iInitialValue, vResolution.y - iInterval - 1 * iInitialValue });
+	//lstPoint.push_back(POINT{ iInterval + 5 * iInitialValue, vResolution.y - iInterval - 3 * iInitialValue });
+	//lstPoint.push_back(POINT{ iInterval + 6 * iInitialValue, vResolution.y - iInterval - 3 * iInitialValue });
+	//lstPoint.push_back(POINT{ iInterval + 6 * iInitialValue, vResolution.y - iInterval - 0 * iInitialValue });
 
 	list<POINT>::iterator firstItr = lstPoint.begin();
 	list<POINT>::iterator lastItr = lstPoint.end();
@@ -161,10 +140,10 @@ void CArea::Render(HDC hdc)
 	{
 		int iWidth = pTex[2]->Width();
 		int iHeight = pTex[2]->Height();
-		//temp = L"" + std::to_wstring(i);
-		//TextOut(hdc, ptMyArea[i].x + radius, ptMyArea[i].y + radius, temp.c_str(), temp.length());
-		//temp = L"" + std::to_wstring(ptMyArea[i].x) + L", " + std::to_wstring(ptMyArea[i].y);
-		//TextOut(hdc, ptMyArea[i].x + radius, ptMyArea[i].y + 3*radius, temp.c_str(), temp.length());v
+		temp = L"" + std::to_wstring(i);
+		TextOut(hdc, ptMyArea[i].x + radius, ptMyArea[i].y + radius, temp.c_str(), temp.length());
+		temp = L"" + std::to_wstring(ptMyArea[i].x) + L", " + std::to_wstring(ptMyArea[i].y);
+		TextOut(hdc, ptMyArea[i].x + radius, ptMyArea[i].y + 3*radius, temp.c_str(), temp.length());
 		TransparentBlt(hdc, ptMyArea[i].x - radius, ptMyArea[i].y - radius, iWidth, iHeight, pTex[2]->GetDC(), 0, 0, iWidth, iHeight, RGB(255, 0, 255));
 	}
 

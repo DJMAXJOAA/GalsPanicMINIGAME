@@ -7,6 +7,7 @@
 #include "CDecisionMgr.h"
 #include "CCore.h"
 #include "CPathMgr.h"
+#include "CResMgr.h"
 
 #include "CArea.h"
 #include "CTexture.h"
@@ -21,10 +22,7 @@ CPlayer::CPlayer()
 	, bDead(false)
 {
 	{
-		pTex = new CTexture;
-		wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
-		strFilePath += L"texture\\PlayerTemp.bmp";
-		pTex->Load(strFilePath);
+		pTex = CResMgr::GetInstance()->LoadTexture(L"PlayerTemp", L"texture\\PlayerTemp.bmp");
 
 		SetScale(Vec2(31.f, 29.f));
 

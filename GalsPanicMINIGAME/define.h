@@ -9,6 +9,8 @@
 #define KEY_NONE(key) KEY_CHECK(key, KEY_STATE::NONE)
 #define MOUSE_POS CKeyMgr::GetInstance()->GetMousePos()
 
+#define CLONE(type) type* Clone() {return new type(*this);}
+
 #define fDT CTimeMgr::GetInstance()->GetfDT()
 #define DT CTimeMgr::GetInstance()->GetDT()
 #define PI 3.14159

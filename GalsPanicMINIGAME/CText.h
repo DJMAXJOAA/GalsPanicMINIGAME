@@ -33,5 +33,7 @@ public:
 public:
     CText();
     ~CText();
+
+    CLONE(CText);
 };
 

@@ -80,6 +80,12 @@
     <Filter Include="Engine\5. 씬\Ending">
       <UniqueIdentifier>{79f6414b-4196-4bbd-8648-b90299307d7d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\3. 매니저\리소스 매니저">
+      <UniqueIdentifier>{d4b00be2-92c7-448c-9d74-4f082e6af560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\6. 리소스\GDI+">
+      <UniqueIdentifier>{08e85b42-262c-40c3-8cb7-1fa38187d313}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -169,6 +175,12 @@
     <ClInclude Include="CScene_Ending.h">
       <Filter>Engine\5. 씬\Ending</Filter>
     </ClInclude>
+    <ClInclude Include="CResMgr.h">
+      <Filter>Engine\3. 매니저\리소스 매니저</Filter>
+    </ClInclude>
+    <ClInclude Include="CGdiPlus.h">
+      <Filter>Engine\6. 리소스\GDI+</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GalsPanicMINIGAME.rc">
@@ -250,6 +262,12 @@
     </ClCompile>
     <ClCompile Include="CScene_Ending.cpp">
       <Filter>Engine\5. 씬\Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="CResMgr.cpp">
+      <Filter>Engine\3. 매니저\리소스 매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="CGdiPlus.cpp">
+      <Filter>Engine\6. 리소스\GDI+</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

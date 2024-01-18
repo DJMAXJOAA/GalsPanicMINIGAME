@@ -3,26 +3,34 @@
 
 #include "CPathMgr.h"
 #include "CCore.h"
+#include "CResMgr.h"
 
 #include "CTexture.h"
 #include "CCollider.h"
 
 CMonster::CMonster()
-	: iSpeed(10)
+	: iSpeed(5)
 	, fAngle(Random(0, 360))
 	, fDirection(cosf(RADIAN(fAngle)), sinf(RADIAN(fAngle)))
 	, pCollide(nullptr)
 {
-	pTex = new CTexture;
-	wstring strFilePath = CPathMgr::GetInstance()->GetContentPath();
-	strFilePath += L"texture\\MonsterTemp.bmp";
-	pTex->Load(strFilePath);
+	pTex = CResMgr::GetInstance()->LoadTexture(L"MonsterTemp", L"texture\\MonsterTemp.bmp");
 
 	SetScale(Vec2(31.f, 29.f));
 
 	CreateCollider();
 	GetCollider()->SetScale(Vec2(31.f, 29.f));
 	GetCollider()->SetOffsetPos(Vec2(-4.f, -5.f));
+}
+
+CMonster::CMonster(const CMonster& _origin)
+	: CObject(_origin)
+	, iSpeed(_origin.iSpeed)
+	, fAngle(Random(0, 360))
+	, fDirection(cosf(RADIAN(fAngle)), sinf(RADIAN(fAngle)))
+	, pCollide(nullptr)
+	, pTex(_origin.pTex)
+{
 }
 
 CMonster::~CMonster()

@@ -49,6 +49,8 @@ public:
 
 public:
     CPlayer();
-    ~CPlayer();
+    virtual ~CPlayer();
+
+    CLONE(CPlayer);
 };
 

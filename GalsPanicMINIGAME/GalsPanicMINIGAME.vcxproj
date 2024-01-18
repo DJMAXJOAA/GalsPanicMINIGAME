@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)Output\bin</OutDir>
+    <OutDir>$(SolutionDir)Output\bin\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Output\bin\</OutDir>
@@ -141,11 +141,13 @@
     <ClInclude Include="CCore.h" />
     <ClInclude Include="CDecisionMgr.h" />
     <ClInclude Include="CEventMgr.h" />
+    <ClInclude Include="CGdiPlus.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CObject.h" />
     <ClInclude Include="CPathMgr.h" />
     <ClInclude Include="CPlayer.h" />
+    <ClInclude Include="CResMgr.h" />
     <ClInclude Include="CResource.h" />
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneMgr.h" />
@@ -172,11 +174,13 @@
     <ClCompile Include="CCore.cpp" />
     <ClCompile Include="CDecisionMgr.cpp" />
     <ClCompile Include="CEventMgr.cpp" />
+    <ClCompile Include="CGdiPlus.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CObject.cpp" />
     <ClCompile Include="CPathMgr.cpp" />
     <ClCompile Include="CPlayer.cpp" />
+    <ClCompile Include="CResMgr.cpp" />
     <ClCompile Include="CResource.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="CSceneMgr.cpp" />

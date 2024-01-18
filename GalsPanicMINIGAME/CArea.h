@@ -38,5 +38,7 @@ public:
 public:
 	CArea();
 	~CArea();
+
+	CLONE(CArea);
 };
 

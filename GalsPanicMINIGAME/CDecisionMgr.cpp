@@ -792,6 +792,9 @@ void CDecisionMgr::DrawEnd()
 		itrPlayerPos = prev(pArea->GetlstPoint().end());
 	}
 
+	// 몬스터 사망처리
+	MonsterDeadCheck();
+
 	// 뒷정리
 	vecSave.clear();
 	pPlayer->SetState(MOVE);
@@ -871,85 +874,6 @@ void CDecisionMgr::DrawCollideDead()
 	}
 }
 
-int CDecisionMgr::MonsterCollide(CMonster* pMonster)
-{
-	auto itrFront = pArea->GetlstPoint().begin();
-	auto itrBack = prev(pArea->GetlstPoint().end());
-	Vec2 vPos = pMonster->GetPos();
-	Vec2 vScale = pMonster->GetScale();
-	POINT monsterPos = { vPos.x, vPos.y };
-	Vec2 direction = pMonster->GetDirection();
-	int speed = pMonster->GetSpeed();
-
-	int max_xpos, min_xpos; // 비교
-	int max_ypos, min_ypos;
-
-	int odd_number;
-
-	if (direction.x <= 0 || direction.y >= 0)
-	{
-		for (auto& itr = itrFront; itr != itrBack; ++itr)
-		{
-			if (itrFront->x == next(itrFront, 1)->x)
-				odd_number = 0;
-			else
-				odd_number = 1;
-
-			switch (odd_number)
-			{
-			case 0: // x가 같을때 (y축으로 비교)
-			{
-				if (next(itr, 1)->y > itr->y) { max_ypos = next(itr, 1)->y; min_ypos = itr->y; }
-				else { min_ypos = next(itr, 1)->y; max_ypos = itr->y; }
-
-				if (direction.x >= 0)
-				{
-					if (itr->x < monsterPos.x + vScale.x / 2 && min_ypos <= monsterPos.y && monsterPos.y <= max_ypos)
-					{
-						return 0;
-					}
-				}
-				else
-				{
-					if (itr->x > monsterPos.x - vScale.x / 2 && min_ypos <= monsterPos.y && monsterPos.y <= max_ypos)
-					{
-						return 0;
-					}
-				}
-				odd_number = 1;
-			}
-			break;
-			case 1: // y가 같을때 (x축으로 비교)
-			{
-				if (next(itr, 1)->x > itr->x) { max_xpos = next(itr, 1)->x; min_xpos = itr->x; }
-				else { min_xpos = next(itr, 1)->x; max_xpos = itr->x; }
-
-				if (direction.y >= 0)
-				{
-					if (itr->y < monsterPos.y + vScale.y / 2 && min_xpos <= monsterPos.x && monsterPos.x <= max_xpos)
-					{
-						return 1;
-					}
-				}
-				else
-				{
-					if (itr->y > monsterPos.y - vScale.y / 2 && min_xpos <= monsterPos.x && monsterPos.x <= max_xpos)
-					{
-						return 1;
-					}
-				}
-				odd_number = 0;
-			}
-			break;
-			default:
-				break;
-			}
-		}
-	}
-
-	return -1;
-}
-
 bool CDecisionMgr::MonsterWallCheck(CMonster* pMonster, int left_right)
 {
 	auto itrFront = pArea->GetlstPoint().begin();
@@ -982,12 +906,12 @@ bool CDecisionMgr::MonsterWallCheck(CMonster* pMonster, int left_right)
 
 			if (direction.x >= 0)
 			{
-				if (itr->x > monsterPos.x && min_ypos <= monsterPos.y && monsterPos.y < max_ypos)
+				if (itr->x < monsterPos.x + vScale.x / 2 && min_ypos <= monsterPos.y && monsterPos.y < max_ypos)
 					cnt++;
 			}
 			else
 			{
-				if (itr->x < monsterPos.x && min_ypos <= monsterPos.y && monsterPos.y < max_ypos)
+				if (itr->x > monsterPos.x - vScale.x / 2 && min_ypos <= monsterPos.y && monsterPos.y < max_ypos)
 					cnt++;
 			}
 		}
@@ -1000,12 +924,12 @@ bool CDecisionMgr::MonsterWallCheck(CMonster* pMonster, int left_right)
 
 			if (direction.y >= 0)
 			{
-				if (itr->y > monsterPos.y && min_xpos <= monsterPos.x && monsterPos.x < max_xpos)
+				if (itr->y < monsterPos.y + vScale.y / 2 && min_xpos <= monsterPos.x && monsterPos.x < max_xpos)
 					cnt++;
 			}
 			else
 			{
-				if (itr->y < monsterPos.y && min_xpos <= monsterPos.x && monsterPos.x < max_xpos)
+				if (itr->y > monsterPos.y - vScale.y / 2 && min_xpos <= monsterPos.x && monsterPos.x < max_xpos)
 					cnt++;
 			}
 		}
@@ -1024,12 +948,12 @@ bool CDecisionMgr::MonsterWallCheck(CMonster* pMonster, int left_right)
 
 		if (direction.x >= 0)
 		{
-			if (itrBack->x > monsterPos.x && min_ypos <= monsterPos.y && monsterPos.y < max_ypos)
+			if (itrBack->x < monsterPos.x + vScale.x / 2 && min_ypos <= monsterPos.y && monsterPos.y < max_ypos)
 				cnt++;
 		}
 		else
 		{
-			if (itrBack->x < monsterPos.x && min_ypos <= monsterPos.y && monsterPos.y < max_ypos)
+			if (itrBack->x > monsterPos.x - vScale.x / 2 && min_ypos <= monsterPos.y && monsterPos.y < max_ypos)
 				cnt++;
 		}
 	}
@@ -1042,22 +966,37 @@ bool CDecisionMgr::MonsterWallCheck(CMonster* pMonster, int left_right)
 
 		if (direction.y >= 0)
 		{
-			if (itrBack->y > monsterPos.y && min_xpos <= monsterPos.x && monsterPos.x < max_xpos)
+			if (itrBack->y < monsterPos.y + vScale.y / 2 && min_xpos <= monsterPos.x && monsterPos.x < max_xpos)
 				cnt++;
 		}
 		else
 		{
-			if (itrBack->y < monsterPos.y && min_xpos <= monsterPos.x && monsterPos.x < max_xpos)
+			if (itrBack->y > monsterPos.y - vScale.y / 2 && min_xpos <= monsterPos.x && monsterPos.x < max_xpos)
 				cnt++;
 		}
 	}
 	break;
 	}
-	if (cnt == 0) return false;
-	if (cnt % 2 == 0)
+	if (cnt % 2 == 1)
 		return true;
 	else
 		return false;
+}
+
+void CDecisionMgr::MonsterDeadCheck()
+{
+	for (auto& monster : vecMonsters)
+	{
+		Vec2 vDirection = monster->GetDirection();
+		Vec2 vPos = monster->GetPos();
+		Vec2 vScale = monster->GetScale();
+		int speed = monster->GetSpeed();
+
+		if (MonsterWallCheck(monster, 0) && MonsterWallCheck(monster, 1))
+		{
+			DeleteObj(monster);
+		}
+	}
 }
 
 void CDecisionMgr::Init()
@@ -1389,31 +1328,26 @@ void CDecisionMgr::MonsterUpdate()
 {
 	for (auto& monster : vecMonsters)
 	{
-		int direction = MonsterCollide(monster);
 		Vec2 vDirection = monster->GetDirection();
 		Vec2 vPos = monster->GetPos();
 		Vec2 vScale = monster->GetScale();
-		if (direction == 0)
+		int speed = monster->GetSpeed();
+
+		if (MonsterWallCheck(monster, 0))
 		{
-			if(MonsterWallCheck(monster, direction))
-			{
-				vDirection.x *= -1;
-				monster->SetDirection(vDirection);
-				if (vDirection.x >= 0) vPos.x += vScale.x;
-				else vPos.x -= vScale.x;
-				monster->SetPos(vPos);
-			}
+			vDirection.x *= -1;
+			monster->SetDirection(vDirection);
+			if (vDirection.x >= 0) vPos.x += speed;
+			else vPos.x -= speed;
+			monster->SetPos(vPos);
 		}
-		else if (direction == 1)
+		if (MonsterWallCheck(monster, 1))
 		{
-			if (MonsterWallCheck(monster, direction))
-			{
-				vDirection.y *= -1;
-				monster->SetDirection(vDirection);
-				if (vDirection.y >= 0) vPos.y += vScale.y;
-				else vPos.y -= vScale.y;
-				monster->SetPos(vPos);
-			}
+			vDirection.y *= -1;
+			monster->SetDirection(vDirection);
+			if (vDirection.y >= 0) vPos.y += speed;
+			else vPos.y -= speed;
+			monster->SetPos(vPos);
 		}
 	}
 }

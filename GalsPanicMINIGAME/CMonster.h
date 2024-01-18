@@ -30,6 +30,9 @@ public:
 
 public:
     CMonster();
-    ~CMonster();
+    CMonster(const CMonster& _origin);
+    virtual ~CMonster();
+
+    CLONE(CMonster);
 };
 

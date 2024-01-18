@@ -28,5 +28,10 @@ using std::function;
 
 #pragma comment(lib, "Msimg32.lib")
 
+#include <gdiplus.h>
+using namespace Gdiplus;
+#pragma comment(lib, "Gdiplus.lib")
+
 #include "define.h"
 #include "struct.h"
+#include "func.h"

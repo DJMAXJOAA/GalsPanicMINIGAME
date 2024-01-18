@@ -4,15 +4,32 @@
 #include "CCollider.h"
 
 CObject::CObject()
-	: vPos{}
-	, vScale{}
-    , m_pCollider(nullptr)
-    , m_bAlive(true)
+	: m_vPos{}
+	, m_vScale{}
+	, m_eType(GROUP_TYPE::DEFAULT)
+	, m_pCollider(nullptr)
+	, m_bAlive(true)
 {
+}
+
+CObject::CObject(const CObject& _origin)
+	: m_vPos(_origin.m_vPos)
+	, m_vScale(_origin.m_vScale)
+	, m_eType(_origin.m_eType)
+	, m_pCollider(nullptr) // 새로 콜라이더 생성
+	, m_bAlive(true)
+{
+	if (_origin.m_pCollider)
+	{
+		m_pCollider = new CCollider(*_origin.m_pCollider);
+		m_pCollider->m_pOwner = this;
+	}
 }
 
 CObject::~CObject()
 {
+	if (m_pCollider != nullptr)
+		delete m_pCollider;
 }
 
 
@@ -39,8 +56,8 @@ void CObject::FinalUpdate()
 
 void CObject::Render(HDC hdc)
 {
-	Rectangle(hdc, (int)(vPos.x - vScale.x / 2.f), (int)(vPos.y - vScale.y / 2.f),
-		(int)(vPos.x + vScale.x / 2.f), (int)(vPos.y + vScale.y / 2.f));
+	Rectangle(hdc, (int)(m_vPos.x - m_vScale.x / 2.f), (int)(m_vPos.y - m_vScale.y / 2.f),
+		(int)(m_vPos.x + m_vScale.x / 2.f), (int)(m_vPos.y + m_vScale.y / 2.f));
 }
 
 void CObject::ComponetRender(HDC hdc)

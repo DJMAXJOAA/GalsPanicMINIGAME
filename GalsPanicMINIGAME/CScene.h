@@ -4,16 +4,16 @@ class CObject;
 
 class CScene
 {
-	vector<CObject*> arrObj[(UINT)GROUP_TYPE::END];
+	vector<CObject*> m_arrObj[(UINT)GROUP_TYPE::END];
 	wstring strName;
 
 public:
-	void AddObject(CObject* pObj, GROUP_TYPE eType) { arrObj[(UINT)eType].push_back(pObj); }
+	void AddObject(CObject* pObj, GROUP_TYPE eType) { m_arrObj[(UINT)eType].push_back(pObj); }
 	void DeleteGroup(GROUP_TYPE _eTarget);
 	void DeleteAll();
 
 public:
-	vector<CObject*>& GetGroupObject(GROUP_TYPE _eType) { return arrObj[(UINT)_eType]; } // 레퍼런스로 주되, 변경은 불가능하게 const
+	vector<CObject*>& GetGroupObject(GROUP_TYPE _eType) { return m_arrObj[(UINT)_eType]; } // 레퍼런스로 주되, 변경은 불가능하게 const
 
 public:
 	void SetName(const wstring& _strName) { strName = _strName; }

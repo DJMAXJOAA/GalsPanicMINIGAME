@@ -44,8 +44,8 @@ public:
 	bool DrawStartPossible(KEY key);
 	void DrawEnd();
 	void DrawCollideDead();
-	int MonsterCollide(CMonster* monster);
 	bool MonsterWallCheck(CMonster* monster, int left_right);
+	void MonsterDeadCheck();
 
 public:
 	void Update();
