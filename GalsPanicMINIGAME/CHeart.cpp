@@ -5,6 +5,7 @@
 
 #include "CResMgr.h"
 #include "CPathMgr.h"
+#include "CDecisionMgr.h"
 
 CHeart::CHeart(int health)
 	: m_iHP(health)
@@ -34,6 +35,7 @@ void CHeart::ReduceHP()
 	m_iHP--;
 	if (m_iHP == 0)
 	{
+		CDecisionMgr::GetInstance()->SetTimeScore(0);
 		ChangeScene(SCENE_TYPE::ENDING);
 	}
 }

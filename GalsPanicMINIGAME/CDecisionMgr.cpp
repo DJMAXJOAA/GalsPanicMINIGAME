@@ -649,7 +649,7 @@ void CDecisionMgr::DrawEnd()
 	auto itrNewFront = pArea->GetnewPoint().begin();
 	auto itrNewBack = pArea->GetnewPoint().end();
 
-	list<POINT> renewPoint;
+	renewPoint.clear();
 	renewPoint.insert(renewPoint.end(), itrFront, vecSave[min]);
 	renewPoint.insert(renewPoint.end(), itrNewFront, itrNewBack);
 	renewPoint.insert(renewPoint.end(), vecSave[max], itrBack);

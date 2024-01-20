@@ -23,6 +23,7 @@ private:
 	vector<CMonster*> vecMonsters;
 	list<POINT>::iterator itrPlayerPos; // 플레이어가 현재 몇번 인덱스에 있는지
 	vector<list<POINT>::iterator> vecSave; // 이터레이터 저장
+	list<POINT> renewPoint;
 	KEY lastKEY;
 
 private:
@@ -38,6 +39,8 @@ public:
 	list<POINT>::iterator GetPlayerAreaPoint() { return itrPlayerPos; }
 	int GetTimeScore() { return (int)m_fTimeCount; }
 	int GetCheck() { return m_iCheck; }
+
+	void SetTimeScore(int score) { m_fTimeCount = score; }
 
 public:
 	void Init();
