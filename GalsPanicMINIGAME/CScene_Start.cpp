@@ -8,21 +8,41 @@
 #include "CTexture.h"
 #include "CMonster.h"
 #include "CHeart.h"
+#include "CNumber.h"
+#include "CPanel.h"
 
 #include "CCore.h"
 #include "CPathMgr.h"
 #include "CDecisionMgr.h"
 #include "CCollisionMgr.h"
+#include "CKeyMgr.h"
 
 void CScene_Start::Update()
 {
 	CScene::Update();
+
+	if (KEY_TAP(KEY::ENTER))
+	{
+		ChangeScene(SCENE_TYPE::ENDING);
+	}
 }
 
 void CScene_Start::Enter()
 {
+	// 영역 크기
+	CPanel* pPanel = new CPanel(L"texture\\area.png");
+	pPanel->SetPos(Vec2(1150.f, 20.f));
+	CreateObj(pPanel, GROUP_TYPE::DEFAULT);
+
+	CNumber* pNumber = new CNumber(0, Vec2(1155.f, 80.0f), 1.0f);
+	CreateObj(pNumber, GROUP_TYPE::DEFAULT);
+
+	CPanel* pPercent = new CPanel(L"texture\\percent.png");
+	pPercent->SetPos(Vec2(1190.f, 70.f));
+	CreateObj(pPercent, GROUP_TYPE::DEFAULT);
+
 	// 영역 추가
-	CArea* pArea = new CArea;
+	CArea* pArea = new CArea(pNumber);
 	AddObject(pArea, GROUP_TYPE::DEFAULT);
 
 	// 하트 추가
@@ -39,7 +59,6 @@ void CScene_Start::Enter()
 
 	// 몬스터
 	vector<CMonster*> monsters;
-
 	{
 		CMonster* pMonster = new CMonster;
 		pMonster->SetPos(Vec2(200.f, 300.f));

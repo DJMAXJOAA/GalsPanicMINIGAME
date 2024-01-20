@@ -145,6 +145,7 @@
     <ClInclude Include="CHeart.h" />
     <ClInclude Include="CKeyMgr.h" />
     <ClInclude Include="CMonster.h" />
+    <ClInclude Include="CNumber.h" />
     <ClInclude Include="CObject.h" />
     <ClInclude Include="CPanel.h" />
     <ClInclude Include="CPathMgr.h" />
@@ -180,6 +181,7 @@
     <ClCompile Include="CHeart.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
     <ClCompile Include="CMonster.cpp" />
+    <ClCompile Include="CNumber.cpp" />
     <ClCompile Include="CObject.cpp" />
     <ClCompile Include="CPanel.cpp" />
     <ClCompile Include="CPathMgr.cpp" />

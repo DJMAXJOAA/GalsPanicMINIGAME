@@ -98,6 +98,9 @@
     <Filter Include="Engine\4. 오브젝트\하트">
       <UniqueIdentifier>{bd719896-12a0-4541-b0aa-880e1dc04366}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\4. 오브젝트\숫자">
+      <UniqueIdentifier>{d13c1427-ffed-4b1a-9d09-c0ade8be0727}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -199,6 +202,9 @@
     <ClInclude Include="CHeart.h">
       <Filter>Engine\4. 오브젝트\하트</Filter>
     </ClInclude>
+    <ClInclude Include="CNumber.h">
+      <Filter>Engine\4. 오브젝트\숫자</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GalsPanicMINIGAME.rc">
@@ -292,6 +298,9 @@
     </ClCompile>
     <ClCompile Include="CHeart.cpp">
       <Filter>Engine\4. 오브젝트\하트</Filter>
+    </ClCompile>
+    <ClCompile Include="CNumber.cpp">
+      <Filter>Engine\4. 오브젝트\숫자</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -3,18 +3,19 @@
 #include "CCore.h"
 #include "CPlayer.h"
 #include "CTexture.h"
+#include "CNumber.h"
 
 #include "CDecisionMgr.h"
 #include "CPathMgr.h"
 #include "CResMgr.h"
 
-
-CArea::CArea()
+CArea::CArea(CNumber* number)
 	: lstPoint{}
 	, newPoint{}
 	, ptBorder(nullptr)
 	, ptMyArea(nullptr)
 	, bDrawing(false)
+	, pAreaExtent(number)
 {
 	// 텍스쳐 로딩
 	pTex[0] = CResMgr::GetInstance()->LoadTexture(L"NewJeans", L"texture\\NewJeans.bmp");
@@ -101,6 +102,10 @@ void CArea::Update()
 			lstPoint.erase(itr);
 			break;
 		}
+	}
+	if (pAreaExtent)
+	{
+		pAreaExtent->SetNumber((int)fExtent);
 	}
 	CalculuateMyArea();
 }

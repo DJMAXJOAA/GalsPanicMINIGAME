@@ -2,6 +2,7 @@
 #include "CObject.h"
 
 class CTexture;
+class CNumber;
 
 class CArea
 	: public CObject
@@ -17,6 +18,7 @@ private:
 	CTexture* pTex[4]; // 비트맵 이미지
 
 private:
+	CNumber* pAreaExtent;
 	float fExtent;
 
 public:
@@ -36,7 +38,7 @@ public:
 	virtual void Render(HDC hdc);
 	
 public:
-	CArea();
+	CArea(CNumber* number);
 	virtual ~CArea();
 
 	CLONE(CArea);

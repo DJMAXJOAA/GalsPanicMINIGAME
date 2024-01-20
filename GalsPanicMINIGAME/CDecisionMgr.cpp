@@ -1017,6 +1017,7 @@ void CDecisionMgr::Init(CPlayer* player, CArea* area, vector<CMonster*> monsters
 	pPlayer = player;
 	pArea = area;
 	vecMonsters = monsters;
+
 	itrPlayerPos = pArea->GetlstPoint().begin();
 }
 

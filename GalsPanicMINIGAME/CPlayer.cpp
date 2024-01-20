@@ -18,7 +18,7 @@
 CPlayer::CPlayer(CHeart* heart)
 	: iState((int)PLAYER_STATE::MOVE)
 	, iDirection((int)PLAYER_DIRECTION::LEFT)
-	, iSpeed(10)
+	, iSpeed(5)
 	, pTex(nullptr)
 	, bDead(false)
 	, pHeart(nullptr)

@@ -14,7 +14,9 @@ using std::vector;
 using std::list;
 #include <string>
 using std::string;
+using std::to_string;
 using std::wstring;
+using std::to_wstring;
 #include <set>
 using std::set;
 #include <map>
