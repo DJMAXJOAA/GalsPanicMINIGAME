@@ -149,9 +149,9 @@ void CArea::Render(HDC hdc)
 		int iWidth = pTex[2]->Width();
 		int iHeight = pTex[2]->Height();
 		temp = L"" + std::to_wstring(i);
-		TextOut(hdc, ptMyArea[i].x + radius, ptMyArea[i].y + radius, temp.c_str(), temp.length());
+		/*TextOut(hdc, ptMyArea[i].x + radius, ptMyArea[i].y + radius, temp.c_str(), temp.length());
 		temp = L"" + std::to_wstring(ptMyArea[i].x) + L", " + std::to_wstring(ptMyArea[i].y);
-		TextOut(hdc, ptMyArea[i].x + radius, ptMyArea[i].y + 3*radius, temp.c_str(), temp.length());
+		TextOut(hdc, ptMyArea[i].x + radius, ptMyArea[i].y + 3*radius, temp.c_str(), temp.length());*/
 		TransparentBlt(hdc, ptMyArea[i].x - radius, ptMyArea[i].y - radius, iWidth, iHeight, pTex[2]->GetDC(), 0, 0, iWidth, iHeight, RGB(255, 0, 255));
 	}
 
