@@ -541,25 +541,22 @@ void CDecisionMgr::DrawEnd()
 
 	pArea->AddToNewPoint(playerPos);
 
-	auto itrFront = pArea->GetlstPoint().begin();
-	auto itrBack = pArea->GetlstPoint().end();
+	list<POINT>& lst = pArea->GetlstPoint();
 
 	// 임시 저장 이터레이터들의 배열 (시작과 끝을 저장)
 	vecSave.push_back(itrPlayerPos);
-	if (itrPlayerPos == prev(itrBack, 1))
+	if (itrPlayerPos == prev(lst.end(), 1))
 	{
-		vecSave.push_back(itrFront);
+		vecSave.push_back(lst.begin());
 	}
 	else
 	{
 		vecSave.push_back(next(itrPlayerPos, 1));
 	}
 
-	list<POINT>& refPoint = pArea->GetlstPoint();
-
 	// 벡터 정렬하기
 	vector<list<POINT>::iterator> vecTemp;
-	for (auto itr = itrFront; itr != itrBack; ++itr)
+	for (auto itr = lst.begin(); itr != lst.end(); ++itr)
 	{
 		for (int i = 0; i < vecSave.size(); i++)
 		{
@@ -650,9 +647,9 @@ void CDecisionMgr::DrawEnd()
 	auto itrNewBack = pArea->GetnewPoint().end();
 
 	renewPoint.clear();
-	renewPoint.insert(renewPoint.end(), itrFront, vecSave[min]);
+	renewPoint.insert(renewPoint.end(), lst.begin(), vecSave[min]);
 	renewPoint.insert(renewPoint.end(), itrNewFront, itrNewBack);
-	renewPoint.insert(renewPoint.end(), vecSave[max], itrBack);
+	renewPoint.insert(renewPoint.end(), vecSave[max], lst.end());
 
 	auto itrtnFront = renewPoint.begin();
 	auto itrtnBack = renewPoint.end();
@@ -661,7 +658,6 @@ void CDecisionMgr::DrawEnd()
 		printf("%d, %d\n", itr->x, itr->y);
 	}
 	printf("\n");
-
 
 	// 리스트 중복 좌표 제거
 	while (1)
@@ -712,22 +708,35 @@ void CDecisionMgr::DrawEnd()
 
 	auto itrtnFront2 = renewPoint.begin();
 	auto itrtnBack2 = renewPoint.end();
-	for (auto itr = itrtnFront2; itr != itrtnBack2; ++itr)
+	for (auto& itr = itrtnFront2; itr != itrtnBack2; ++itr)
 	{
 		printf("%d, %d\n", itr->x, itr->y);
 	}
 	printf("\n");
 
 	// 배열에 반영
-	POINT* save = pArea->GetptMyArea();
-	std::copy(renewPoint.begin(), renewPoint.end(), save);
-
-	// 새로 만든 리스트를 적용
-	pArea->GetlstPoint() = renewPoint;
+	POINT * save = pArea->GetMyArea();
+	if (save != nullptr)
+	{
+		delete[] save;
+		save = nullptr;
+	}
+	save = new POINT[renewPoint.size() + 1];
+	lst.clear();
+	int i = 0;
+	for (auto& itr : renewPoint)
+	{
+		POINT tmp = { itr.x, itr.y };
+		lst.push_back(tmp);
+		save[i].x = tmp.x;
+		save[i].y = tmp.y;
+		i++;
+	}
+	pArea->SetPoint(save);
 
 	// 플레이어 이터레이터 초기화
 	bool itrPlayerInit = false;
-	for (auto itr = itrFront; itr != itrBack; ++itr)
+	for (auto itr = lst.begin(); itr != lst.end(); ++itr)
 	{
 		if (itr->x == playerPos.x && itr->y == playerPos.y)
 		{

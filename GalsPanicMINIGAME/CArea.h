@@ -10,8 +10,8 @@ class CArea
 private:
 	list<POINT> lstPoint;
 	list<POINT> newPoint;
-	POINT* ptBorder; // 외곽선 영역
-	POINT* ptMyArea; // 내 영역
+	vector<POINT> vecBorder;
+	POINT* ptMyArea;
 	bool bDrawing; // 그리는 중
 
 private:
@@ -24,9 +24,10 @@ private:
 public:
 	list<POINT>& GetlstPoint() { return lstPoint; }
 	list<POINT>& GetnewPoint() { return newPoint; }
-	POINT* GetptMyArea() { return ptMyArea; }
+	POINT* GetMyArea() { return ptMyArea; }
 	float GetExtent() { return fExtent; }
 	void SetDraw(bool TF) { bDrawing = TF; }
+	void SetPoint(POINT* _ptPoint) { ptMyArea = _ptPoint; }
 
 public:
 	void AddToNewPoint(POINT _point) { newPoint.push_back(_point); };

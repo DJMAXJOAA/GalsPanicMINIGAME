@@ -101,6 +101,9 @@
     <Filter Include="Engine\4. 오브젝트\숫자">
       <UniqueIdentifier>{d13c1427-ffed-4b1a-9d09-c0ade8be0727}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\5. 씬\Start\게임로직">
+      <UniqueIdentifier>{684bad70-4bd9-4727-8680-25e58a0c9cf6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">

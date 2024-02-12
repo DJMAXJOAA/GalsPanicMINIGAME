@@ -22,7 +22,7 @@ private:
 	CArea* pArea;
 	vector<CMonster*> vecMonsters;
 	list<POINT>::iterator itrPlayerPos; // 플레이어가 현재 몇번 인덱스에 있는지
-	vector<list<POINT>::iterator> vecSave; // 이터레이터 저장
+	vector<list<POINT>::iterator> vecSave;
 	list<POINT> renewPoint;
 	KEY lastKEY;
 

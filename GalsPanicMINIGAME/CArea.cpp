@@ -12,7 +12,7 @@
 CArea::CArea(CNumber* number)
 	: lstPoint{}
 	, newPoint{}
-	, ptBorder(nullptr)
+	, vecBorder{}
 	, ptMyArea(nullptr)
 	, bDrawing(false)
 	, pAreaExtent(number)
@@ -36,7 +36,7 @@ CArea::CArea(CNumber* number)
 	list<POINT>::iterator firstItr = lstPoint.begin();
 	list<POINT>::iterator lastItr = lstPoint.end();
 
-	ptMyArea = new POINT[lstPoint.size()+1];
+	ptMyArea = new POINT[lstPoint.size() + 1];
 	int i = 0;
 	for (auto& itr = firstItr; itr != lastItr; ++itr)
 	{
@@ -47,32 +47,26 @@ CArea::CArea(CNumber* number)
 	CalculuateMyArea(); // 넓이 계산
 
 	// 기본 영역
-	ptBorder = new POINT[4];
-	ptBorder[0].x = iInterval;
-	ptBorder[0].y = vResolution.y - iInterval;
-	ptBorder[1].x = iInterval;
-	ptBorder[1].y = iInterval;
-	ptBorder[2].x = vResolution.x - iInterval;
-	ptBorder[2].y = iInterval;
-	ptBorder[3].x = vResolution.x - iInterval;
-	ptBorder[3].y = vResolution.y - iInterval;
+	vecBorder.resize(4);
+	vecBorder[0].x = iInterval;
+	vecBorder[0].y = vResolution.y - iInterval;
+	vecBorder[1].x = iInterval;
+	vecBorder[1].y = iInterval;
+	vecBorder[2].x = vResolution.x - iInterval;
+	vecBorder[2].y = iInterval;
+	vecBorder[3].x = vResolution.x - iInterval;
+	vecBorder[3].y = vResolution.y - iInterval;
 }
 
 CArea::~CArea()
 {
 	lstPoint.clear();
 	newPoint.clear();
-	for (int i = 0; i < 4; i++) pTex[i] = nullptr;
-	if (ptBorder != nullptr)
+	vecBorder.clear();
+	if (ptMyArea != nullptr)
 	{
-		delete[] ptBorder;
-		ptBorder = nullptr;
+		delete[] ptMyArea;
 	}
-	//if (ptMyArea != nullptr)
-	//{
-	//	delete[] ptMyArea;
-	//	ptMyArea = nullptr;
-	//}
 }
 
 void CArea::CalculuateMyArea()
@@ -130,14 +124,13 @@ void CArea::Render(HDC hdc)
 
 		Polygon(pTex[1]->GetDC(), ptMyArea, lstPoint.size()); // 내 영역
 
-		MoveToEx(pTex[1]->GetDC(), ptBorder[0].x, ptBorder[0].y, NULL);
+		MoveToEx(pTex[1]->GetDC(), vecBorder[0].x, vecBorder[0].y, NULL);
 		for (int i = 1; i < 4; i++)
 		{
-			LineTo(pTex[1]->GetDC(), ptBorder[i].x, ptBorder[i].y);
-			MoveToEx(pTex[1]->GetDC(), ptBorder[i].x, ptBorder[i].y, NULL);
+			LineTo(pTex[1]->GetDC(), vecBorder[i].x, vecBorder[i].y);
+			MoveToEx(pTex[1]->GetDC(), vecBorder[i].x, vecBorder[i].y, NULL);
 		}
-		LineTo(pTex[1]->GetDC(), ptBorder[0].x, ptBorder[0].y);
-
+		LineTo(pTex[1]->GetDC(), vecBorder[0].x, vecBorder[0].y);
 
 		SelectObject(hdc, oldBrush);
 		DeleteObject(hBrush);
@@ -153,9 +146,9 @@ void CArea::Render(HDC hdc)
 		int iWidth = pTex[2]->Width();
 		int iHeight = pTex[2]->Height();
 		temp = L"" + std::to_wstring(i);
-		/*TextOut(hdc, ptMyArea[i].x + radius, ptMyArea[i].y + radius, temp.c_str(), temp.length());
+		TextOut(hdc, ptMyArea[i].x + radius, ptMyArea[i].y + radius, temp.c_str(), temp.length());
 		temp = L"" + std::to_wstring(ptMyArea[i].x) + L", " + std::to_wstring(ptMyArea[i].y);
-		TextOut(hdc, ptMyArea[i].x + radius, ptMyArea[i].y + 3*radius, temp.c_str(), temp.length());*/
+		TextOut(hdc, ptMyArea[i].x + radius, ptMyArea[i].y + 3*radius, temp.c_str(), temp.length());
 		TransparentBlt(hdc, ptMyArea[i].x - radius, ptMyArea[i].y - radius, iWidth, iHeight, pTex[2]->GetDC(), 0, 0, iWidth, iHeight, RGB(255, 0, 255));
 	}
 
